@@ -2,16 +2,31 @@
 <html>
 <head>
   <title>Raisin <%= @page_title if @page_title %></title>
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+	<![endif]-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="span9">
+<body>
 <div class="container">
 	<header>
-			<%= render 'nav' %>
+			<%= render 'layouts/nav' %>
 	</header>
-	<%= yield %>
+	
+	<% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+	<main>
+		<%= yield %>
+	</main>
+	
+	<footer>
+		<%= render 'layouts/footer' %>
+	</footer>
 </div>
 </body>
 </html>
