@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Raisin</title>
+  <title>Raisin <%= @page_title if @page_title %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="span9">
+<div class="container">
+	<header>
+			<%= render 'nav' %>
+	</header>
+	<%= yield %>
+</div>
 </body>
 </html>
