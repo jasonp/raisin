@@ -12,11 +12,15 @@
 	    </div>
 	
 			<!-- Collect the nav links, forms, and other content for toggling -->
+			<!-- If not logged in, there is no left menu! -->
 			    <div class="collapse navbar-collapse" id="raisin-navbar-collapse-1">
-			      <ul class="nav navbar-nav">
-			        <li><a href="#">Projects</a></li>
-			        <li><a href="#">My Tasks</a></li>
+			      
+					<% if current_user %>
+						<ul class="nav navbar-nav">			        
+			        <li><%= link_to "My Dashboard", current_user %></a></li>
+							<li><a href="#">Projects</a></li>
 			      </ul>
+					<% end %>
 			
 			
 			      <ul class="nav navbar-nav navbar-right">
@@ -36,11 +40,11 @@
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
-		            <li><a href="#">Account settings</a></li>
+		            <li><%= link_to "Account settings", edit_user_registration_path %></a></li>
 		            <li><a href="#">Another action</a></li>
 		            <li><a href="#">Something else here</a></li>
 		            <li class="divider"></li>
-		            <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+		            <li><%= link_to('Log out', destroy_user_session_path, :method => :delete) %></li>
 		          </ul>
 		        </li>
 				<% end %> <!-- if / else login -->
