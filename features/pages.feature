@@ -11,3 +11,4 @@ Scenario: Viewing Raisin's home page
 Scenario: Viewing Raisin's log-in page
 	When I go to the log in page
 	Then I should see "Log in"
+	And I should see "Sign in with Facebook"

@@ -1,0 +1,19 @@
+<% if @user %>
+
+<h4>My profile (visible only to people in my family)</h4>
+
+<% if @user.photo %>
+	<%= image_tag @user.photo %>
+<% else %>
+	Set your photo!
+<% end %>	
+
+<p><%= @user.name %></p>
+
+<p>It might be that this page is best used as the personal dashboard page; tasks, updates, etc.</p>
+
+<% else %>
+
+<h2 class="alert">Sorry: it looks like you're trying to see a user profile that doesn't exist, or that you're not allowed to view.</h2>
+
+<% end %>
