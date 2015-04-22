@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  stripe_customer_id: MyText
+  active_until: 2015-04-21 17:01:09
+  plan: MyText
+
+two:
+  name: MyText
+  stripe_customer_id: MyText
+  active_until: 2015-04-21 17:01:09
+  plan: MyText

@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/*******
+*********
+***    Structural Elements
+***
+*/
+
+main {
+	height: 500px;
+}
+
 .footer-text {
 	text-align: center;
 	width: 100%;
@@ -9,6 +19,14 @@
 	color: lighten(#000, 46.7%)
 }
 
-main {
-	height: 500px;
+
+/*******
+*********
+***    New account page
+***
+*/
+
+.new_account {
+	width: 500px;
+	margin-left: 150px;
 }

@@ -16,10 +16,11 @@ Scenario: Viewing Raisin's sign up page
 Scenario: A user signs up
 	When a user signs up
 	Then I should see "You have signed up successfully."
+	And I should see "Let's set up your family account."
 	
 @signin	
 Scenario: A user signs in
 	Given the user has an account
 	When she logs in
 	Then I should see "Signed in successfully."
-	
+
