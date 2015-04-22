@@ -33,7 +33,7 @@
 				
 				<!-- If logged out -->
 				<% if !current_user %>
-					<li><a href="<%= new_user_registration_path %>">Sign up</a></li>
+					<li><a href="<%= new_account_path %>">Sign up</a></li>
 					<li><a href="<%= new_user_session_path %>">Log in</a></li>
 				<% else %>
 				<!-- If logged in -->

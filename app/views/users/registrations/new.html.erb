@@ -14,6 +14,14 @@
     <div class="controls"><%= f.email_field :email %></div>
   </div>
 
+	<%= f.fields_for :account do |a| %>
+		 <div class="form-group">
+		   <div class="control-label"><%= a.label :name, "My family account name" %></div>
+			<p class="help-block">(e.g. "The Smiths", or "The Super Coopers")</p>
+		   <div class="controls"><%= a.text_field :name, autofocus: true %></div>
+		 </div>
+	<% end %>
+
   <div class="form-group">
     <div class="control-label">
 			<%= f.label :password %>
