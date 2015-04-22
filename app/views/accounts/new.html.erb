@@ -3,9 +3,9 @@
 <%= form_for @account, html: {class: "form new_account"} do |f| %>
 
   <div class="form-group">
-    <div class="control-label"><%= f.label :name, "Pick a family account name:" %></div>
+    <div class="control-label"><%= f.label :name, "Pick a family account name" %></div>
 		<p class="help-block">(e.g. "The Smiths", or "The Super Coopers")</p>
-    <div class="controls"><%= f.email_field :name, autofocus: true %></div>
+    <div class="controls"><%= f.text_field :name, autofocus: true %></div>
   </div>
 
   <div class="actions">

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'Great success! New information saved.' }
         format.json { render json: @user, status: :created, location: @user }
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
