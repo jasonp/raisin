@@ -1,0 +1,50 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form" }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <div class="control-label"><%= f.label :name, "My full name:" %></div>
+    <div class="controls"><%= f.text_field :name, autofocus: true %></div>
+  </div>
+
+  <div class="form-group">
+    <div class="control-label"><%= f.label :email, "My email address:" %></div>
+    <div class="controls"><%= f.email_field :email %></div>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="control-label">
+			<%= f.label :password %>
+			<p class="help-block"><i>(Leave this field blank to keep the same password!)</i></p>
+		</div>
+    <div class="controls"><%= f.password_field :password, autocomplete: "off" %></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <div class="controls"><%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  </div>
+
+  <div class="form-group">
+		<div class="control-label">
+    	<%= f.label :current_password %> 
+			<p class="help-block"><i>(This is the password I just logged in with -- to make sure the change is on purpose.)</i></p>
+		</div>
+    <div class="controls"><%= f.password_field :current_password, autocomplete: "off" %></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Update", class: "btn" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: "btn", data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>

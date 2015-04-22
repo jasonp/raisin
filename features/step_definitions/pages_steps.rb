@@ -11,8 +11,9 @@ Then(/^I should see "(.*?)"$/) do |arg1|
 end
 
 When /^a user signs up$/ do
-  visit(new_user_registration_path)
-  fill_in('Email', :with => "example@example.com")
+  visit('users/sign_up')
+  fill_in('My full name:', :with => "Example Person")
+  fill_in('My email address:', :with => "example@example.com")
   fill_in('Password', :with => "godzilla")
   fill_in('Password confirmation', :with => "godzilla")
   click_button('Sign up')
