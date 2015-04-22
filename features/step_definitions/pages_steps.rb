@@ -11,12 +11,13 @@ Then(/^I should see "(.*?)"$/) do |arg1|
 end
 
 When /^a user signs up$/ do
-  visit('users/sign_up')
+  visit('accounts/new')
   fill_in('My full name', :with => "Example Person")
   fill_in('My email address', :with => "example@example.com")
   fill_in('Password', :with => "godzilla")
   fill_in('Password confirmation', :with => "godzilla")
-  click_button('Sign up')
+  fill_in('My family account name', :with => "My Family")
+  click_button('Take me to my dashboard')
 end
 
 Given /^the user has an account$/ do

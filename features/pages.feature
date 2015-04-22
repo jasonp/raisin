@@ -15,8 +15,7 @@ Scenario: Viewing Raisin's sign up page
 @signup
 Scenario: A user signs up
 	When a user signs up
-	Then I should see "You have signed up successfully."
-	And I should see "Let's set up your family account."
+	Then I should see "All set! Welcome to Raisin."
 	
 @signin	
 Scenario: A user signs in

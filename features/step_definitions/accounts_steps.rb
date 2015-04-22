@@ -6,6 +6,11 @@ Given /^a logged-in user$/ do
   click_button('Log in') 
 end
 
+Given /^the user has a user record$/ do
+  @user = User.create!(:email => "example@example.com", :password => "godzilla", :password_confirmation => "godzilla") 
+end
+
+
 When /^she creates an account$/ do
   visit('/accounts/new')
   fill_in('Pick a family account name', :with => "Example Family")

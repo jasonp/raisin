@@ -1,11 +1,9 @@
 Feature: Accounts
 	
-@accounts	
-Scenario: A logged in user can create an account
-	Given a logged-in user
-	When she creates an account
-	Then she should see "All set! Welcome to Raisin."
-
-
+@redirect	
+Scenario: A user with no accounts see's new account page
+	Given the user has a user record
+	When she logs in
+	Then she should see "Let's set up your family account."
 
 
