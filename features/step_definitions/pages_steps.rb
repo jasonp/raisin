@@ -12,8 +12,8 @@ end
 
 When /^a user signs up$/ do
   visit('users/sign_up')
-  fill_in('My full name:', :with => "Example Person")
-  fill_in('My email address:', :with => "example@example.com")
+  fill_in('My full name', :with => "Example Person")
+  fill_in('My email address', :with => "example@example.com")
   fill_in('Password', :with => "godzilla")
   fill_in('Password confirmation', :with => "godzilla")
   click_button('Sign up')
@@ -28,4 +28,10 @@ When /^she logs in$/ do
   fill_in('Email', :with => "example@example.com")
   fill_in('Password', :with => "godzilla")
   click_button('Log in')
+end
+
+When /^she updates her information$/ do
+  visit(edit_user_path(@user))
+  fill_in('My full name', :with => "Example Person Again")
+  click_button('Update')
 end

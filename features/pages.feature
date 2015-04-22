@@ -23,4 +23,12 @@ Scenario: A user signs in
 	Given the user has an account
 	When she logs in
 	Then I should see "Signed in successfully."
+	
+@update
+Scenario: A user updates their info
+	Given the user has an account
+	When she logs in
+	When she updates her information
+	Then I should see "Great success! New information saved."
+	
 
