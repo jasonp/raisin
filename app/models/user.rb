@@ -9,12 +9,13 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :accounts
  
  def self.from_omniauth(auth)
-   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+   u = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
      user.email = auth.info.email
      user.password = Devise.friendly_token[0,20]
      user.name = auth.info.name   # the user model has a name
      user.photo = auth.info.image # the user model has an image
    end
+  
  end  
         
 end

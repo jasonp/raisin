@@ -20,3 +20,9 @@ end
 Then(/^she should see "(.*?)"$/) do |arg1|
   page.should have_content(arg1)
 end
+
+
+Given /^she has (\d+) family accounts$/ do |num|
+  n = num.to_i
+  n.times { @user.accounts.create(:name => "Example Family") }
+end

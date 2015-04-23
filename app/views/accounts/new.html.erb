@@ -54,4 +54,10 @@
   </div>
 <% end %>
 
+<% if !current_user %>
+	<div class="sign_up_facebook">
+		Or, <%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook) %>
+	</div>
+<% end %>
+
 
