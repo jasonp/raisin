@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150423141815) do
     t.integer  "project_id"
     t.integer  "account_id"
     t.string   "name"
+    t.text     "email"
     t.datetime "birthday"
     t.text     "gender"
     t.datetime "created_at", null: false
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150423141815) do
 
   create_table "projects", force: :cascade do |t|
     t.text     "title"
-    t.string   "removeable"
+    t.string   "removable"
     t.text     "description"
     t.integer  "account_id"
     t.text     "status"

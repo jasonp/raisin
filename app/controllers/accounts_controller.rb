@@ -27,11 +27,16 @@ class AccountsController < ApplicationController
     
     @account.active_until = Time.now.utc + 2.months
     
+    
     respond_to do |format|
       if @account.save
         if !current_user
           sign_in @account.users.last
         end
+        
+        @proj = @account.projects.create(title: current_user.name, removable: "no")
+        @proj.members.create(user_id: current_user.id)
+        
         format.html { redirect_to root_path, notice: 'All set! Welcome to Raisin.' }
         format.json { render json: root_path, status: :created, location: @account }
       else
@@ -45,9 +50,9 @@ class AccountsController < ApplicationController
     @account = Account.find_by_id(params[:id])
     @page_title = " - " + @account.name
     
-    @family_members = Project.where(account_id: @account.id, removeable: "no")
+    @family_members = Project.where(account_id: @account.id, removable: "no")
     
-    @projects = Project.where(account_id: @account.id, removeable: nil)
+    @projects = Project.where(account_id: @account.id, removable: nil)
     
     session["preferred_account_id"] = @account.id
     

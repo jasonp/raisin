@@ -1,12 +1,15 @@
 <h1><%= @account.name %></h1>
 
-<h4>Family Members</h4>
+<% if @family_members.count > 0 %>
+	<h4>Family Members</h4>
 
-<% @family_members.each do |fm| %>
-	<div class="project_box">
-		<div class="project_box_title"><%= link_to fm.title, account_project_path(@account, fm) %></div>
-		<div class="project_box_desc"><%= fm.description %></div>
-	</div>
+	<% @family_members.each do |fm| %>
+		<div class="family_member_box">
+			<div class="project_box_title"><%= link_to fm.title, account_project_path(@account, fm) %></div>
+			<div class="project_box_desc"><%= fm.description %></div>
+		</div>
+	<% end %>
+
 <% end %>
 
 <h4>Projects</h4>

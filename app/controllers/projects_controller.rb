@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   # we get to use current_user without checking because we require log-in in this controller
   before_filter :authenticate_user!
+  before_filter :check_editable, only: [:edit]
   
   
   def index
@@ -8,12 +9,28 @@ class ProjectsController < ApplicationController
 
   def new
     @account = Account.find_by_id(params[:account_id])
-    @project = @account.projects.build
+    @project = @account.projects.build unless @account.nil?
+    
+    respond_to do |format|
+      if @account.nil?
+        format.html { redirect_to new_account_path }
+      else
+        format.html { render 'new' }
+      end
+    end
   end
   
   def show
-    @project = Project.find_by_id(params[:id])
+    @project = Project.where(account: params[:account_id], id: params[:id])[0]
     @account = Account.find_by_id(params[:account_id])
+    
+    respond_to do |format|
+      if @project.nil?
+        format.html { redirect_to root_path }
+      else
+        format.html { render 'show' }
+      end
+    end
   end
 
   def create
@@ -62,5 +79,11 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:title, :description, :members_attributes => [:id, :email, :name, :user_id])
     end
   
+    def check_editable
+      project = Project.find_by_id(params[:id])
+      if project.removable == "no"
+        redirect_to root_path
+      end
+    end
   
 end

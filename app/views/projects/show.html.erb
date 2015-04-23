@@ -6,7 +6,7 @@
 	</div>
 </div>	
 
-<h4>Project members:</h4>
+<h4>Project members (<%= @project.members.count %>)</h4>
 <ul>
 	<% @project.members.each do |m| %>
 		<li><%= m.name || m.user.name %></li>

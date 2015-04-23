@@ -35,12 +35,13 @@ $mid-gray: lighten(#000, 46.7%);
 ***
 */
 
-.project_box {
+.project_box, .family_member_box {
 	padding: .5em;
 	border: 1px solid $mid-gray;
 	width: 250px;
 	margin-right: 10px;
 	display: inline-block;
+	margin-bottom: 15px;
 }
 
 .project_box_title {

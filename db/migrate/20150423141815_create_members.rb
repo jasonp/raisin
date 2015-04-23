@@ -5,6 +5,7 @@ class CreateMembers < ActiveRecord::Migration
       t.integer :project_id
       t.integer :account_id
       t.string :name
+      t.text :email
       t.datetime :birthday
       t.text :gender
       
