@@ -1,0 +1,14 @@
+
+<div class="project_page_top">
+	<h2><%= @project.title %></h2>
+	<div class="project_description">
+		<p><%= @project.description %></p>
+	</div>
+</div>	
+
+<h4>Project members:</h4>
+<ul>
+	<% @project.members.each do |m| %>
+		<li><%= m.name || m.user.name %></li>
+	<% end %>	
+</ul>

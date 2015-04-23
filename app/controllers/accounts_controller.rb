@@ -45,6 +45,10 @@ class AccountsController < ApplicationController
     @account = Account.find_by_id(params[:id])
     @page_title = " - " + @account.name
     
+    @family_members = Project.where(account_id: @account.id, removeable: "no")
+    
+    @projects = Project.where(account_id: @account.id, removeable: nil)
+    
     session["preferred_account_id"] = @account.id
     
   end

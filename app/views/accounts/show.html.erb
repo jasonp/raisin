@@ -1,2 +1,25 @@
 <h1><%= @account.name %></h1>
-<p>Find me in app/views/accounts/show.html.erb</p>
+
+<h4>Family Members</h4>
+
+<% @family_members.each do |fm| %>
+	<div class="project_box">
+		<div class="project_box_title"><%= link_to fm.title, account_project_path(@account, fm) %></div>
+		<div class="project_box_desc"><%= fm.description %></div>
+	</div>
+<% end %>
+
+<h4>Projects</h4>
+
+	<% @projects.each do |p| %>
+		<div class="project_box">
+			<div class="project_box_title"><%= link_to p.title, account_project_path(@account, p) %></div>
+			<div class="project_box_desc"><%= p.description %></div>
+		</div>
+	<% end %>	
+	
+	<div class="project_box">
+		<div class="project_box_title"><%= link_to "Create a new project", new_account_project_path(@account) %></div>
+		<div class="project_box_desc">:)</div>
+	</div>
+	

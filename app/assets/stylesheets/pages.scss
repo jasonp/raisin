@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$mid-gray: lighten(#000, 46.7%);
+
 /*******
 *********
 ***    Structural Elements
@@ -12,7 +14,7 @@
 	text-align: center;
 	width: 100%;
 	font-size: 90%;
-	color: lighten(#000, 46.7%)
+	color: $mid-gray;
 }
 
 
@@ -23,6 +25,24 @@
 */
 
 .new_account {
-	width: 500px;
-	margin-left: 150px;
+
+}
+
+
+/*******
+*********
+***    Show Account Page
+***
+*/
+
+.project_box {
+	padding: .5em;
+	border: 1px solid $mid-gray;
+	width: 250px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.project_box_title {
+	font-weight: bold;
 }

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :accounts, only: [:new, :show, :edit, :create, :update, :index] do
     get 'users', on: :member
+    resources :projects
   end
   
 
