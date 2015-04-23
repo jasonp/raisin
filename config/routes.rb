@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'members/new'
+
+  get 'members/create'
+
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'users/registrations' }
   resources :users, only: [:show, :edit, :update]
   
   resources :accounts, only: [:new, :show, :edit, :create, :update, :index] do
     get 'users', on: :member
     resources :projects
+    resources :members
   end
   
 
