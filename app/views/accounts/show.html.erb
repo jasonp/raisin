@@ -3,31 +3,42 @@
 <% if @family_members.count > 0 %>
 	<h4>Family Members</h4>
 
+
 	<% @family_members.each do |fm| %>
-		<div class="family_member_box">
-			<div class="project_box_title"><%= link_to fm.title, account_project_path(@account, fm) %></div>
-			<div class="project_box_desc"><%= fm.description %></div>
-		</div>
+		<a class="" href="<%= account_project_path(@account, fm) %>">
+			<span class="family_member_box">
+				<div class="project_box_photo"><%= image_tag fm.users.first.photo %></div>
+				<div class="project_box_title"><%= fm.title %></div>
+				<div class="project_box_desc"><%= fm.description %></div>
+			</span>
+		</a>	
 	<% end %>
 
-	<div class="project_box">
-		<div class="project_box_title"><%= link_to "Add a new family member", new_account_member_path(@account, type: "family") %></div>
-		<div class="project_box_desc">:)</div>
-	</div>
+	<a class="" href="<%= new_account_member_path(@account, type: "family") %>">
+		<span class="family_member_box add_new_member">
+			<div class="project_box_title">Add a new family member </div>
+			<div class="project_box_desc new_member_desc">+</div>
+		</span>
+	</a>	
+
 
 <% end %>
 
 <h4>Projects</h4>
 
 	<% @projects.each do |p| %>
-		<div class="project_box">
-			<div class="project_box_title"><%= link_to p.title, account_project_path(@account, p) %></div>
-			<div class="project_box_desc"><%= p.description %></div>
-		</div>
+		<a class="" href="<%= account_project_path(@account, p) %>">
+			<div class="project_box">
+				<div class="project_box_title"><%= p.title %></div>
+				<div class="project_box_desc"><%= p.description %></div>
+			</div>
+		</a>
 	<% end %>	
 	
-	<div class="project_box">
-		<div class="project_box_title"><%= link_to "Create a new project", new_account_project_path(@account) %></div>
-		<div class="project_box_desc">:)</div>
-	</div>
+	<a class="" href="<%= new_account_project_path(@account) %>">
+		<div class="project_box add_new_project">
+			<div class="project_box_title">Create a new project </div>
+			<div class="project_box_desc new_member_desc">+</div>
+		</div>
+	</a>
 	

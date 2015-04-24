@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $mid-gray: lighten(#000, 46.7%);
+$light-gray: lighten(#000, 89.7%);
+$practically-white: lighten(#000, 95.0%);
+
 
 /*******
 *********
@@ -21,6 +24,26 @@ $mid-gray: lighten(#000, 46.7%);
 	color: $mid-gray;
 }
 
+footer {
+	margin-top: 25px;
+	border-top: 1px solid $light-gray;
+	padding-top: 15px;
+}
+
+header {
+	margin-bottom: 30px;
+}
+
+
+/*******
+*********
+***    New project page
+***
+*/
+
+.new_project_page_box {}
+
+.cancel_new_project { margin-left: 5px;}
 
 /*******
 *********
@@ -32,6 +55,20 @@ $mid-gray: lighten(#000, 46.7%);
 
 }
 
+/*******
+*********
+***    New member page
+***
+*/
+
+
+.member_headline {
+	margin-bottom: 2em;
+}
+
+.callout {
+	
+}
 
 /*******
 *********
@@ -39,13 +76,39 @@ $mid-gray: lighten(#000, 46.7%);
 ***
 */
 
-.project_box, .family_member_box {
+.project_row {
+	display:inline-block;
+}
+
+.family_member_box {
+	width: 125px;
+	height: 125px;
+	display: inline-block;
+	vertical-align: bottom;
+	text-align: center;
+	padding-top: .7em;
+}
+
+.add_new_member {	padding: .8em; padding-top: 1.3em; border: 1px dashed $light-gray; }
+.new_member_desc { font-size: 200%; }
+.project_box_photo { margin: .3em; margin-bottom: .6em;}
+
+.project_box {
 	padding: .5em;
-	border: 1px solid $mid-gray;
-	width: 250px;
+	border: 1px dashed $light-gray;
+	background: $practically-white;
+	width: 150px;
+	height: 150px;
 	margin-right: 10px;
 	display: inline-block;
-	margin-bottom: 15px;
+	vertical-align: top;
+}
+
+.add_new_project {
+	background: transparent;
+	border: 1px dashed $light-gray;
+	text-align: center;
+	padding-top: 2.2em;
 }
 
 .project_box_title {

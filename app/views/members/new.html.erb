@@ -1,2 +1,97 @@
-<h1>Members#new</h1>
-<p>Find me in app/views/members/new.html.erb</p>
+<div class="row">
+<div class="new_member_page_box col-md-8 col-md-offset-2">
+	
+	<h4 class="member_headline"><%= @headline %></h4>
+	
+	<%= form_for @member, url: account_members_path(@account, @member) , html: {class: "form-horizontal new_member"} do |f| %>
+
+	<% if @member.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+	      <ul>
+	        <% @member.errors.full_messages.each do |msg| %>
+	            <li><%= msg %></li>
+	        <% end %>
+	      </ul>
+	    </div>
+	<% end %>
+
+		<% if @project %>
+			<%= f.hidden_field :project_id, @project.id %>
+		<% end %>	
+
+		<div class="form-group">
+			<%= f.label :name, class: "col-sm-2 control-label" %>
+			<div class="col-sm-10">
+		  	<%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Amelia Earhart" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :birthday, "Birthday", class: "col-sm-2 control-label" %>
+			<div class="col-sm-10">
+		  	<%= f.date_field :birthday, class: "form-control" %>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<%= f.label :gender, "Gender", class: "col-sm-2 control-label" %>
+			<div class="col-sm-10">
+		  	<%= f.select :gender, ["Female", "Male"], {}, class: "form-control" %>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="radio col-sm-offset-2">
+				<label>
+				<%= radio_button_tag :participant, "participant" %>
+				<div class="">
+			  	Invite this family member to participate as a full user (a parent or adult kid).
+				</div>
+				</label>
+			</div>	
+		
+			<div class="radio col-sm-offset-2">
+				<label>
+				<%= radio_button_tag :participant, "nonparticipant" %>
+				<div class="">
+			  	Add this person to the family without sending them an invitation (a child or infant).
+				</div>
+				</label>
+				<p class="help-block">Learn more about what this means.</p>
+			</div>
+			
+		</div>
+
+		<div class="form-group hidden_participating_explainer">
+			<p class="col-sm-offset-2">Raisin supports two kinds of family members: participating and non-participating. Usually, parents or adult children are participating members, and younger kids are non-participating. If you'd like to invite this person as a participating member, which means they'll get their own user account, can make and check-off to-dos, and so on, just fill in the email field below.</p>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :email, "Email address:", class: "col-sm-2 control-label" %>
+			<div class="col-sm-10">
+		  	<%= f.email_field :email, class: "form-control", placeholder: "ameliaearhart@gmail.com" %>
+			</div>
+		</div>
+		
+
+		
+	
+		
+
+
+	  <div class="actions">
+			<div class="controls">
+	    <%= f.submit "Add this family member", class: "btn" %>
+			<span class="cancel_new_project">Or <%= link_to "nevermind, cancel...", root_path %></span>
+			</div>
+	  </div>
+
+
+	<% end %>
+
+</div>
+</div>
+
+

@@ -37,10 +37,11 @@ ActiveRecord::Schema.define(version: 20150423141815) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "account_id"
-    t.string   "name"
+    t.text     "name"
     t.text     "email"
     t.datetime "birthday"
     t.text     "gender"
+    t.text     "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

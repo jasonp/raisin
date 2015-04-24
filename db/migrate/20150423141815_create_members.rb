@@ -4,10 +4,11 @@ class CreateMembers < ActiveRecord::Migration
       t.integer :user_id
       t.integer :project_id
       t.integer :account_id
-      t.string :name
+      t.text :name
       t.text :email
       t.datetime :birthday
       t.text :gender
+      t.text :photo
       
 
       t.timestamps null: false
