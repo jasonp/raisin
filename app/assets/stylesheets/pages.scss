@@ -34,6 +34,10 @@ header {
 	margin-bottom: 30px;
 }
 
+.bump10 {margin-top: 10px;}
+.bump20 {margin-top: 20px;}
+.bump30 {margin-top: 30px;}
+
 
 /*******
 *********
@@ -68,6 +72,17 @@ header {
 
 .callout {
 	
+}
+
+/*******
+*********
+***    Claim user page (Devise default sign up page)
+***
+*/
+
+
+.claim_form_header {
+	margin-bottom: 25px;
 }
 
 /*******

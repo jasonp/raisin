@@ -21,6 +21,16 @@ class User < ActiveRecord::Base
      user.photo = auth.info.image # the user model has an image
    end
   
- end  
+ end 
+ 
+ # This is an existing user so let's not overwrite everything
+ def self.link_from_omniauth(auth, user)
+     user.photo = auth.info.image # the user model has an image
+     user.provider = auth.provider
+     user.uid = auth.uid
+     return user
+ end 
+ 
+ 
         
 end

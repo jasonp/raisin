@@ -43,47 +43,47 @@
 		</div>
 		
 		<div class="form-group">
-			<div class="radio col-sm-offset-2">
+			
+			<div class="col-sm-2 control-label"></div>
+			<div class="radio col-sm-10">
+				<label>
+				<%= radio_button_tag :participant, "nonparticipant" %>
+				<div class="">
+			  	Add this person to the family without sending an invitation (a child or infant).
+				</div>
+				</label>
+			</div>
+			
+			
+			<div class="col-sm-2 control-label"></div>
+			<div class="radio col-sm-10">
 				<label>
 				<%= radio_button_tag :participant, "participant" %>
 				<div class="">
 			  	Invite this family member to participate as a full user (a parent or adult kid).
 				</div>
 				</label>
-			</div>	
-		
-			<div class="radio col-sm-offset-2">
-				<label>
-				<%= radio_button_tag :participant, "nonparticipant" %>
-				<div class="">
-			  	Add this person to the family without sending them an invitation (a child or infant).
-				</div>
-				</label>
 				<p class="help-block">Learn more about what this means.</p>
-			</div>
+			</div>	
 			
 		</div>
 
 		<div class="form-group hidden_participating_explainer">
-			<p class="col-sm-offset-2">Raisin supports two kinds of family members: participating and non-participating. Usually, parents or adult children are participating members, and younger kids are non-participating. If you'd like to invite this person as a participating member, which means they'll get their own user account, can make and check-off to-dos, and so on, just fill in the email field below.</p>
+			<div class="col-sm-2 control-label"></div>
+			<p class="col-sm-10">Raisin supports two kinds of family members: participating and non-participating. Usually, parents or adult children are participating members, and younger kids are non-participating. If you'd like to invite this person as a participating member, which means they'll get their own user account, can make and check-off to-dos, and so on, just fill in the email field below.</p>
 		</div>
 
 		<div class="form-group">
-			<%= f.label :email, "Email address:", class: "col-sm-2 control-label" %>
+			<%= f.label :email, "Email:", class: "col-sm-2 control-label" %>
 			<div class="col-sm-10">
 		  	<%= f.email_field :email, class: "form-control", placeholder: "ameliaearhart@gmail.com" %>
 			</div>
 		</div>
-		
-
-		
-	
-		
 
 
 	  <div class="actions">
 			<div class="controls">
-	    <%= f.submit "Add this family member", class: "btn" %>
+	    <%= f.submit "Add this family member", class: "btn btn-default col-sm-offset-2 bump10" %>
 			<span class="cancel_new_project">Or <%= link_to "nevermind, cancel...", root_path %></span>
 			</div>
 	  </div>

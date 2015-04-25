@@ -16,6 +16,10 @@
     <div class="control-label"><%= link_to "I want to update my password.", edit_user_registration_path %></div>
   </div>
 
+	<div class="form-group">
+		<%= link_to "Link to my Facebook account", user_omniauth_authorize_path(:facebook) %>
+	</div>	
+
   <div class="form-group">
     <%= f.submit "Update", class: "btn" %>
   </div>

@@ -1,45 +1,52 @@
-<h2>Sign up</h2>
+<div class="row">
+<div class="claim_user_page_box col-md-8 col-md-offset-2">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form"}) do |f| %>
+<div class="claim_form_header">
+<h4>Claim your free account</h2>
+	<p>
+		You have been invited to collaborate with someone on Raisin. Don't worry! Your user account on Raisin is free -- a Family can add as many members or collaborators as they'd like, for no additional charge.
+	</p>
+</div>	
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form form-horizontal"}) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <div class="control-label"><%= f.label :name, "My full name" %></div>
-    <div class="controls"><%= f.text_field :name, autofocus: true %></div>
+		<%= f.label :name, "Full name", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10"><%= f.text_field :name, {value: params[:name], autofocus: true, class: "form-control"} %></div>
   </div>
 
   <div class="form-group">
-    <div class="control-label"><%= f.label :email, "My email address" %>
-		<p class="help-block">(This will be my username)</p></div>
-    <div class="controls"><%= f.email_field :email %></div>
-  </div>
-
-	<%= f.fields_for :account do |a| %>
-		 <div class="form-group">
-		   <div class="control-label"><%= a.label :name, "My family account name" %></div>
-			<p class="help-block">(e.g. "The Smiths", or "The Super Coopers")</p>
-		   <div class="controls"><%= a.text_field :name, autofocus: true %></div>
-		 </div>
-	<% end %>
-
-  <div class="form-group">
-    <div class="control-label">
-			<%= f.label :password %>
-			<p class="help-block"><% if @validatable %>
-	    <em>(<%= @minimum_password_length %> characters minimum)</em>
-	    <% end %></p>
+    <%= f.label :email, "Email", class: "col-sm-2 control-label" %>
+		
+    <div class="col-sm-10">
+			<%= f.email_field :email, {class: "form-control", value: params[:email] }%>
+			<p class="help-block">(This will be my username)</p>
 		</div>
-    <div class="controls"><%= f.password_field :password, autocomplete: "off" %></div>
   </div>
 
   <div class="form-group">
-    <div class="control-label"><%= f.label :password_confirmation %></div>
-    <div class="controls"><%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+
+			<%= f.label :password, class: "col-sm-2 control-label" %>
+
+    	<div class="col-sm-10">
+				<%= f.password_field :password, class: "form-control", autocomplete: "off" %>
+				<p class="help-block"><% if @validatable %>
+		    <em>(<%= @minimum_password_length %> characters minimum)</em>
+		    <% end %></p>
+			</div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn" %>
+  <div class="form-group">
+    <%= f.label :password_confirmation, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10"><%= f.password_field :password_confirmation, class: "form-control", autocomplete: "off" %></div>
+  </div>
+
+  <div class="actions col-sm-offset-2">
+    <%= f.submit "Take me to my dashboard", class: "btn btn-default" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+</div>
+</div>
+

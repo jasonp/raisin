@@ -7,7 +7,16 @@
 	<% @family_members.each do |fm| %>
 		<a class="" href="<%= account_project_path(@account, fm) %>">
 			<span class="family_member_box">
-				<div class="project_box_photo"><%= image_tag fm.users.first.photo %></div>
+				<% if fm.members.first.user %>
+					<% if fm.members.first.user.photo != nil %>
+						<% photo_url = fm.members.first.user.photo %>
+					<% else %>
+						<% photo_url = 'nophoto.png' %>
+					<% end %>	
+				<% else %>
+					<% photo_url = 'nophoto.png' %>
+				<% end %>
+				<div class="project_box_photo"><%= image_tag photo_url %></div>
 				<div class="project_box_title"><%= fm.title %></div>
 				<div class="project_box_desc"><%= fm.description %></div>
 			</span>
