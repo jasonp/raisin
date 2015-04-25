@@ -28,13 +28,6 @@ Scenario: A logged-in user with a project should see it listed on the account pa
 	Then she should see "Family Members"
 
 @projects	
-Scenario: A logged-in user can update a project
-	Given a user with a permanent project
-	When she creates a project
-	When she tries to edit a project
-	Then she should find "Update the project"
-
-@projects	
 Scenario: A logged-in user cannot update a permanent project
 	Given a user with a permanent project
 	When she tries to edit a permanent project
@@ -58,7 +51,7 @@ Scenario: A logged-in user with a project can add or invite members to the proje
 	Given a user with a permanent project
 	When she creates a project
 	And she adds a member to the project
-	Then she should see "Invited Member"
+	Then she should see "We added a new member"
 	
 
 @projects	

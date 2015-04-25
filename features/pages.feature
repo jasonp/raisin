@@ -10,7 +10,7 @@ Scenario: Viewing Raisin's home page without logging in
 Scenario: Viewing Raisin's sign up page
 	When I go to the sign up page
 	Then I should see "Sign up"
-	And I should see "Sign in with Facebook"
+	And I should see "Sign up with Facebook"
 	
 @signup
 Scenario: A user signs up

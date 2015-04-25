@@ -83,7 +83,7 @@ class MembersController < ApplicationController
           InviteMailer.invite_to_project(@member, @project, current_user, @welcome_message).deliver_later if @project_invite  
           
           
-          format.html { redirect_to root_path, notice: 'Hooray! We added a new family member.' }
+          format.html { redirect_to root_path, notice: 'Hooray! We added a new member.' }
         else
           format.html { render action: "edit" }
         end

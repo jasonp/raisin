@@ -3,7 +3,7 @@ When(/^I go to the home page$/) do
 end
 
 When(/^I go to the sign up page$/) do 
-  visit(new_user_registration_path)
+  visit(new_account_path)
 end
 
 Then(/^I should see "(.*?)"$/) do |arg1|
