@@ -65,13 +65,37 @@ header {
 ***
 */
 
+.new_member_page_box {
+	padding-top: 1em;
+}
 
 .member_headline {
 	margin-bottom: 2em;
 }
 
 .callout {
+}
+
+.sidebar_topper {
+	border-bottom: 1px solid $light-gray;
+	padding-bottom: .2em;
+}
+
+.sidebar_member_list_item {
+	height: 55px;
+	margin-bottom: 8px;
+
+}
+.sidebar_member_list_item-image {
+	float: left;
+	margin-right: 9px;
+}
+.sidebar_member_list_item-name {
 	
+}
+.sidebar_member_list_item-action {
+	font-size: 80%;
+	color: $mid-gray;
 }
 
 #hidden_new_member_email_field, #hidden_participating_explainer {

@@ -20,17 +20,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
        members.each do |m|
          @account_ids << m.account_id
          m.user_id = resource.id
+         
+         # let's add an account association for project invitees
+         if !m.account_id
+           m.project.account.users << resource
+         end
          m.save!
+         
        end
+       
        
        # Find all the accounts we neeed to associate, and associate them
        @accs = @account_ids.uniq
        @accs.each do |a|
          account = Account.find_by_id(a)
-         account.users << resource
-         account.projects.each do |p|
-           @projects << p
-         end
+         if account
+           account.projects.each do |p|
+             @projects << p
+           end
+         end   
        end
        
        # Lastly, find all the family member projects in all the accounts, and create 

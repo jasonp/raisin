@@ -9,6 +9,15 @@
 <h4>Project members (<%= @project.members.count %>)</h4>
 <ul>
 	<% @project.members.each do |m| %>
-		<li><%= m.name || m.user.name %></li>
+		<li>
+			<%= m.name || m.user.name %> 
+			<% if !m.user %>
+			(Pending)
+			<% end %>
+		</li>
 	<% end %>	
 </ul>
+
+<% if @project.users.first == current_user %>
+	<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
+<% end %>

@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     @redirect_route = ""
     if current_user
       if current_user.accounts.count < 1
-        @redirect_route = "create"
+        @redirect_route = "create" 
       elsif current_user.accounts.count == 1
         @redirect_route = "dashboard"
       else

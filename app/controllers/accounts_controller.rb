@@ -52,7 +52,19 @@ class AccountsController < ApplicationController
     
     @family_members = Project.where(account_id: @account.id, removable: "no")
     
-    @projects = Project.where(account_id: @account.id, removable: nil)
+    # Let's whittle this down to family members that the user has permission to see
+    @fams = []
+    @family_members.each do |fm|
+      @fams << fm if fm.users.include?(current_user)
+    end
+    
+    @projs = Project.where(account_id: @account.id, removable: nil)
+    
+    # Same process... what do they have permission to see?
+    @projects = []
+    @projs.each do |p|
+      @projects << p if p.users.include?(current_user)
+    end
     
     session["preferred_account_id"] = @account.id
     

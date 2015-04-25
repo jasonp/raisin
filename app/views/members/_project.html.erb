@@ -1,0 +1,103 @@
+<h4 class="member_headline col-md-offset-1"><%= @headline %></h4>
+
+<div class="row">
+<div class="new_member_page_box col-md-6 col-md-offset-1">
+	
+<%= form_for @member, url: account_members_path(@account, @member) , html: {class: "form-horizontal new_member"} do |f| %>
+
+<% if @member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+        <% @member.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+
+	<%= f.hidden_field :project_id, value: @project.id %>
+
+
+	<div class="form-group">
+		<%= f.label :name, class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+	  	<%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Amelia Earhart" %>
+		</div>
+	</div>
+
+	<div class="form-group" id="visible_new_member_email_field">
+		<%= f.label :email, "Email:", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+	  	<%= f.email_field :email, class: "form-control", placeholder: "ameliaearhart@gmail.com" %>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<%= label_tag :message, "Welcome message (optional):", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+	  	<%= text_area_tag :message, @default_message, { class: "form-control", rows: 4 }  %>
+		</div>
+	</div>
+
+
+  <div class="actions">
+		<div class="controls">
+    <%= f.submit "Send invitation", class: "btn btn-default col-sm-offset-2 bump10" %>
+		<span class="cancel_new_project">Or <%= link_to "nevermind, cancel...", root_path %></span>
+		</div>
+  </div>
+
+
+<% end %>
+
+</div>
+
+<div class="new_member_page_sidebar col-md-4 ">
+	<h5 class="sidebar_topper">Here's who's already working on this project:</h5>
+	<% @project.members.each do |m| %>
+		<div class="sidebar_member_list_item">
+			<div class="sidebar_member_list_item-image">
+				<% if m.user %>
+					<% if m.user.photo %>
+						<%= image_tag m.user.photo %>
+					<% else %>
+						<%= image_tag 'nophoto.png' %>
+					<% end %>
+				<% else %>
+					<% if m.photo %>
+						<%= image_tag m.photo %>
+					<% else %>
+						<% if m.name %>
+							<%= image_tag 'nophoto.png' %>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
+			<div class="sidebar_member_list_item-name">
+				<% if m.user %>
+					<%= m.user.name %>
+				<% end %>
+				<% if !m.user %>
+					<%= m.name %> <% if m.name %>(Pending)<% end %>
+				<% end %>
+			</div>
+			<div class="sidebar_member_list_item-action">
+				<% if m.user %>
+					<%= m.user.email %>
+				<% else %>
+					<%= m.email %>
+				<% end %>	
+				
+			</div>	
+			
+			<div class="sidebar_member_list_item-action">
+				<% if m.user || m.name %>
+					<%= link_to "Remove this person", root_path %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
