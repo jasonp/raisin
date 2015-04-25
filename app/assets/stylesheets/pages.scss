@@ -74,6 +74,13 @@ header {
 	
 }
 
+#hidden_new_member_email_field, #hidden_participating_explainer {
+	display: none;
+}
+#hidden_participating_explainer_link {color: $mid-gray;}
+
+.cancel_new_project, .cancel_new_project a {vertical-align: bottom;}
+
 /*******
 *********
 ***    Claim user page (Devise default sign up page)

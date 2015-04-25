@@ -47,7 +47,7 @@
 			<div class="col-sm-2 control-label"></div>
 			<div class="radio col-sm-10">
 				<label>
-				<%= radio_button_tag :participant, "nonparticipant" %>
+				<%= radio_button_tag :participant, "nonparticipant", false, data: {behavior: "nonparticipant"} %>
 				<div class="">
 			  	Add this person to the family without sending an invitation (a child or infant).
 				</div>
@@ -58,22 +58,23 @@
 			<div class="col-sm-2 control-label"></div>
 			<div class="radio col-sm-10">
 				<label>
-				<%= radio_button_tag :participant, "participant" %>
+				<%= radio_button_tag :participant, "participant", false, data: { behavior: "participant" } %>
 				<div class="">
 			  	Invite this family member to participate as a full user (a parent or adult kid).
 				</div>
 				</label>
-				<p class="help-block">Learn more about what this means.</p>
+				<p class="help-block"><%= link_to "Learn more about what this means", '#', id: "hidden_participating_explainer_link", remote: true, data: { member_explainer: "this_link" } %>.</p>
 			</div>	
 			
 		</div>
 
-		<div class="form-group hidden_participating_explainer">
+		<div class="form-group" id="hidden_participating_explainer">
 			<div class="col-sm-2 control-label"></div>
 			<p class="col-sm-10">Raisin supports two kinds of family members: participating and non-participating. Usually, parents or adult children are participating members, and younger kids are non-participating. If you'd like to invite this person as a participating member, which means they'll get their own user account, can make and check-off to-dos, and so on, just fill in the email field below.</p>
 		</div>
 
-		<div class="form-group">
+
+		<div class="form-group" id="hidden_new_member_email_field">
 			<%= f.label :email, "Email:", class: "col-sm-2 control-label" %>
 			<div class="col-sm-10">
 		  	<%= f.email_field :email, class: "form-control", placeholder: "ameliaearhart@gmail.com" %>
