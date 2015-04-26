@@ -11,6 +11,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
     # POST /resource
     def create
+      # ultimately I want to add a key/check on this to make sure people can't add themselves
+      # to random projects & accts by guessing emails.
      super do |resource|
        @account_ids = []
        @projects = []
@@ -18,36 +20,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
        # Find all the memberships that we need to associate, and associate them
        members = Member.where(email: resource.email)
        members.each do |m|
-         @account_ids << m.account_id
-         m.user_id = resource.id
-         
-         # let's add an account association for project invitees
-         if !m.account_id
-           m.project.account.users << resource
+         # add the user to any accounts
+         a = m.project.account
+         if a
+           a.users << resource
          end
+         
+         # and of course add the user_id to the membership record
+         m.user_id = resource.id
          m.save!
          
        end
        
-       
-       # Find all the accounts we neeed to associate, and associate them
-       @accs = @account_ids.uniq
-       @accs.each do |a|
-         account = Account.find_by_id(a)
-         if account
-           account.projects.each do |p|
-             @projects << p
-           end
-         end   
-       end
-       
-       # Lastly, find all the family member projects in all the accounts, and create 
-       # memberships where they don't yet exist
-       @projects.each do |pr|
-         if pr.removable == "no"
-           pr.members.create(user_id: resource.id) unless pr.users.include?(resource)
-         end
-       end
        
      end
      

@@ -17,9 +17,9 @@
     </div>
 <% end %>
 
-	<% if @project %>
-		<%= f.hidden_field :project_id, value: @project.id %>
-	<% end %>	
+	
+	<%= f.hidden_field :status, value: "family" %>
+	
 
 	<div class="form-group">
 		<%= f.label :name, class: "col-sm-2 control-label" %>

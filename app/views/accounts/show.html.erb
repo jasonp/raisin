@@ -1,10 +1,10 @@
 <h1><%= @account.name %></h1>
 
-<% if @fams.count > 0 %>
+<% if @family_members.count > 0 %>
 	<h4>Family Members</h4>
 
 
-	<% @fams.each do |fm| %>
+	<% @family_members.each do |fm| %>
 		<a class="" href="<%= account_project_path(@account, fm) %>">
 			<span class="family_member_box">
 				<% if fm.members.first.user %>
@@ -44,7 +44,7 @@
 		</a>
 	<% end %>	
 	
-	<% if @fams.count > 0 %>
+	<% if @family_members.count > 0 %>
 		<a class="" href="<%= new_account_project_path(@account) %>">
 			<div class="project_box add_new_project">
 				<div class="project_box_title">Create a new project </div>

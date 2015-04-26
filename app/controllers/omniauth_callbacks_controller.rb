@@ -27,10 +27,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           m = @user.name.split(" ")
           @account = @user.accounts.create(name: m.last, active_until: Time.now.utc + 2.months)
 
-          # create a permanent project 
+          # create a permanent project (a family member)
           @proj = @account.projects.create(title: current_user.name, removable: "no")
-          # add a member to it
-          @proj.members.create(user_id: current_user.id)
+          # add the new user as a family member
+          @proj.members.create(user_id: current_user.id, account_id: @account.id)
 
         end
 

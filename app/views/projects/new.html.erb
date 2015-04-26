@@ -20,7 +20,19 @@
 		</div>
 
 		<div class="form-group">
-		  <div class="controls"><%= f.text_area :description, class: "form-control", placeholder: "(Optional) A short project description" %></div>
+		  <div class="controls"><%= f.text_area :description, class: "form-control", rows: 4, placeholder: "(Optional) A short project description" %></div>
+		</div>
+
+		<div class="form-group">
+
+			<div class="checkbox">
+				<label>
+				<%= check_box_tag :family_share, "family_share", false %>
+			  	Automatically add all family members as collaborators.
+				</label>
+			</div>	
+			
+
 		</div>
 
 

@@ -42,6 +42,17 @@ class ProjectsController < ApplicationController
     @new_member = Member.add_user_to_project(current_user, @project)
     @new_member.save!
     
+    # check to see if we're supposed to associate anyone else
+    if params[:family_share]
+      family_members = Member.where(account_id: @account.id)
+      family_members.each do |fm|
+        usr = fm.user
+        if usr
+          mem = Member.add_user_to_project(usr, @project)
+        end
+      end
+    end
+    
     respond_to do |format|
       if @project.save
         format.html { redirect_to account_project_path(@account, @project) }
