@@ -100,11 +100,27 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     
-    respond_to do |format|
-      if @project.delete
-        format.html { redirect_to root_path, flash: {warning: 'OK, that project has gone the way of the dodo.'}}
-      end
-    end  
+    if @project.removable == "no"
+      @removable = "yes"
+    end
+
+    @members_to_delete = @project.members
+    
+      if @project.delete  
+        
+        @members_to_delete.each do |m|
+          m.delete
+        end
+        
+        if @removable == "yes"
+          redirect_to root_path, flash: {warning: 'OK, family member removed.'}
+        else
+          redirect_to root_path, flash: {warning: 'OK, that project has gone the way of the dodo.'}
+        end
+      else
+        redirect_to root_path, flash: {danger: 'Uh, oh, something went wrong.' }  
+      end # project delete
+
     
   end
   

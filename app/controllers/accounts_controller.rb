@@ -33,6 +33,8 @@ class AccountsController < ApplicationController
           sign_in @account.users.last
         end
         
+        check_for_and_associate_members_and_accounts(current_user)
+        
         @proj = @account.projects.create(title: current_user.name, removable: "no")
         @proj.members.create(user_id: current_user.id, account_id: @account.id)
         
@@ -93,6 +95,23 @@ class AccountsController < ApplicationController
 
     def account_params
       params.require(:account).permit(:name, :active_until, :users_attributes => [:id, :email, :name, :password, :password_confirmation])
+    end
+    
+    def check_for_and_associate_members_and_accounts(resource)
+     # Find all the memberships that we need to associate, and associate them
+     members = Member.where(email: resource.email)
+     members.each do |m|
+       # add the user to any accounts
+       a = m.project.account
+       if a
+         a.users << resource if !a.users.include?(resource)
+         a.save!
+       end
+
+       # and of course add the user_id to the membership record
+       m.user_id = resource.id
+       m.save!
+    end
     end
     
     
