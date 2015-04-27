@@ -13,27 +13,39 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def create
       # ultimately I want to add a key/check on this to make sure people can't add themselves
       # to random projects & accts by guessing emails.
-     super do |resource|
+     #super do |resource|
        @account_ids = []
        @projects = []
+       parameters = params
        
-       # Find all the memberships that we need to associate, and associate them
-       members = Member.where(email: resource.email)
-       members.each do |m|
-         # add the user to any accounts
-         a = m.project.account
-         if a
-           a.users << resource
-         end
+       resource = User.new(user_params)
+       respond_to do |format| 
+         if resource.save     
+           sign_in(resource)                      
+           # Find all the memberships that we need to associate, and associate them
+           members = Member.where(email: resource.email)
+           members.each do |m|
+             # add the user to any accounts
+             a = m.project.account
+             if a
+               a.users << resource if !a.users.include?(resource)
+               a.save!
+             end
          
-         # and of course add the user_id to the membership record
-         m.user_id = resource.id
-         m.save!
-         
-       end
+             # and of course add the user_id to the membership record
+             m.user_id = resource.id
+             m.save!
+          
+           end
+           
+           format.html {redirect_to root_path, notice: "Invitation accepted!"}
+         else
+           format.html {redirect_to new_user_registration_path(email: params[:user][:email], name: params[:user][:name]), flash: { warning: "Oops, it looks like your password is invalid -- you need 8 characters, minimum."} }
+         end # if/save
+       end   # format
        
        
-     end
+     #end # super do
      
      
     end
@@ -67,6 +79,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
      # You can put the params you want to permit in the empty array.
      def configure_sign_up_params
        devise_parameter_sanitizer.for(:sign_up) { |u| u.permit({ accounts_attributes: [:name, :id] }, :email, :name, :password, :password_confirmation) }
+     end
+     
+     def user_params
+       params.require(:user).permit(:name, :email, :password, :password_confirmation)
      end
   
      # You can put the params you want to permit in the empty array.

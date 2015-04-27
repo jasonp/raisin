@@ -38,39 +38,43 @@ class MembersController < ApplicationController
       # When they sign up, we'll need to update their member record with a user_id.  
       # All we need to do to ensure they don't get extra privelages is to NOT ASSOCIATE AN 
       # ACCOUNT to the membership, ONLY a project_id
-      @test_for_existing_user = User.find_by_email(params[:email])
+      @test_for_existing_user = User.find_by_email(params[:member][:email])
       @project = Project.find(params[:member][:project_id])
       @member = @project.members.create(member_params_only_project)
       
       # store the welcome message
       @welcome_message = params[:message]
       
+      logger.info(@test_for_existing_user)
       if !@test_for_existing_user
         # by default, this is a participating member, so:
         @project_invite = true
       else
         @existing_user_invite = true
         @member.user_id = @test_for_existing_user.id
+        @member.save
         account = @project.account
-        account.users << @test_for_existing_user
+        account.users << @test_for_existing_user if !account.users.include?(@test_for_existing_user)
       end    
 
     else
       # We're adding a family member to an account
       # let's only do this if it's not a dupe email
-      @test_for_existing_user = User.find_by_email(params[:email])
+      @test_for_existing_user = User.find_by_email(params[:member][:email])
 
       @account = Account.find_by_id(params[:account_id])
+
+      # ONLY FAMILY MEMBERS get a member-based association to an account
       @member = @account.members.create(member_params)
     
-      # That means we need to create a permanent project for them
+      # We need to create a permanent project for them
       # 
       @proj = Project.new(title: @member.name, removable: "no", account_id: @account.id)
       @proj.save!      
     
       @member.project_id = @proj.id
-      # ONLY FAMILY MEMBERS get a member-based association to an account
-      @member.account_id = @account.id
+
+
     
       # Time to check and see if they're supposed to get an invite as well
       # but we'll send it after the save, so we have to flag it as an account invite
@@ -78,6 +82,8 @@ class MembersController < ApplicationController
         if @test_for_existing_user   
           @existing_account_invite = true
           @member.user_id = @test_for_existing_user.id
+          @member.save
+          @account.users << @test_for_existing_user if !@account.users.include?(@test_for_existing_user)
         else
           @account_invite = true
         end
@@ -104,7 +110,7 @@ class MembersController < ApplicationController
           # Let's deliver email, if needed
           InviteMailer.invite_to_account(@member, @account, current_user).deliver_later if @account_invite
           InviteMailer.invite_to_project(@member, @project, current_user, @welcome_message).deliver_later if @project_invite  
-          InviteMailer.existing_project_invite(@member, @project, current_user).deliver_later if @existing_user_invite
+          InviteMailer.existing_project_invite(@member, @project, current_user, @welcome_message).deliver_later if @existing_user_invite
           InviteMailer.existing_account_invite(@member, @account, current_user).deliver_later if @existing_account_invite
           
           format.html { redirect_to root_path, notice: 'Hooray! We added a new member.' }

@@ -48,8 +48,13 @@ class ProjectsController < ApplicationController
       family_members.each do |fm|
         usr = fm.user
         if usr
-          mem = Member.add_user_to_project(usr, @project)
+          mem = Member.add_user_to_project(usr, @project) unless usr == current_user
+          # send email
+        elsif fm.email && fm.email != ""
+          mem = Member.add_pending_user_to_project(fm.email, fm.name, @project)
+          # send email
         end
+        
       end
     end
     

@@ -3,7 +3,7 @@
 <%= @from_name %> has added you to the <%= @account.name %> family on Raisin. 
 </p>
 <p>
-Welcome to a new family! When you log in to Raisin, it will prompt you to choose which family dashboard you'd like to see. You can always switch between dashboards by visiting the <a href="<%= @url %>">dashboard selection page</a>.
+Welcome to a new family! When you <%= link_to 'log in to your Raisin account', new_user_session_url %>, it will prompt you to choose which family dashboard you'd like to see. You can always switch between dashboards by visiting the <a href="<%= @url %>">dashboard selection page</a>.
 </p>
 
 <p>Cheers,<br />

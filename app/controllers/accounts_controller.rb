@@ -19,13 +19,12 @@ class AccountsController < ApplicationController
   
   def create
 
-    if !current_user
-      @account = Account.new(account_params)
-    else
-      @account = current_user.accounts.create(account_params)
-    end
-    
+    @account = Account.new(account_params)
     @account.active_until = Time.now.utc + 2.months
+    
+    if current_user
+      @account.users << current_user
+    end
     
     
     respond_to do |format|

@@ -28,14 +28,14 @@ class InviteMailer < ApplicationMailer
     mail(to: to_email_with_name, from: from_email_with_name, subject: subject_line)
   end  
   
-  def existing_project_invite(member, project, current_user)
-    @name = member.name
+  def existing_project_invite(member, project, inviter, message)
+    @name = member.user.name
     @from_name = inviter.name
-    @url = new_user_registration_url(email: member.email, name: member.name)
+    @url = new_user_registration_url(email: member.user.email, name: member.user.name)
     @title = project.title
     @message = message
     
-    to_email_with_name = %("#{@name}" <#{member.email}>)
+    to_email_with_name = %("#{@name}" <#{member.user.email}>)
     from_email_with_name = %("#{@from_name} (Raisin)" <dispatch@raisinhq.com>)
     subject_line = %(Join the #{@title} project on Raisin)
     
@@ -43,12 +43,13 @@ class InviteMailer < ApplicationMailer
     
   end
   
-  def existing_account_invite(member, account, current_user)
-    @name = member.name
+  def existing_account_invite(member, account, inviter)
+    @name = member.user.name
     @from_name = inviter.name
     @url = accounts_url
+    @account = account
     
-    to_email_with_name = %("#{@name}" <#{member.email}>)
+    to_email_with_name = %("#{@name}" <#{member.user.email}>)
     from_email_with_name = %("#{@from_name} (Raisin)" <dispatch@raisinhq.com>)
     subject_line = %(Join the #{account.name} family on Raisin)
     

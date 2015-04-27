@@ -25,4 +25,8 @@ class Member < ActiveRecord::Base
     m = Member.create(:user_id => user.id, :project_id => project.id)
   end
   
+  def self.add_pending_user_to_project(email, name, project)
+    m = Member.create(:email => email, :name => name, :project_id => project.id)
+  end
+  
 end

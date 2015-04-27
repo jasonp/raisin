@@ -1,12 +1,14 @@
 Hello, <%= @name %>
 
-<%= @from_name %> has added you to a project in Raisin called: <strong><%= @title %></strong>. 
+<%= @from_name %> has added you to a project in Raisin called: <%= @title %>. 
 
 They wrote:
->	<%= @message %>
+	<%= @message %>
 
 
-To collaborate on this project simply log in to your Raisin account and you'll find the project in your account dashboard.
+To collaborate on this project simply log in to your Raisin account and you'll find the project in your account dashboard:
+
+<%= new_user_session_url %>
 
 Cheers,
 	- Jason Preston
