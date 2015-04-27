@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_editable, only: [:edit]
   
-  
   def index
   end
 
@@ -28,11 +27,19 @@ class ProjectsController < ApplicationController
       @garage = true
     end
     
+    # Prevent unauthorized users from seeing a project
+    # Not working yet
+    @project_check = check_for_project_membership(@project, current_user)
+    
     respond_to do |format|
       if @project.nil?
         format.html { redirect_to root_path }
       else
-        format.html { render 'show' }
+        if @project_check == false
+          format.html { redirect_to root_path }
+        else
+          format.html { render 'show' }
+        end
       end
     end
   end
@@ -134,6 +141,24 @@ class ProjectsController < ApplicationController
       project = Project.find_by_id(params[:id])
       if project.removable == "no"
         redirect_to root_path
+      end
+    end
+    
+    def check_for_project_membership(project, user)
+      if project.removable == "no"
+        # family project -- check to see if the user is a family member
+        if Member.where(user_id: user.id, account_id: project.account.id).count > 0
+          return true
+        else
+          return false
+        end
+      else
+        # regular project, check for project membership
+        if Member.where(user_id: user.id, project_id: project.id).count > 0
+          return true
+        else
+          return false
+        end
       end
     end
   
