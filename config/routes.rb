@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'members/new'
-
-  get 'members/create'
 
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'users/registrations' }
   resources :users, only: [:show, :edit, :update]
@@ -12,6 +9,8 @@ Rails.application.routes.draw do
     resources :projects
     resources :members
   end
+  
+  get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

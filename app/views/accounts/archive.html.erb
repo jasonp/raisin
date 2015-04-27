@@ -1,0 +1,8 @@
+<h4>Projects in the garage</h4>
+
+<ul>
+	
+	<% @projects.each do |p| %>
+		<li><%= link_to p.title, account_project_path(@account, p) %></li>
+	<% end %>
+</ul>

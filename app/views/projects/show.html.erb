@@ -1,4 +1,12 @@
 
+
+<% if @garage %>
+	<p class="garage_notice">
+		This project has been stashed in the garage! That means it's frozen in time unless you choose to make it active in the project settings below, after which it will appear in your dashboard again.
+	</p>
+<% end %>
+
+
 <div class="project_page_top">
 	<h2><%= @project.title %></h2>
 	<div class="project_description">
@@ -19,5 +27,14 @@
 </ul>
 
 <% if @project.users.first == current_user %>
-	<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
+	<% if !@garage %>
+		<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
+	<% end %>
 <% end %>
+
+<div class="project_mini_footer">
+	<% if @project.removable != "no" %>
+		<%= render 'project_mini_footer', locals: {account: @account, project: @project} %>
+	<% end %>
+	
+</div>

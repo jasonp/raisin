@@ -59,18 +59,34 @@ class AccountsController < ApplicationController
     
     # Same process... what do they have permission to see?
     @projects = []
+    @inactive_count = 0
     @projs.each do |p|
-      @projects << p if p.users.include?(current_user)
+      if p.status == "active"
+        if p.users.include?(current_user)
+          @projects << p 
+        end  
+      else
+        @inactive_count = @inactive_count + 1 if p.status == "garage"
+      end  
     end
+    
     
     session["preferred_account_id"] = @account.id
     
   end
 
   def edit
+    # "Account settings"
   end
 
   def update
+  end
+  
+  def archive
+    # "Project in the garage"
+    
+    @account = Account.find(params[:account_id])
+    @projects = Project.where(account_id: @account.id, removable: nil, status: "garage")
   end
   
   private

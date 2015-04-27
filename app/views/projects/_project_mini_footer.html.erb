@@ -1,0 +1,47 @@
+<div id="access_edit_project">
+	<p class="help-block"><%= link_to "Update project settings...", '#', id: "access_edit_project_link", remote: true, data: { project_status: "status_link" } %></p>
+</div>
+
+<div id="hidden_settings_form">
+
+	<div class="row">
+	<h5 class="left-adjust">Project Settings</h5>	
+	<%= form_for @project, url: account_project_path(@account, @project), method: :put , html: {class: "form"} do |f| %>
+		
+		
+		<div class="form-group">
+			
+			<div class="control-label"></div>
+			<div class="radio col-sm-10">
+				<label>
+				<%= f.radio_button :status, "active", {value: @project.status} %>
+				<div class="">
+			  	This project is in the house: add to-dos, conversations, etc.
+				</div>
+				</label>
+			</div>
+
+
+			<div class="control-label"></div>
+			<div class="radio col-sm-10">
+				<label>
+				<%= f.radio_button :status, "garage", {value: @project.status} %>
+				<div class="">
+			  	In the garage; everything will stay exactly as-is in case you want to pull it out later, but it won't take up space on your dashboard.
+				</div>
+				</label>
+			</div>	
+
+		</div>
+		
+		<div class="actions col-sm-10">
+	    <%= f.submit "Update the project", class: "btn btn-default" %>
+			<span class="cancel_new_project">Or <%= link_to "Nevermind, cancel...", '#', id: "hide_edit_project_link", remote: true, data: { edit_status_hide: "hide_link" } %></span>
+	  </div>
+		
+	<% end %>
+	
+	<div class="delete_project_link col-sm-10">
+	Or, you can <%= link_to 'delete the entire project permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %>.
+	</div>
+</div>

@@ -22,6 +22,8 @@
 		<div class="form-group">
 		  <div class="controls"><%= f.text_area :description, class: "form-control", rows: 4, placeholder: "(Optional) A short project description" %></div>
 		</div>
+		
+		<%= f.hidden_field :status, value: "active" %>
 
 		<div class="form-group">
 

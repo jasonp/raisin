@@ -24,6 +24,10 @@ class ProjectsController < ApplicationController
     @project = Project.where(account: params[:account_id], id: params[:id])[0]
     @account = Account.find_by_id(params[:account_id])
     
+    if @project.status == "garage"
+      @garage = true
+    end
+    
     respond_to do |format|
       if @project.nil?
         format.html { redirect_to root_path }
@@ -81,7 +85,11 @@ class ProjectsController < ApplicationController
     
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to account_project_path(@account, @project), notice: 'Project updated!' }
+        if @project.status == "garage"
+          format.html { redirect_to root_path, notice: 'OK: We stashed that project in the garage.'}
+        else
+          format.html { redirect_to account_project_path(@account, @project), notice: 'Project updated!' }
+        end  
       else
         format.html { render action: "edit" }
       end
@@ -89,10 +97,21 @@ class ProjectsController < ApplicationController
     
   end
   
+  def destroy
+    @project = Project.find(params[:id])
+    
+    respond_to do |format|
+      if @project.delete
+        format.html { redirect_to root_path, flash: {warning: 'OK, that project has gone the way of the dodo.'}}
+      end
+    end  
+    
+  end
+  
   private
 
     def project_params
-      params.require(:project).permit(:title, :description, :members_attributes => [:id, :email, :name, :user_id])
+      params.require(:project).permit(:title, :description, :status, :members_attributes => [:id, :email, :name, :user_id])
     end
   
     def check_editable

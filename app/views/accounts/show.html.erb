@@ -53,3 +53,11 @@
 		</a>
 	<% end %>
 	
+	<% if @inactive_count > 0 %>
+		<div class="inactive_projects">
+			And <a href="<%= account_project_archive_path(@account) %>">
+				<%= @inactive_count %> more <%= ' project'.pluralize(@inactive_count) %> in the garage... 
+			</a>
+		</div>	
+	<% end %>
+	
