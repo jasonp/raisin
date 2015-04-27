@@ -51,7 +51,7 @@ class AccountsController < ApplicationController
     
     # Only display family members to other family members
     @fam_member = Member.where(account_id: @account.id, user_id: current_user.id)
-    if @fam_member
+    if @fam_member.count > 0
       @family_members = Project.where(account_id: @account.id, removable: "no")
     end  
     
