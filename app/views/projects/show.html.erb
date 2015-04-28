@@ -6,14 +6,40 @@
 	</p>
 <% end %>
 
-<%= @project_check %>
-
 <div class="project_page_top">
 	<h2><%= @project.title %></h2>
 	<div class="project_description">
 		<p><%= @project.description %></p>
 	</div>
 </div>	
+
+<div id="project_todo_section">
+	
+	<div id="show_new_todo_form_link_box">
+		<p><%= link_to "[ Add a new to-do list ]", '#', id: "show_new_todo_form_link", remote: true, data: { show_form: "show_link" } %></p>
+	</div>
+	
+	<div id="hidden_new_todo_form">
+		<div class="row">
+		<%= form_for @list, url: account_project_lists_path(@account, @project, @list), method: :post, remote: true, html: {class: "form col-md-9"} do |f| %>
+			<%= f.hidden_field :status, value: "active" %>
+			<div class="form-group">
+				<div class="col-md-6">
+			  	<%= f.text_field :title, class: "form-control", placeholder: "A brand new to-do list!" %>
+				</div>
+			
+				<div class="col-md-3">
+					<%= f.submit "Add to-do list", class: "btn btn-default" %>
+				</div>
+			
+			</div>
+		
+		
+		<% end %>
+		</div>
+	</div> 
+	
+</div>	<!-- end todo section -->
 
 <h4>Project members (<%= @project.members.count %>)</h4>
 <ul>

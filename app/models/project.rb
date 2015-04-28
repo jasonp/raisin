@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
   # Projects / Users
   has_many :members
   has_many :users, through: :members
+  has_many :lists
   
   belongs_to :account
   

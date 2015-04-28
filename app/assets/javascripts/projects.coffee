@@ -22,3 +22,8 @@ $ ->
   $("a[data-family-options='hide_options_link']").click ->
     $('#edit_family_member_project').toggle()
     $("a[data-family-member='options_link']").toggle()
+
+$ ->
+  $("a[data-show-form='show_link']").click ->
+    $('#hidden_new_todo_form').toggle()
+    $(this).toggle()

@@ -23,6 +23,8 @@ class ProjectsController < ApplicationController
     @project = Project.where(account: params[:account_id], id: params[:id])[0]
     @account = Account.find_by_id(params[:account_id])
     
+    @list = @project.lists.new
+    
     if @project.status == "garage"
       @garage = true
     end
