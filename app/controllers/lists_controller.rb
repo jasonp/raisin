@@ -29,6 +29,8 @@ class ListsController < ApplicationController
   end
 
   def update
+    
+    
   end
   
   def show

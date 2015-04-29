@@ -1,0 +1,3 @@
+$("#add_todo_list_item_form-<%= escape_javascript(@list.id.to_s) %>").empty();
+$("#add_todo_item_link-<%= escape_javascript(@list.id.to_s) %>").append("<%= escape_javascript(render 'items/show_new_item_form_link', :locals => {list: @list, project: @project}) %>");
+$("#todo_list_items-<%= escape_javascript(@list.id.to_s) %>").append("<%= escape_javascript(render '/items/list_item_actionable', locals: {project: @project, list: @list, li: @li})%>")

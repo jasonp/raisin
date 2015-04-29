@@ -1,21 +1,22 @@
 # == Schema Information
 #
-# Table name: lists
+# Table name: items
 #
 #  id         :integer          not null, primary key
 #  title      :text
+#  list_id    :integer
+#  user_id    :integer
+#  due        :datetime
 #  status     :text
-#  project_id :integer
-#  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class List < ActiveRecord::Base
-  
-  belongs_to :project
-  has_many :items, dependent: :destroy
+class Item < ActiveRecord::Base
+
+  belongs_to :list
+  belongs_to :user
   
   validates :title, presence: true
-  
+
 end

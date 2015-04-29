@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   # Projects / Users
   has_many :members
   has_many :users, through: :members
-  has_many :lists
+  has_many :lists, dependent: :destroy
   
   belongs_to :account
   

@@ -1,21 +1,25 @@
 Rails.application.routes.draw do
 
-
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'users/registrations' }
   resources :users, only: [:show, :edit, :update]
   
   resources :accounts, only: [:new, :show, :edit, :create, :update, :index] do
     get 'users', on: :member
     resources :projects do
-      resources :lists, only: [:create, :update, :destroy, :show, :new]
+      resources :lists, only: [:create, :update, :destroy, :show, :new] do
+        resources :items, only: [:new, :create, :update, :destroy, :show]
+      end
     end
     resources :members
   end
+  
+
   
   get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'
 
   # special ajax routes for to-do lists
   get '/accounts/:account_id/projects/:project_id/cancel', to: 'lists#cancel', as: "account_project_cancel_list", :defaults => { :format => 'js' }
+  get '/accounts/:account_id/projects/:project_id/lists/:list_id/cancel', to: 'items#cancel', as: "account_project_list_cancel_item", :defaults => { :format => 'js' }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

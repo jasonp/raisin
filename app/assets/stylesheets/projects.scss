@@ -24,6 +24,10 @@ $todo-list-blue: #1d428b;
 ***
 */
 
+.starts_hidden {
+	display: none;
+}
+
 .garage_notice {
 	border-top: 3px double #ef5900;
 	border-bottom: 3px double #ef5900;
@@ -71,6 +75,21 @@ h5.todo_list_title a:hover {
 	margin-bottom: 1em;
 }
 
+.completed_queue {
+	margin-left: 1em;
+	font-size: 86%;
+}
+
+.recently_completed_header {
+	font-weight: bold;
+	margin-top: 1em;
+	margin-bottom: .3em;
+}
+
+.new_list_item_form_row {
+	margin-left: .5em;
+	margin-top: .5em;
+}
 
 /* Form fields */
 
@@ -85,7 +104,20 @@ h5.todo_list_title a:hover {
 	border-bottom: 1px dashed $light-gray;
 }
 
+#todo_item_input{
+	width: 475px;
+}
+.new_list_item_cancel_link {
+	margin-left: 1em;
+	margin-top: .5em;
+}
+.add_todo_item_link {
+	margin-top: .5em;
+}
 
+#todo_due_date_input {
+	width: 125px;
+}
 
 #hidden_settings_form {
 	display: none;
@@ -98,3 +130,8 @@ h5.todo_list_title a:hover {
 #hidden_new_todo_form {
 	display: none;
 }
+
+a.completed_todo {
+	color: $mid-gray;
+}
+

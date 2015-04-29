@@ -1,3 +1,4 @@
+include ProjectsHelper
 class ProjectsController < ApplicationController
   # we get to use current_user without checking because we require log-in in this controller
   before_filter :authenticate_user!
@@ -23,9 +24,10 @@ class ProjectsController < ApplicationController
     @project = Project.where(account: params[:account_id], id: params[:id])[0]
     @account = Account.find_by_id(params[:account_id])
     
+    # For lists & items
     @list = @project.lists.new
-    
-    @lists = List.where(project_id: @project.id, status: "active")
+    @lists = List.where(project_id: @project.id, status: "active").order(id: :desc)
+    @assignees = return_potential_users_to_assign(@project)
     
     if @project.status == "garage"
       @garage = true

@@ -1,4 +1,5 @@
 <% @lists.each do |list| %>
+	<% @list = list %>
 	<div class="todo_list_box">
 		<h5 class="todo_list_title">
 		<a href="<%= account_project_list_path(@project.account, @project, list) %>"><strong><%= list.title %></strong></a>
@@ -6,19 +7,30 @@
 		
 		<div class="todo_list_items">
 			
-			<div id="add_todo_item_link">
-				<%= link_to "Add a to-do", "#" %>
+	
+			<div id="todo_list_items-<%= list.id %>">
+				<% list.items.order(created_at: :asc).each do |li| %>
+					<% if li.status == "active" %>
+						<% @li = li %>
+						<%= render '/items/list_item_actionable', locals: {li: @li} %>
+					<% end %>	
+				<% end %>
 			</div>
+
 			
-			<div id="todo_list_items">
-				
-			</div>
-			
-			<div id="add_todo_list_item_form">
+			<div id="add_todo_list_item_form-<%= list.id %>">
 				
 			</div>	
 			
+			<div id="add_todo_item_link-<%= list.id %>" class="add_todo_item_link">
+				<%= render '/items/show_new_item_form_link', locals: {project: @project, list: @list} %>
+			</div>
+			
 		</div>
+		
+		<div id="completed_todo_items_queue-<%= list.id %>" class="completed_queue starts_hidden">
+			<p class="text-muted recently_completed_header">Recently completed to-dos</hp>
+		</div>	
 	
 	</div>
 <% end %>

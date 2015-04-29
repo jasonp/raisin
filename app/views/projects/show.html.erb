@@ -28,21 +28,13 @@
 
 	<div class="existing_project_todo_section">
 
-			<%= render '/lists/existing_list', locals: {lists: @list, project: @project} %>
+			<%= render '/lists/existing_list', locals: {lists: @lists, project: @project} %>
 
 	</div>
-
-	<h4>Project members (<%= @project.members.count %>)</h4>
-	<ul>
-		<% @project.members.each do |m| %>
-			<li>
-				<%= m.name || m.user.name %> 
-				<% if !m.user %>
-				(Pending)
-				<% end %>
-			</li>
-		<% end %>	
-	</ul>
+	
+	<div class="completed_todos">
+		<%= link_to "See completed to-dos for this project...", "#" %>
+	</div>
 
 	<% if @project.users.first == current_user %>
 		<% if @project.removable != "no" %>

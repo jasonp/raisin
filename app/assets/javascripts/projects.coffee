@@ -23,3 +23,6 @@ $ ->
     $('#edit_family_member_project').toggle()
     $("a[data-family-member='options_link']").toggle()
 
+$ ->
+  $("body").on 'click', '.submittable', (evt) ->
+    $(this).parents('form:first').submit();

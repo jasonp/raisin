@@ -1,0 +1,14 @@
+<div id="list_item_inactive-<%= @li.id %>">
+	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
+	<div class="checkbox">
+		<% id_string = "list_item" + @li.id.to_s %>
+		<% checked_status = true if @li.status == "checked" %>
+		<label>
+		<%= check_box_tag :item, "checked", checked_status, id: id_string, class: "submittable", disabled: true, data: {checked: @li.id} %>
+
+	  	<%= link_to @li.title, account_project_list_item_path(@project.account, @project, @list, @li), class: "completed_todo" %>
+
+		</label>
+	</div>
+	<% end %>
+</div>
