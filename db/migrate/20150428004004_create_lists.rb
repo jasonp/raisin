@@ -4,6 +4,7 @@ class CreateLists < ActiveRecord::Migration
       t.text :title
       t.text :status
       t.integer :project_id
+      t.integer :position
 
       t.timestamps null: false
     end

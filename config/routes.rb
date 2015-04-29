@@ -7,13 +7,15 @@ Rails.application.routes.draw do
   resources :accounts, only: [:new, :show, :edit, :create, :update, :index] do
     get 'users', on: :member
     resources :projects do
-      resources :lists
+      resources :lists, only: [:create, :update, :destroy, :show, :new]
     end
     resources :members
   end
   
   get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'
-  
+
+  # special ajax routes for to-do lists
+  get '/accounts/:account_id/projects/:project_id/cancel', to: 'lists#cancel', as: "account_project_cancel_list", :defaults => { :format => 'js' }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

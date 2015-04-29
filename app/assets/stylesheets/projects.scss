@@ -1,3 +1,85 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$mid-gray: lighten(#000, 46.7%);
+$light-gray: lighten(#000, 89.7%);
+$practically-white: lighten(#000, 95.0%);
+
+$todo-list-blue: #1d428b;
+
+/*******
+*********
+***    New project page
+***
+*/
+
+.new_project_page_box {}
+.cancel_new_project { margin-left: 5px;}
+
+/*******
+*********
+***    Show project page
+***
+*/
+
+.garage_notice {
+	border-top: 3px double #ef5900;
+	border-bottom: 3px double #ef5900;
+	padding: .5em;
+}
+
+.project_page_top {
+	border-bottom: 1px solid $light-gray;
+	margin-bottom: 1.5em;
+}
+
+.project_description{
+	font-size: 14px;
+	color: $mid-gray;
+}
+
+.left-adjust {margin-left: 15px;}
+.right1em {margin-right: .3em;}
+
+.new_list_form_row {
+	margin-top: 1em;
+}
+
+h5.todo_list_title a {
+	/* color: #7c463a; */
+	border-bottom: 1px solid #ef5900;
+} 
+h5.todo_list_title a:hover {
+	text-decoration: none;
+	border-bottom: 1px solid darken(#ef5900, 15%);
+}
+
+
+/* Form fields */
+
+#list_title {
+	border-radius: 0; 
+	-webkit-box-shadow: none;; 
+	box-shadow: none; 
+	-webkit-transition: none; 
+	-o-transition: none;
+	transition: none; 
+	border: none;
+	border-bottom: 1px dashed $light-gray;
+}
+
+
+
+#hidden_settings_form {
+	display: none;
+}
+
+#edit_family_member_project {
+	display: none;
+}
+
+#hidden_new_todo_form {
+	display: none;
+}

@@ -25,6 +25,8 @@ class ProjectsController < ApplicationController
     
     @list = @project.lists.new
     
+    @lists = List.where(project_id: @project.id, status: "active")
+    
     if @project.status == "garage"
       @garage = true
     end

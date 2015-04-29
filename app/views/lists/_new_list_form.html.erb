@@ -1,0 +1,22 @@
+<div class="row new_list_form_row">
+	<%= form_for @list, url: account_project_lists_path(@project.account, @project, @list), method: :post, remote: true, html: {class: "form col-md-11"} do |f| %>
+		<%= f.hidden_field :status, value: "active" %>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-md-8">
+			  	<%= f.text_field :title, class: "form-control", placeholder: "A brand new to-do list!" %>
+				</div>
+	
+				<div class="col-md-2">
+					<%= f.submit "Add to-do list", class: "btn btn-default right1em" %>
+				</div>
+	
+			</div>
+
+
+	<% end %>
+
+
+	<%= link_to "Cancel", account_project_cancel_list_path(@project.account, @project), :remote => true %>
+	</div>
+</div>

@@ -1,0 +1,2 @@
+$("#new_todo_form").empty();
+$("#show_new_todo_form_link_box").append("<%= escape_javascript(render 'new_todo_list_button', :locals => {list: @list, project: @project}) %>");

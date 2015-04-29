@@ -1,85 +1,78 @@
+<div class="project_page">
 
+	<% if @garage %>
+		<p class="garage_notice">
+			This project has been stashed in the garage! That means it's frozen in time unless you choose to make it active in the project settings below, after which it will appear in your dashboard again.
+		</p>
+	<% end %>
 
-<% if @garage %>
-	<p class="garage_notice">
-		This project has been stashed in the garage! That means it's frozen in time unless you choose to make it active in the project settings below, after which it will appear in your dashboard again.
-	</p>
-<% end %>
-
-<div class="project_page_top">
-	<h2><%= @project.title %></h2>
-	<div class="project_description">
-		<p><%= @project.description %></p>
-	</div>
-</div>	
-
-<div id="project_todo_section">
-	
-	<div id="show_new_todo_form_link_box">
-		<p><%= link_to "[ Add a new to-do list ]", '#', id: "show_new_todo_form_link", remote: true, data: { show_form: "show_link" } %></p>
-	</div>
-	
-	<div id="hidden_new_todo_form">
-		<div class="row">
-		<%= form_for @list, url: account_project_lists_path(@account, @project, @list), method: :post, remote: true, html: {class: "form col-md-9"} do |f| %>
-			<%= f.hidden_field :status, value: "active" %>
-			<div class="form-group">
-				<div class="col-md-6">
-			  	<%= f.text_field :title, class: "form-control", placeholder: "A brand new to-do list!" %>
-				</div>
-			
-				<div class="col-md-3">
-					<%= f.submit "Add to-do list", class: "btn btn-default" %>
-				</div>
-			
-			</div>
-		
-		
-		<% end %>
+	<div class="project_page_top">
+		<h2><%= @project.title %></h2>
+		<div class="">
+			<h5 class="project_description"><%= @project.description %></h5>
 		</div>
-	</div> 
-	
-</div>	<!-- end todo section -->
+	</div>	
 
-<h4>Project members (<%= @project.members.count %>)</h4>
-<ul>
-	<% @project.members.each do |m| %>
-		<li>
-			<%= m.name || m.user.name %> 
-			<% if !m.user %>
-			(Pending)
+	<h4 class="todo_header">To-do lists</h4>
+	<div id="project_todo_section">
+	
+		<div id="show_new_todo_form_link_box">
+			<%= render '/lists/new_todo_list_button', locals: {lists: @list, project: @project, account: @account} %>
+		</div>
+	
+		<div id="new_todo_form">
+
+		</div> 
+	
+	</div>	<!-- end todo section -->
+
+	<div class="existing_project_todo_section">
+
+			<%= render '/lists/existing_list', locals: {lists: @list, project: @project} %>
+
+	</div>
+
+	<h4>Project members (<%= @project.members.count %>)</h4>
+	<ul>
+		<% @project.members.each do |m| %>
+			<li>
+				<%= m.name || m.user.name %> 
+				<% if !m.user %>
+				(Pending)
+				<% end %>
+			</li>
+		<% end %>	
+	</ul>
+
+	<% if @project.users.first == current_user %>
+		<% if @project.removable != "no" %>
+			<% if !@garage %>
+				<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
 			<% end %>
-		</li>
-	<% end %>	
-</ul>
-
-<% if @project.users.first == current_user %>
-	<% if @project.removable != "no" %>
-		<% if !@garage %>
-			<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
 		<% end %>
 	<% end %>
-<% end %>
 
-<div class="project_mini_footer">
-	<% if @project.removable != "no" %>
-		<%= render 'project_mini_footer', locals: {account: @account, project: @project} %>
-	<% end %>
+	<div class="project_mini_footer">
+		<% if @project.removable != "no" %>
+			<%= render 'project_mini_footer', locals: {account: @account, project: @project} %>
+		<% end %>
 	
-</div>
-
-<div class="family_mini_footer">
-	
-	<% if @project.removable == "no" %>
-	
-	<div id="access_edit_family_member_project">
-		<p class="help-block"><%= link_to "[ Show options ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_member: "options_link" } %></p>
 	</div>
+
+	<div class="family_mini_footer">
 	
+		<% if @project.removable == "no" %>
 	
-		<div id="edit_family_member_project">
-			<p><%= link_to "[ Hide this option ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_options: "hide_options_link" } %></p>
-			<p class="help-block">You can <%= link_to 'remove this person permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %> from your family.</p>
+		<div id="access_edit_family_member_project">
+			<p class="help-block"><%= link_to "[ Show options ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_member: "options_link" } %></p>
 		</div>
-	<% end %>
-</div>	
+	
+	
+			<div id="edit_family_member_project">
+				<p><%= link_to "[ Hide this option ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_options: "hide_options_link" } %></p>
+				<p class="help-block">You can <%= link_to 'remove this person permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %> from your family.</p>
+			</div>
+		<% end %>
+	</div>	
+
+</div>

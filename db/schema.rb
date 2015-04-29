@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150428004004) do
     t.text     "title"
     t.text     "status"
     t.integer  "project_id"
+    t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
