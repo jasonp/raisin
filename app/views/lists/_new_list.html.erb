@@ -1,5 +1,11 @@
 <div class="todo_list_box">
-	<h5 class="todo_list_title"><a href="<%= account_project_list_path(@project.account, @project, @list) %>"><%= @list.title %></a></h5>
-	<%= link_to "Add a to-do", "#" %>
+	<h5 class="todo_list_title">
+	<a href="<%= account_project_list_path(@project.account, @project, @list) %>"><strong><%= list.title %></strong></a>
+	</h5>
+	
+	<div class="todo_list_items">
+		<%= link_to "Add a to-do", "#" %>
+	</div>
+	
 	
 </div>

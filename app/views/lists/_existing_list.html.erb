@@ -3,7 +3,22 @@
 		<h5 class="todo_list_title">
 		<a href="<%= account_project_list_path(@project.account, @project, list) %>"><strong><%= list.title %></strong></a>
 		</h5>
-		<%= link_to "Add a to-do", "#" %>
+		
+		<div class="todo_list_items">
+			
+			<div id="add_todo_item_link">
+				<%= link_to "Add a to-do", "#" %>
+			</div>
+			
+			<div id="todo_list_items">
+				
+			</div>
+			
+			<div id="add_todo_list_item_form">
+				
+			</div>	
+			
+		</div>
 	
 	</div>
 <% end %>
