@@ -1,0 +1,4 @@
+<h5 class="todo_list_title">
+	<a href="<%= account_project_list_path(@project.account, @project, @list) %>"><strong><%= @list.title %></strong></a>
+	<span class="edit_list_title_link_span"><%= link_to "[ Edit ]", '#', id: "edit_list_title_link", remote: true, data: { list_id: @list.id.to_s } %></span>
+</h5>

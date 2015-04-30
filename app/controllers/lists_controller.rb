@@ -29,7 +29,14 @@ class ListsController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:project_id])
+    @list = List.find(params[:id])
     
+    respond_to do |format|
+      if @list.update(list_params)
+        format.js
+      end
+    end
     
   end
   
@@ -38,12 +45,19 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    @list = List.find(params[:id])
+    
+    respond_to do |format|
+      if @list.destroy
+        format.js
+      end
+    end
   end
   
   private
   
     def list_params
-      params.require(:list).permit(:title, :status)
+      params.require(:list).permit(:title, :status, :description)
     end
     
 end

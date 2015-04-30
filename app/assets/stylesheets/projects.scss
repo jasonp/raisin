@@ -60,6 +60,16 @@ h5.todo_list_title a:hover {
 	border-bottom: 1px solid darken(#ef5900, 15%);
 }
 
+h5.todo_list_title .edit_list_title_link_span a {
+	color: $light-gray;
+	text-decoration: none;
+	border-bottom: none;
+}
+
+h5.todo_list_title .edit_list_title_link_span a:hover {
+	color: $mid-gray;
+}
+
 .todo_list_items {
 	margin-left: 1em;
 }
@@ -93,7 +103,13 @@ h5.todo_list_title a:hover {
 
 /* Form fields */
 
-#list_title {
+#link_options {
+	vertical-align: bottom;
+	margin-bottom: -4px;
+}
+
+#list_title, #inline_edit_list_title {
+	width: 500px;
 	border-radius: 0; 
 	-webkit-box-shadow: none;; 
 	box-shadow: none; 
@@ -102,6 +118,10 @@ h5.todo_list_title a:hover {
 	transition: none; 
 	border: none;
 	border-bottom: 1px dashed $light-gray;
+}
+
+#inline_edit_list_title {
+	margin-left: 1em;
 }
 
 #todo_item_input{

@@ -1,0 +1,4 @@
+$("#todo_list_existing_title-<%= escape_javascript(@list.id.to_s) %>").empty();
+$("#todo_list_existing_title-<%= escape_javascript(@list.id.to_s) %>").toggle();
+$("#todo_list_existing_title-<%= escape_javascript(@list.id.to_s) %>").append("<%= escape_javascript(render '/lists/existing_list_headline', :locals => {list: @list, project: @project}) %>");
+$("#todo_list_edit_title_form-<%= escape_javascript(@list.id.to_s) %>").toggle()

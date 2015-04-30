@@ -26,3 +26,20 @@ $ ->
 $ ->
   $("body").on 'click', '.submittable', (evt) ->
     $(this).parents('form:first').submit();
+
+$ ->
+  $("body").on 'click', '#edit_list_title_link', (evt) ->
+    listId = $(this).data("list-id")
+    editDiv = "#todo_list_edit_title_form-" + listId
+    titleDiv = "#todo_list_existing_title-" + listId
+    $(editDiv).toggle()
+    $(titleDiv).toggle()
+
+$ ->
+  $("body").on 'click', '#cancel_edit_title_link', (evt) ->
+    listId = $(this).data("list-id")
+    editDiv = "#todo_list_edit_title_form-" + listId
+    titleDiv = "#todo_list_existing_title-" + listId
+    $(editDiv).toggle()
+    $(titleDiv).toggle()
+    

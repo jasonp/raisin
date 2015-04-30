@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(version: 20150429032045) do
     t.text     "status"
     t.integer  "project_id"
     t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "members", force: :cascade do |t|
