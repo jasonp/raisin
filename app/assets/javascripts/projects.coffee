@@ -42,4 +42,21 @@ $ ->
     titleDiv = "#todo_list_existing_title-" + listId
     $(editDiv).toggle()
     $(titleDiv).toggle()
+
+$ ->
+  $("body").on 'click', '#cancel_edit_item_link', (evt) ->
+    itemId = $(this).data("item-id")
+    editDiv = "#update_list_item_form-" + itemId
+    titleDiv = "#list_item_actionable-" + itemId
+    $(editDiv).toggle()
+    $(titleDiv).toggle()
+
+$ ->
+  $("body").on 'click', '#show_edit_item_form_link', (evt) ->
+    itemId = $(this).data("item-id")
+    editDiv = "#update_list_item_form-" + itemId
+    titleDiv = "#list_item_actionable-" + itemId
+    $(editDiv).toggle()
+    $(titleDiv).toggle()
+
     

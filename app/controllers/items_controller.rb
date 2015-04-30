@@ -1,4 +1,5 @@
 include ItemsHelper
+include ProjectsHelper
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
   
@@ -14,6 +15,7 @@ class ItemsController < ApplicationController
   def create
     @list = List.find(params[:list_id])
     @project = @list.project
+    @assignees = return_potential_users_to_assign(@project)
     
     @li = @list.items.create(item_params)
     
@@ -25,16 +27,16 @@ class ItemsController < ApplicationController
   def update
     @list = List.find(params[:list_id])
     @project = @list.project
+    @assignees = return_potential_users_to_assign(@project)
     
     @li = Item.find(params[:id])
-    # toggle status
-    if @li.status == "active"
+    
+    if params[:item] == "checked"
       @li.status = "checked"
-      @li.completed_by = current_user.id
+      @li.save
     else
-      @li.status = "active"
+      @li.update(item_params)
     end
-    @li.save
     
     # Set the list to completed if this is the last to-do
     active_todo_count = Item.where(list_id: @list.id, status: "active").count
@@ -44,7 +46,12 @@ class ItemsController < ApplicationController
     end
     
     respond_to do |format|
-      format.js
+      if @li.status == "checked"
+        format.js {render 'checked'}
+      else
+        format.js {render 'update'}
+      end
+          
     end
   end
 

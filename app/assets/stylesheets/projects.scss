@@ -135,6 +135,30 @@ h5.todo_list_title .edit_list_title_link_span a:hover {
 	margin-top: .5em;
 }
 
+.todo_assigned_person_label {
+	background: #d69c84;
+	font-size: 89%;
+	padding: 2px;
+	padding-left: 4px;
+	color: $practically-white;
+	border-radius: 3px;
+	margin-left: .5em;
+	margin-right: .5em;
+}
+
+.todo_due_date_label {
+	font-size: 89%;
+	color: $mid-gray;
+}
+
+#show_edit_item_form_link {
+	color: $practically-white;
+}
+#show_edit_item_form_link:hover {
+	color: $mid-gray;
+}
+
+
 #todo_due_date_input {
 	width: 125px;
 }

@@ -46,7 +46,9 @@
 				<% list.items.order(created_at: :asc).each do |li| %>
 					<% if li.status == "active" %>
 						<% @li = li %>
-						<%= render '/items/list_item_actionable', locals: {li: @li} %>
+
+							<%= render '/items/list_item_actionable', locals: {li: @li} %>
+
 					<% end %>	
 				<% end %>
 			</div>

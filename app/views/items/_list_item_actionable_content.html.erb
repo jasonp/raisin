@@ -1,0 +1,59 @@
+<div id="list_item_actionable-<%= @li.id %>" data-list-container="<%= @li.id.to_s %>">
+	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
+	<%= f.hidden_field :completed_by, value: current_user.id %>
+	<%= f.hidden_field :status, value: "checked" %>
+	<div class="checkbox">
+		<% id_string = "list_item" + @li.id.to_s %>
+		<% checked_status = true if @li.status == "checked" %>
+		<label>
+		<%= check_box_tag :item, "checked", checked_status, id: id_string, class: "submittable", data: {checked: @li.id} %>
+
+	  	<%= @li.title %>
+			
+			<% if @li.user %>
+				<span class="todo_assigned_person_label">
+					<%= @li.user.name %></a>
+				</span>
+			<% end %>	
+			
+			<% if @li.due %>
+				<span class="todo_due_date_label">	
+					<%= @li.due.to_date.to_formatted_s(:long) %>
+				</span>	
+			<% end %>
+			
+			<%= link_to "Edit", '#', id: "show_edit_item_form_link", remote: true, data: { item_id: @li.id.to_s } %>
+
+		</label>
+	</div>
+	<% end %>
+</div>
+
+<div class="row new_list_item_form_row starts_hidden" id="update_list_item_form-<%= @li.id %>">
+	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
+		<%= f.hidden_field :status, value: "active" %>
+		<%= f.hidden_field :created_by, value: current_user.id %>
+
+			<div class="form-group">
+			  <%= f.text_field :title, class: "form-control input-sm", id: "todo_item_input", autofocus: true, placeholder: "Add a to-do item" %>
+			</div>	
+				
+			<div class="form-group">
+				<%= f.select :user_id, options_for_select(@assignees, @li.user_id), {}, :class => "input-sm form-control assign_user_select" %>
+			</div>		
+			
+			<div class="form-group">
+				<%= f.date_field :due, class: "form-control input-sm", id: "todo_due_date_input" %>
+			</div>
+	
+			<div class="form-group">
+				<%= f.submit "Update", class: "btn btn-default right1em btn-sm" %>
+			</div>
+	<% end %>
+	
+	<div class="new_list_item_cancel_link">
+		<%= link_to "Cancel my edits", '#', id: "cancel_edit_item_link", remote: true, data: { item_id: @li.id.to_s } %>
+	</div>	
+	
+</div>
+
