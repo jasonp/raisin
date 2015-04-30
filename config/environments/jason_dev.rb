@@ -23,7 +23,7 @@ Rails.application.configure do
       authentication: :plain,
       enable_starttls_auto: true,
       user_name: 'app36071197@heroku.com',
-      password: 'zxbgfdfz'
+      password: 'weqp44ii7952'
   }
 
   # Print deprecation notices to the Rails logger.

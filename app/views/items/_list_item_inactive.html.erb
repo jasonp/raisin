@@ -1,6 +1,6 @@
 <div id="list_item_inactive-<%= @li.id %>">
 	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
-	<%= f.hidden_field :status, value: "unchecked" %>
+	<%= f.hidden_field :status, value: "unchecking" %>
 	<div class="checkbox">
 		<% id_string = "list_item" + @li.id.to_s %>
 		<% checked_status = true if @li.status == "checked" %>

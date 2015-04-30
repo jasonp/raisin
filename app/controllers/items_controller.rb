@@ -31,16 +31,19 @@ class ItemsController < ApplicationController
     
     @li = Item.find(params[:id])
     
-    if params[:item] == "checked"
+    if params[:action_to_take] == "update"
+      @li.update(item_params)
+      @action = "updated"
+    elsif params[:item] == "checked"
       @li.status = "checked"
       @li.completed_by = current_user.id
       @li.save
-    elsif params[:item][:status] == "unchecked"
+      @action = "checked"
+    elsif params[:item][:status] == "unchecking"
       @li.status = "active"
       @li.completed_by = nil
       @li.save
-    else
-      @li.update(item_params)
+      @action = "unchecked"
     end
     
     # Set the list to completed if this is the last to-do
@@ -51,9 +54,9 @@ class ItemsController < ApplicationController
     end
     
     respond_to do |format|
-      if @li.status == "checked"
+      if @action == "checked"
         format.js {render 'checked'}
-      elsif @li.status == "active"
+      elsif @action == "unchecked"
         format.js {render 'unchecked' }  
       else
         format.js {render 'update'}
