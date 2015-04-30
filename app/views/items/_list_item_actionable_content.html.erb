@@ -1,6 +1,5 @@
 <div id="list_item_actionable-<%= @li.id %>" data-list-container="<%= @li.id.to_s %>">
 	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
-	<%= f.hidden_field :completed_by, value: current_user.id %>
 	<%= f.hidden_field :status, value: "checked" %>
 	<div class="checkbox">
 		<% id_string = "list_item" + @li.id.to_s %>
@@ -52,7 +51,8 @@
 	<% end %>
 	
 	<div class="new_list_item_cancel_link">
-		<%= link_to "Cancel my edits", '#', id: "cancel_edit_item_link", remote: true, data: { item_id: @li.id.to_s } %>
+		<%= link_to "Cancel my edits", '#', id: "cancel_edit_item_link", remote: true, data: { item_id: @li.id.to_s } %> or
+		<%= link_to 'Delete this item', account_project_list_item_path(@project.account, @project, @list, @li), method: :delete, remote: true %>.</p>
 	</div>	
 	
 </div>

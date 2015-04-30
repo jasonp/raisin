@@ -1,0 +1,2 @@
+$("#list_item_actionable_box-<%= escape_javascript(@li.id.to_s) %>").append("<%= escape_javascript(render '/items/list_item_actionable_content', locals: {project: @project, list: @list, li: @li})%>");
+$("#list_item_inactive-<%= escape_javascript(@li.id.to_s) %>").remove();

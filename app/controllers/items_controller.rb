@@ -33,6 +33,11 @@ class ItemsController < ApplicationController
     
     if params[:item] == "checked"
       @li.status = "checked"
+      @li.completed_by = current_user.id
+      @li.save
+    elsif params[:item][:status] == "unchecked"
+      @li.status = "active"
+      @li.completed_by = nil
       @li.save
     else
       @li.update(item_params)
@@ -48,6 +53,8 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @li.status == "checked"
         format.js {render 'checked'}
+      elsif @li.status == "active"
+        format.js {render 'unchecked' }  
       else
         format.js {render 'update'}
       end
@@ -63,6 +70,13 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @li = Item.find(params[:id])
+    
+    respond_to do |format|
+      if @li.destroy
+        format.js
+      end
+    end
   end
   
   def cancel
