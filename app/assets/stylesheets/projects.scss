@@ -19,6 +19,14 @@ $todo-list-blue: #1d428b;
 .new_project_page_box {}
 .cancel_new_project { margin-left: 5px;}
 
+
+
+.completed_page_top {
+	border-bottom: 1px solid $light-gray;
+	margin-bottom: 1.5em;
+	background: $practically-white;
+}
+
 /*******
 *********
 ***    Show project page

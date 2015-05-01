@@ -1,14 +1,40 @@
 <h3>Completed To-do Items for <%= @project.title %></h3>
+<span class="invite_new_collaborator_link"><%= link_to "Go back to the project page", account_project_path(@project.account, @project) %></span>
+<div class="completed_page_top">
+	
+</div>
 
+<% completed_count = 0 %>
 <% @lists.each do |list| %>
-	<div class="completed_todos_list_title"><%= list.title %></div>
+	<% item_queue = [] %>
+	<% list.items.each do |li| %>
+	<% item_queue << li if li.status == "checked" %>
+	<% end %>
+	
+	<% if item_queue.count > 0 %>
+	<div class="completed_todos_list_title"><h5><%= list.title %></h5></div>
 	<div class="completed_todos_list_items">
-		<% list.items.each do |li| %>
-			<% if li.status == "checked" %>
-				<li><%= li.title %></li>
+		<% item_queue.each do |li| %>
+		    <% completed_count = completed_count + 1 %>
+				<% id_string = "list_item" + li.id.to_s %>
+				<div class="checkbox">
+					<label>
+					<%= check_box_tag :list, "unchecked", true, id: id_string, disabled: true, class: "submittable", data: {checked: li.id} %>
+
+						<% completer = User.find_by_id(li.completed_by) %>
+				  	<%= link_to li.title, account_project_list_item_path(@project.account, @project, list, li), class: "todo_item-link" %> <span class="text-muted"> ( Completed by <%= completer.name %> on <%= li.updated_at.to_date.to_formatted_s(:long)%> ) </span>
+
+					</label>
+				</div>
 			<% end %>	
-		<% end %>
 	</div>	
+	<% end %>
 	
 	
 <% end %>	
+
+<% if completed_count == 0 %>
+	<div class="empty_completed_explainer">It looks like you haven't completed any to-do's for this project yet!</div>
+<% else %>
+  <div class="completed_todos_counter text-muted">You've completed <%= completed_count %> to-do's across <%= @lists.count %> lists. Nice work!</div>
+<% end %>
