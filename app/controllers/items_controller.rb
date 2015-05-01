@@ -30,22 +30,17 @@ class ItemsController < ApplicationController
     @assignees = return_potential_users_to_assign(@project)
     
     @li = Item.find(params[:id])
+    @li.update(item_params)
     
     if params[:action_to_take] == "update"
-      @li.update(item_params)
+      @action = "updated"
+    elsif params[:action_to_take] == "individual_update_info"
       @action = "updated"
     elsif params[:action_to_take] == "individual_update"
-      @li.update(item_params)
       @action = "individual_update"  
-    elsif params[:item] == "checked"
-      @li.status = "checked"
-      @li.completed_by = current_user.id
-      @li.save
+    elsif params[:action_to_take] == "check_and_move"
       @action = "checked"
-    elsif params[:item][:status] == "unchecking"
-      @li.status = "active"
-      @li.completed_by = nil
-      @li.save
+    elsif params[:action_to_take] == "uncheck_and_move"
       @action = "unchecked"
     end
     

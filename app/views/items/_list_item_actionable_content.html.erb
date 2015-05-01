@@ -1,11 +1,15 @@
 <div id="list_item_actionable-<%= @li.id %>" data-list-container="<%= @li.id.to_s %>">
 	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
-	<%= f.hidden_field :status, value: "checked" %>
+	<%= hidden_field_tag :action_to_take, "check_and_move" %>
 	<div class="checkbox">
 		<% id_string = "list_item" + @li.id.to_s %>
-		<% checked_status = true if @li.status == "checked" %>
+		<% if @li.status == "active" -%>
+			<%= f.hidden_field :completed_by, value: current_user.id %>
+		<% else -%>
+			<%= f.hidden_field :completed_by, value: nil %>
+		<% end -%>
 		<label>
-		<%= check_box_tag :item, "checked", checked_status, id: id_string, class: "submittable", data: {checked: @li.id} %>
+		<%= f.check_box :status, {id: id_string, class: "submittable", data: {checked: @li.id} }, "checked", "active" %>	
 
 	  	<%= link_to @li.title, account_project_list_item_path(@project.account, @project, @list, @li), class: "todo_item-link" %>
 			
