@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
     if params[:action_to_take] == "update"
       @action = "updated"
     elsif params[:action_to_take] == "individual_update_info"
-      @action = "updated"
+      @action = "updated_individually"
     elsif params[:action_to_take] == "individual_update"
       @action = "individual_update"  
     elsif params[:action_to_take] == "check_and_move"
@@ -58,6 +58,8 @@ class ItemsController < ApplicationController
         format.js {render 'unchecked' }  
       elsif @action == "individual_update"
         format.js {render 'nada' }  
+      elsif @action == "updated_individually"
+        format.js {render 'individual' }  
       else
         format.js {render 'update'}
       end

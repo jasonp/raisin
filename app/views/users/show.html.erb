@@ -6,7 +6,7 @@
 	<div class="video_controller_nav form-inline" id="filter_selector_form">
 		<%= form_tag(user_path(@user), remote: true, method: :get) do |f| %>
 			<%= select_tag "date_range", options_for_select(@date_options), :class => "col-md-2 form-control input-sm filter-selector" %>
-			<%= submit_tag "Filter", :class => "btn btn-default btn-xs" %>
+			<%= submit_tag "Filter", :class => "btn btn-default btn-sm" %>
 		<% end %>	
 	</div>
 </div>	

@@ -1,0 +1,3 @@
+$("#list_item_actionable_box-<%= escape_javascript(@li.id.to_s) %>").empty();
+$("#list_item_actionable_box-<%= escape_javascript(@li.id.to_s) %>").append("<%= escape_javascript(render 'list_item_individual') %>");
+
