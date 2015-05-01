@@ -7,7 +7,7 @@
 		<label>
 		<%= check_box_tag :item, "checked", checked_status, id: id_string, class: "submittable", data: {checked: @li.id} %>
 
-	  	<%= @li.title %>
+	  	<%= link_to @li.title, account_project_list_item_path(@project.account, @project, @list, @li), class: "todo_item-link" %>
 			
 			<% if @li.user %>
 				<span class="todo_assigned_person_label">
