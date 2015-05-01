@@ -50,6 +50,8 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+
   def create
     
     @account = Account.find_by_id(params[:account_id])

@@ -34,14 +34,17 @@
 
 		</div>
 		
-		<div class="actions col-sm-10">
+		<div class="actions col-sm-12">
 	    <%= f.submit "Update the project", class: "btn btn-default" %>
-			<span class="cancel_new_project">Or <%= link_to "Nevermind, cancel...", '#', id: "hide_edit_project_link", remote: true, data: { edit_status_hide: "hide_link" } %></span>
+			<span class="cancel_new_project"> <%= link_to "Nevermind, cancel...", '#', id: "hide_edit_project_link", remote: true, data: { edit_status_hide: "hide_link" } %></span>
+			
+			<span class="delete_project_link col-sm-offset-3">
+			Or, you can <%= link_to 'delete the entire project permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %>.
+			</span>
+			
 	  </div>
 		
 	<% end %>
 	
-	<div class="delete_project_link col-sm-10">
-	Or, you can <%= link_to 'delete the entire project permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %>.
-	</div>
+
 </div>

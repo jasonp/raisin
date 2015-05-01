@@ -44,6 +44,16 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
   end
 
+  def completed
+
+    @account = Account.find_by_id(params[:account_id])
+    @project = Project.find_by_id(params[:project_id])
+    
+    @lists = List.where(project_id: @project.id).order(id: :desc)
+    
+  end
+
+
   def destroy
     @list = List.find(params[:id])
     

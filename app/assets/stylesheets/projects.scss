@@ -25,6 +25,11 @@ $todo-list-blue: #1d428b;
 ***
 */
 
+.invite_new_collaborator_link {
+	float: right;
+	margin-top: 1em;
+}
+
 .starts_hidden {
 	display: none;
 }
@@ -141,11 +146,12 @@ a.todo_item-link {
 }
 
 .todo_assigned_person_label {
-	background: #d69c84;
+/*	background: #d69c84; */
+	background: lighten(#d69c84, 24.0%);
 	font-size: 89%;
 	padding: 2px;
 	padding-left: 4px;
-	color: $practically-white;
+	color: $dark-gray;
 	border-radius: 3px;
 	margin-left: .5em;
 	margin-right: .5em;
@@ -182,5 +188,11 @@ a.todo_item-link {
 
 a.completed_todo {
 	color: $mid-gray;
+}
+
+#hidden_settings_form {
+	border-top: 3px double $light-gray;
+	background: $practically-white;
+	padding: 1em;
 }
 

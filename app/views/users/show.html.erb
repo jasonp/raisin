@@ -1,6 +1,6 @@
 <% if @user %>
 
-<h4>My profile (visible only to people in my family)</h4>
+<h4>My tasks</h4>
 
 <% if @user.photo %>
 	<%= image_tag @user.photo %>
@@ -10,7 +10,7 @@
 
 <p><%= @user.name %></p>
 
-<p>It might be that this page is best used as the personal dashboard page; tasks, updates, etc.</p>
+
 
 <% else %>
 

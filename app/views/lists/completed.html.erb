@@ -1,0 +1,14 @@
+<h3>Completed To-do Items for <%= @project.title %></h3>
+
+<% @lists.each do |list| %>
+	<div class="completed_todos_list_title"><%= list.title %></div>
+	<div class="completed_todos_list_items">
+		<% list.items.each do |li| %>
+			<% if li.status == "checked" %>
+				<li><%= li.title %></li>
+			<% end %>	
+		<% end %>
+	</div>	
+	
+	
+<% end %>	

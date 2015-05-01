@@ -7,11 +7,24 @@
 	<% end %>
 
 	<div class="project_page_top">
+		<% if @project.users.first == current_user %>
+			<% if @project.removable != "no" %>
+				<% if !@garage %>
+					<span class="invite_new_collaborator_link">
+					<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
+					</span>
+				<% end %>
+			<% end %>
+		<% end %>
+	
 		<h2><%= @project.title %></h2>
+		
 		<div class="">
 			<h5 class="project_description"><%= @project.description %></h5>
 		</div>
+		
 	</div>	
+	
 
 	<h4 class="todo_header">To-do lists</h4>
 	<div id="project_todo_section">
@@ -33,16 +46,8 @@
 	</div>
 	
 	<div class="completed_todos">
-		<%= link_to "See completed to-dos for this project...", "#" %>
+		<%= link_to "See completed to-dos for this project...", account_project_lists_completed_path(@account, @project) %>
 	</div>
-
-	<% if @project.users.first == current_user %>
-		<% if @project.removable != "no" %>
-			<% if !@garage %>
-				<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
-			<% end %>
-		<% end %>
-	<% end %>
 
 	<div class="project_mini_footer">
 		<% if @project.removable != "no" %>
@@ -54,16 +59,17 @@
 	<div class="family_mini_footer">
 	
 		<% if @project.removable == "no" %>
+			<% if @project.users.first != current_user %>
+				<div id="access_edit_family_member_project">
+					<p class="help-block"><%= link_to "[ Show options ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_member: "options_link" } %></p>
+				</div>
 	
-		<div id="access_edit_family_member_project">
-			<p class="help-block"><%= link_to "[ Show options ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_member: "options_link" } %></p>
-		</div>
 	
-	
-			<div id="edit_family_member_project">
-				<p><%= link_to "[ Hide this option ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_options: "hide_options_link" } %></p>
-				<p class="help-block">You can <%= link_to 'remove this person permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %> from your family.</p>
-			</div>
+					<div id="edit_family_member_project">
+						<p><%= link_to "[ Hide this option ]", '#', id: "access_edit_family_member_project_link", remote: true, data: { family_options: "hide_options_link" } %></p>
+						<p class="help-block">You can <%= link_to 'remove this person permanently', account_project_path(@account, @project), method: :delete, data: {confirm: 'Are you sure? This cannot be undone.'} %> from your family.</p>
+					</div>
+			<% end %>
 		<% end %>
 	</div>	
 
