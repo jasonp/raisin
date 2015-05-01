@@ -1,3 +1,28 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*****
+****  Show User page
+**
+*****/
+
+.todo_item_project_list_subhead {
+	font-size: 110%;
+	margin-bottom: .4em;
+	margin-top: 1em;
+	color: #7c463a;
+}
+
+.todo_item_project_list_subhead a, .todo_item_project_list_subhead a:hover {
+	text-decoration: underline;
+
+}
+
+.collection_of_todos_indent_class {
+	margin-left: 1em;
+}
+
+.filter-selector {
+	margin-right: 1em;
+}

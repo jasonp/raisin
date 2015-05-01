@@ -1,15 +1,29 @@
 <% if @user %>
 
-<h4>My tasks</h4>
-
+<div class="user_photo_profile_page">
 <% if @user.photo %>
 	<%= image_tag @user.photo %>
 <% else %>
 	Set your photo!
 <% end %>	
+</div>
 
-<p><%= @user.name %></p>
+<h4 class="todo_header">To-dos for <%= @user.name %></h4>
 
+<div class="user_assigned_todos_control_panel">
+	<div class="video_controller_nav form-inline" id="filter_selector_form">
+		<%= form_tag(user_path(@user), remote: true, method: :get) do |f| %>
+			<%= select_tag "date_range", options_for_select(@date_options), :class => "col-md-2 form-control input-sm filter-selector" %>
+			<%= submit_tag "Filter", :class => "btn btn-default btn-sm" %>
+		<% end %>	
+	</div>
+</div>	
+
+<div class="user_assigned_todos_section" id="user_assigned_todos_block">
+	
+	<%= render 'user_assigned_todos_loop' %>
+	
+</div>	
 
 
 <% else %>
