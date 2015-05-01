@@ -47,8 +47,13 @@ header {
 ***
 */
 
-.new_account {
+.or_facebook {
+	margin-top: 7em;
+}
 
+.sign_up_facebook {
+	margin-top: 1em;
+	margin-left: 3em;
 }
 
 /*******
@@ -141,6 +146,12 @@ header {
 	display: inline-block;
 	vertical-align: top;
 }
+
+.family_member_projects_container a:hover, .account_projects_container a:hover {
+	border: none;
+	text-decoration:none;
+}
+
 
 .add_new_project {
 	background: transparent;

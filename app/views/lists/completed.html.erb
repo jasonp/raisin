@@ -1,15 +1,16 @@
-<h3>Completed To-do Items for <%= @project.title %></h3>
+<h3>Completed to-do items for <%= @project.title %></h3>
 <span class="invite_new_collaborator_link"><%= link_to "Go back to the project page", account_project_path(@project.account, @project) %></span>
 <div class="completed_page_top">
 	
 </div>
 
-<% completed_count = 0 %>
-<% @lists.each do |list| %>
-	<% item_queue = [] %>
-	<% list.items.each do |li| %>
-	<% item_queue << li if li.status == "checked" %>
-	<% end %>
+<% completed_count = 0 -%>
+<% list_count = 0 -%>
+<% @lists.each do |list| -%>
+	<% item_queue = [] -%>
+	<% list.items.each do |li| -%>
+		<% item_queue << li if li.status == "checked" -%>
+	<% end -%>
 	
 	<% if item_queue.count > 0 %>
 	<div class="completed_todos_list_title"><h5><%= list.title %></h5></div>
@@ -36,5 +37,5 @@
 <% if completed_count == 0 %>
 	<div class="empty_completed_explainer">It looks like you haven't completed any to-do's for this project yet!</div>
 <% else %>
-  <div class="completed_todos_counter text-muted">You've completed <%= completed_count %> to-do's across <%= @lists.count %> lists. Nice work!</div>
+  <div class="completed_todos_counter text-muted">You've completed <%= completed_count %> <%= ' to-do'.pluralize(completed_count) %>. Nice work!</div>
 <% end %>

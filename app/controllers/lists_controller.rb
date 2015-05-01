@@ -1,3 +1,4 @@
+include ProjectsHelper
 class ListsController < ApplicationController
   before_filter :authenticate_user!
 
@@ -42,6 +43,8 @@ class ListsController < ApplicationController
   
   def show
     @list = List.find(params[:id])
+    @project = @list.project
+    @assignees = return_potential_users_to_assign(@project)
   end
 
   def completed

@@ -32,7 +32,7 @@ $ ->
     listId = $(this).data("list-id")
     editDiv = "#todo_list_edit_title_form-" + listId
     titleDiv = "#todo_list_existing_title-" + listId
-    $(editDiv).toggle()
+    $(editDiv).fadeToggle()
     $(titleDiv).toggle()
 
 $ ->

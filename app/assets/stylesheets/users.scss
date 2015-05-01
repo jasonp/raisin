@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$mid-gray: lighten(#000, 46.7%);
+$light-gray: lighten(#000, 89.7%);
+$practically-white: lighten(#000, 95.0%);
+$dark-gray: lighten(#000, 20%);   
+
+$todo-list-blue: #1d428b;
+
 /*****
 ****  Show User page
 **
@@ -16,7 +23,11 @@
 
 .todo_item_project_list_subhead a, .todo_item_project_list_subhead a:hover {
 	text-decoration: underline;
+}
 
+.user_assigned_todos_control_panel {
+	border-bottom: 1px solid $light-gray;
+	padding-bottom: 1em;
 }
 
 .collection_of_todos_indent_class {
@@ -25,4 +36,20 @@
 
 .filter-selector {
 	margin-right: 1em;
+}
+
+.user_photo_profile_page {
+	float: right;
+	margin-top: 1em;
+}
+
+
+/*****
+****  Sign in page
+**
+*****/
+
+
+.forgot_your_password, .nevermind_remebered_it {
+	margin-top: 1em;
 }

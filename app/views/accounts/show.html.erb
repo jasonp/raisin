@@ -3,8 +3,9 @@
 <% if @family_members %>
 	<h4>Family Members</h4>
 
-
+	<div class="family_member_projects_container">
 	<% @family_members.each do |fm| %>
+	
 		<a class="" href="<%= account_project_path(@account, fm) %>">
 			<span class="family_member_box">
 				<% if fm.members.first.user %>
@@ -20,7 +21,7 @@
 				<div class="project_box_title"><%= fm.title %></div>
 				<div class="project_box_desc"><%= fm.description %></div>
 			</span>
-		</a>	
+		</a>		
 	<% end %>
 
 	<a class="" href="<%= new_account_member_path(@account, type: "family") %>">
@@ -30,11 +31,13 @@
 		</span>
 	</a>	
 
+	</div>
 
 <% end %>
 
 <h4>Projects</h4>
 
+	<div class="account_projects_container">
 	<% @projects.each do |p| %>
 		<a class="" href="<%= account_project_path(@account, p) %>">
 			<div class="project_box">
@@ -52,6 +55,8 @@
 			</div>
 		</a>
 	<% end %>
+	
+	</div>
 	
 	<% if @inactive_count > 0 %>
 		<div class="inactive_projects">

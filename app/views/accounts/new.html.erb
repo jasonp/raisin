@@ -1,8 +1,12 @@
-<h2>Awesome! Let's set up your family account.</h2>
+<h2>Let's set up your family account.</h2>
 
-<%= form_for @account, html: {class: "form new_account"} do |f| %>
+<div class="row">
+<div class="new_member_page_box col-md-6">
+
+<%= form_for @account, html: {class: "new_account form-horizontal"} do |f| %>
 
 <% if @account.errors.any? %>
+
     <div id="error_explanation">
       <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
@@ -12,52 +16,79 @@
         <% end %>
       </ul>
     </div>
+
 <% end %>
+
+
 
 		<%= f.fields_for :users do |a| %>
 		<div class="form-group">
-		  <div class="control-label"><%= a.label :name, "My full name" %></div>
-		  <div class="controls"><%= a.text_field :name, autofocus: true %></div>
+		  <%= a.label :name, "Your full name", class: "col-sm-4 control-label" %>
+		  <div class="col-sm-7"><%= a.text_field :name, autofocus: true, class: "form-control", placeholder: "Oprah Winfrey" %></div>
 		</div>
 
 		<div class="form-group">
-		  <div class="control-label"><%= a.label :email, "My email address" %>
-			<p class="help-block">(This will be my username)</p></div>
-		  <div class="controls"><%= a.email_field :email %></div>
-		</div>
-
-		<div class="form-group">
-		  <div class="control-label">
-				<%= a.label :password %>
-				<p class="help-block"><% if @validatable %>
-		    <em>(<%= @minimum_password_length %> characters minimum)</em>
-		    <% end %></p>
+		  <%= a.label :email, "Your email", class: "col-sm-4 control-label" %>
+			
+		  <div class="col-sm-7">
+				<%= a.email_field :email, class: "form-control", placeholder: "oprah@oprahmail.com" %>
+				<p class="help-block">(This will be your username)</p>
 			</div>
-		  <div class="controls"><%= a.password_field :password, autocomplete: "off" %></div>
 		</div>
 
 		<div class="form-group">
-		  <div class="control-label"><%= a.label :password_confirmation %></div>
-		  <div class="controls"><%= a.password_field :password_confirmation, autocomplete: "off" %></div>
+		  
+			<%= a.label :password, class: "col-sm-4 control-label" %>
+			
+		  <div class="col-sm-7">
+				<%= a.password_field :password, autocomplete: "off", class: "form-control" %>
+				<p class="help-block">
+		    <em>(8 characters minimum)</em>
+		    </p>
+			</div>
+		</div>
+
+		<div class="form-group">
+		  <%= a.label :password_confirmation, class: "col-sm-4 control-label" %>
+		  <div class="col-sm-7">
+				<%= a.password_field :password_confirmation, autocomplete: "off",  class: "form-control" %>
+			</div>
 		</div>
 		
 	<% end %>	
 		
   <div class="form-group">
-    <div class="control-label"><%= f.label :name, "My family account name" %></div>
-		<p class="help-block">(e.g. "The Smiths", or "The Super Coopers")</p>
-    <div class="controls"><%= f.text_field :name, autofocus: true %></div>
+    <%= f.label :name, "Your family account name", class: "col-sm-4 control-label" %>
+		
+    <div class="col-sm-7">
+			<%= f.text_field :name, class: "form-control", placeholder: "The Winfreys" %>
+			<p class="help-block">(e.g. "The Smiths", or "The Super Coopers")</p>
+		</div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Take me to my dashboard", class: "btn" %>
+  <div class="actions col-sm-offset-4">
+    <%= f.submit "Take me to my dashboard", class: "btn btn-default" %>
   </div>
 <% end %>
 
-<% if !current_user %>
-	<div class="sign_up_facebook">
-		Or, <%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook) %>
-	</div>
-<% end %>
 
+
+</div>
+
+<div class="new_account_page_sidebar col-md-4 ">
+
+	<% if !current_user %>
+
+	<div class="or_facebook"><%= image_tag 'or.png' %></div>
+
+
+		<div class="sign_up_facebook">
+			<%= link_to image_tag('fblogin.png'), user_omniauth_authorize_path(:facebook) %>
+		</div>
+
+	<% end %>	
+	
+</div>
+
+</div>
 

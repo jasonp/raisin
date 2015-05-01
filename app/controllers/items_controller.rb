@@ -34,6 +34,9 @@ class ItemsController < ApplicationController
     if params[:action_to_take] == "update"
       @li.update(item_params)
       @action = "updated"
+    elsif params[:action_to_take] == "individual_update"
+      @li.update(item_params)
+      @action = "individual_update"  
     elsif params[:item] == "checked"
       @li.status = "checked"
       @li.completed_by = current_user.id
@@ -58,6 +61,8 @@ class ItemsController < ApplicationController
         format.js {render 'checked'}
       elsif @action == "unchecked"
         format.js {render 'unchecked' }  
+      elsif @action == "individual_update"
+        format.js {render 'nada' }  
       else
         format.js {render 'update'}
       end
@@ -70,6 +75,10 @@ class ItemsController < ApplicationController
   
   def show
     @item = Item.find(params[:id])
+    @list = @item.list
+    @project = @list.project
+    @li = @item
+    @assignees = return_potential_users_to_assign(@project)    
   end
 
   def destroy

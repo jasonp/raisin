@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :members
   end
   
+  get '/welcome', to: 'accounts#new', as: 'welcome'
 
   
   get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'

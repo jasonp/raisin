@@ -1,1 +1,12 @@
-<%= @list.title %>
+<h3><%= @list.project.title %></h3>
+<span class="invite_new_collaborator_link"><%= link_to "Go back to the project page", account_project_path(@project.account, @project) %></span>
+<div class="completed_page_top">
+</div>
+
+
+<div class="list_page_todos_section">
+	
+	<%= render 'new_list' %>
+	
+</div>
+
