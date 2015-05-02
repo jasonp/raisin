@@ -25,24 +25,41 @@ module ProjectsHelper
       assigning_user = User.find(item.created_by)
       # If there's a user it's assigned to someone, and they should get a notification
       # IF the user has enabled notifications. [ "immediate", "off", "digest" ]
-      # Also we should only do immediate e-mails for new to-dos with due dates
+      # Also we should only do immediate e-mails for new to-dos with due dates, and if the users are different
       if item.user.email_preference == "immediate"
-        if item.due
-          # send notification
-          NotificationMailer.new_todo_assigned_to_user(item, item.user, assigning_user).deliver_later
-        end  
+        if assigning_user != item.user
+          if item.due
+            # send notification
+            if NotificationMailer.new_todo_assigned_to_user(item, item.user, assigning_user).deliver_later
+              # create notification object, mark as sent
+              notification_string = assigning_user.name + " assigned you a to-do: " + item.title 
+              @notification = Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new", item_id: item.id)
+              @notification.save
+            end # delivery check  
+          end  
+        else
+          # save a self-notifcation for fun
+          notification_string = "You assigned yourself a to-do: " + item.title 
+          @notification = Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new", item_id: item.id) 
+          @notification.save 
+        end # self-sender check  
       elsif item.user.email_preference == "digest"
         # queue notification
         # notification_string: "This user has assigned you a to-do"
         # Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "queued", status: "new")
       else # "off"
         # no email notification -- tell the Notification object it's already sent
-        # notification_string: "This user has assigned you a to-do"
-        # Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new")        
+        # create notification object, mark as sent
+        notification_string = assigning_user.name + " assigned you a to-do: " + item.title 
+        @notification = Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new", item_id: item.id)
+        @notification.save
       end  
       
     end
   end
+  
+  # Warning: this thing is a beast.
+  # Need to re-factor at some point.
   
   def check_for_and_issue_completed_todo_notifications(item)
     if item.user
@@ -55,16 +72,27 @@ module ProjectsHelper
       if assigning_user.email_preference == "immediate"
         if assigning_user != completing_user
           # send notification
-          NotificationMailer.assigned_user_completed_todo(item, completing_user, assigning_user).deliver_later
-        end
+          if NotificationMailer.assigned_user_completed_todo(item, completing_user, assigning_user).deliver_later
+            # create notification object, mark as sent
+            notification_string = completing_user.name + " completed a to-do you assigned: " + item.title 
+            @notification = Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new", item_id: item.id)
+            @notification.save
+          end # check for mail delivery  
+        else
+          # save a self-notifcation for fun
+          notification_string = "You completed a to-do: " + item.title 
+          @notification = Notification.new(user_id: item.created_by, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new", item_id: item.id)
+          @notification.save
+        end # self-sender check
       elsif item.user.email_preference == "digest"
         # queue notification
         # notification_string: "This user has assigned you a to-do"
         # Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "queued", status: "new")
       else # "off"
         # no email notification -- tell the Notification object it's already sent
-        # notification_string: "This user has assigned you a to-do"
-        # Notification.new(user_id: item.user.id, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new")        
+        notification_string = completing_user.name + " completed a to-do you assigned: " + item.title 
+        @notification = Notification.new(user_id: item.created_by, creator_id: item.created_by, notification: notification_string, email_status: "sent", status: "new", item_id: item.id)
+        @notification.save 
       end  
       
     end
