@@ -8,7 +8,7 @@ class InviteMailer < ApplicationMailer
     
     to_email_with_name = %("#{@name}" <#{member.email}>)
     from_email_with_name = %("#{@from_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(Join the #{account.name} family on Raisin)
+    subject_line = %(Join #{account.name}, a family on Raisin)
     
 
     mail(to: to_email_with_name, from: from_email_with_name, subject: subject_line)
@@ -23,7 +23,7 @@ class InviteMailer < ApplicationMailer
     
     to_email_with_name = %("#{@name}" <#{member.email}>)
     from_email_with_name = %("#{@from_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(Join the #{@title} project on Raisin)
+    subject_line = %(Join #{@title}, a project on Raisin)
     
     mail(to: to_email_with_name, from: from_email_with_name, subject: subject_line)
   end  
@@ -37,7 +37,7 @@ class InviteMailer < ApplicationMailer
     
     to_email_with_name = %("#{@name}" <#{member.user.email}>)
     from_email_with_name = %("#{@from_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(Join the #{@title} project on Raisin)
+    subject_line = %(Join #{@title}, a project on Raisin)
     
     mail(to: to_email_with_name, from: from_email_with_name, subject: subject_line)
     
@@ -51,7 +51,7 @@ class InviteMailer < ApplicationMailer
     
     to_email_with_name = %("#{@name}" <#{member.user.email}>)
     from_email_with_name = %("#{@from_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(Join the #{account.name} family on Raisin)
+    subject_line = %(Join #{account.name}, a family on Raisin)
     
 
     mail(to: to_email_with_name, from: from_email_with_name, subject: subject_line)

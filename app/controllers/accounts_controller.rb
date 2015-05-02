@@ -94,7 +94,7 @@ class AccountsController < ApplicationController
   private
 
     def account_params
-      params.require(:account).permit(:name, :active_until, :users_attributes => [:id, :email, :name, :password, :password_confirmation])
+      params.require(:account).permit(:name, :active_until, :users_attributes => [:id, :email, :name, :email_preference, :password, :password_confirmation])
     end
     
     def check_for_and_associate_members_and_accounts(resource)

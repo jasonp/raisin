@@ -19,6 +19,8 @@ class ItemsController < ApplicationController
     
     @li = @list.items.create(item_params)
     
+    check_for_and_issue_assigned_todo_notifications(@li)
+    
     respond_to do |format|
       format.js
     end
@@ -36,9 +38,12 @@ class ItemsController < ApplicationController
       @action = "updated"
     elsif params[:action_to_take] == "individual_update_info"
       @action = "updated_individually"
+      check_for_and_issue_completed_todo_notifications(@li) if @li.status == "checked"
     elsif params[:action_to_take] == "individual_update"
       @action = "individual_update"  
+      check_for_and_issue_completed_todo_notifications(@li) if @li.status == "checked"
     elsif params[:action_to_take] == "check_and_move"
+      check_for_and_issue_completed_todo_notifications(@li) if @li.status == "checked"
       @action = "checked"
     elsif params[:action_to_take] == "uncheck_and_move"
       @action = "unchecked"

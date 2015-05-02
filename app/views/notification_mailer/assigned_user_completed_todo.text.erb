@@ -1,0 +1,10 @@
+--- REPLY ABOVE THIS LINE TO RESPOND IN RAISIN ---
+
+Hey <%= @to_user_name %>,
+
+<%= @from_user_name %> has completed a to-do you assigned in Raisin. You can reply to this email to make a comment on the to-do. You can also visit the to-do on Raisin to comment.
+
+<%= @todo.title %> <% if @todo.due %>( Completed on <%= @todo.updated_at.to_date.to_formatted_s(:long) %> )<% end %>
+
+Cheers, 
+	Raisin Dispatch
