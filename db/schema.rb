@@ -78,8 +78,11 @@ ActiveRecord::Schema.define(version: 20150502051511) do
     t.integer  "item_id"
     t.integer  "list_id"
     t.integer  "project_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "conversation_id"
+    t.integer  "file_id"
+    t.string   "mute"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "projects", force: :cascade do |t|

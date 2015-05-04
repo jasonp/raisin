@@ -17,6 +17,8 @@ class Item < ActiveRecord::Base
   belongs_to :list
   belongs_to :user
   
+  has_many :notifications
+  
   validates :title, presence: true
 
 end

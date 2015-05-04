@@ -16,6 +16,8 @@ class List < ActiveRecord::Base
   belongs_to :project
   has_many :items, dependent: :destroy
   
+  has_many :notifications
+  
   validates :title, presence: true
   
 end

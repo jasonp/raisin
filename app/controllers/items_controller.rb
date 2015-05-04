@@ -1,5 +1,6 @@
 include ItemsHelper
 include ProjectsHelper
+include ApplicationHelper
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
   
@@ -19,7 +20,12 @@ class ItemsController < ApplicationController
     
     @li = @list.items.create(item_params)
     
-    check_for_and_issue_assigned_todo_notifications(@li)
+    if @li.due
+      notify_users = []
+      notify_users << @li.user unless @li.user == current_user
+      check_for_and_issue_notifications_for(@li, notify_users, "new_todo_assigned")
+      # check_for_and_issue_assigned_todo_notifications(@li)
+    end
     
     respond_to do |format|
       format.js
@@ -38,21 +44,30 @@ class ItemsController < ApplicationController
       @action = "updated"
     elsif params[:action_to_take] == "individual_update_info"
       @action = "updated_individually"
-      check_for_and_issue_completed_todo_notifications(@li) if @li.status == "checked"
     elsif params[:action_to_take] == "individual_update"
       @action = "individual_update"  
-      check_for_and_issue_completed_todo_notifications(@li) if @li.status == "checked"
     elsif params[:action_to_take] == "check_and_move"
-      check_for_and_issue_completed_todo_notifications(@li) if @li.status == "checked"
       @action = "checked"
     elsif params[:action_to_take] == "uncheck_and_move"
       @action = "unchecked"
     end
     
+    # If the to-do has been checked, issue notification
+    if @li.status == "checked"
+       notify_users = []
+       creating_user = User.find(@li.created_by)
+       notify_users << creating_user unless creating_user == current_user
+       check_for_and_issue_notifications_for(@li, notify_users, "todo_completed")
+     end
+    
     # Set the list to completed if this is the last to-do
+    # or re-activate it if needed
     active_todo_count = Item.where(list_id: @list.id, status: "active").count
     if active_todo_count < 1
       @list.status = "completed"
+      @list.save
+    elsif active_todo_count > 0
+      @list.status = "active"
       @list.save
     end
     

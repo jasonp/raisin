@@ -9,6 +9,9 @@ class CreateNotifications < ActiveRecord::Migration
       t.integer :item_id
       t.integer :list_id
       t.integer :project_id
+      t.integer :conversation_id
+      t.integer :file_id
+      t.string :mute
 
       t.timestamps null: false
     end

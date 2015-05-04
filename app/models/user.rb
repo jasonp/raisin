@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   has_many :members
   has_many :projects, through: :members
   
+  has_many :notifications
+  
   validates :name, presence: true
   validates :email, presence: true
   
