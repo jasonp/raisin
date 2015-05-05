@@ -109,7 +109,13 @@ GEM
       multi_json (~> 1.3)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    griddler (1.1.0)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-sendgrid (0.0.1)
+      griddler
     hashie (3.4.1)
+    htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -285,6 +291,8 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
+  griddler
+  griddler-sendgrid
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

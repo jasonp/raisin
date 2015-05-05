@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get '/accounts/:account_id/projects/:project_id/cancel', to: 'lists#cancel', as: "account_project_cancel_list", :defaults => { :format => 'js' }
   get '/accounts/:account_id/projects/:project_id/lists/:list_id/cancel', to: 'items#cancel', as: "account_project_list_cancel_item", :defaults => { :format => 'js' }
   
+  # mount griddler using default path: /email_processor
+  mount_griddler
 
 
   # The priority is based upon order of creation: first created -> highest priority.
