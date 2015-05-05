@@ -1,0 +1,12 @@
+<%= form_for @comment, url: account_comments_path(@project.account), method: :post, remote: true, html: {class: "form"} do |f| %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.hidden_field :item_id, value: @li.id %>
+
+		<div class="form-group">
+		  <%= f.text_area :content, class: "form-control", rows: 5, id: "comment_area", placeholder: "Add a comment..." %>
+		</div>	
+
+		<div class="form-group">
+			<%= f.submit "Post comment", class: "btn btn-default" %>
+		</div>
+<% end %>

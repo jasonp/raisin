@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   has_many :projects, through: :members
   
   has_many :notifications
+  has_many :comments
   
   validates :name, presence: true
   validates :email, presence: true

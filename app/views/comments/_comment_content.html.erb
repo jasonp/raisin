@@ -1,0 +1,39 @@
+<a name="comment-<%=ec.id %>"></a>
+<div class="row">
+<div class="comment_display_box" id="comment_content-<%= ec.id %>">
+	<div class="comment_intro">
+		<strong><%= ec.user.name %></strong> <span class="small intro_meta">on <%= ec.created_at.to_date.to_formatted_s(:long)  %></span>
+	</div>
+	
+	<div class="comment_content">
+		<%= ec.content %>
+	</div>
+
+	<% if ec.user == current_user %>
+		<div class="comment_footer small">
+			<% link_self_url = '#comment-' + ec.id.to_s %>
+			You can <%= link_to "edit", link_self_url, id: "show_edit_comment_form_link",  data: { comment_id: ec.id.to_s } %> this comment, or <%= link_to 'delete', account_comment_path(@project.account, ec), method: :delete, remote: true %> it.
+		</div>	
+	<% end %>
+	
+</div>
+
+
+<div class="comment_display_box starts_hidden" id="edit_comment_content-<%= ec.id %>">
+	
+	<%= form_for ec, url: account_comment_path(@project.account, ec), method: :put, remote: true, html: {class: "form"} do |f| %>
+
+			<div class="form-group">
+			  <%= f.text_area :content, class: "form-control", rows: 5, id: "comment_area", placeholder: "Add a comment..." %>
+			</div>	
+
+			<div class="form-group">
+				<% link_self_url = '#comment-' + ec.id.to_s %>
+				<%= f.submit "Update comment", class: "btn btn-default" %> or <%= link_to "cancel my edits", link_self_url, id: "cancel_edit_comment_link", data: { comment_id: ec.id.to_s } %>.
+			</div>
+	<% end %>
+	
+</div>
+
+
+</div>

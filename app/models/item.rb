@@ -18,6 +18,7 @@ class Item < ActiveRecord::Base
   belongs_to :user
   
   has_many :notifications
+  has_many :comments
   
   validates :title, presence: true
 

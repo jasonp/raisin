@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   has_many :members
   has_many :users, through: :members
   has_many :lists, dependent: :destroy
+  has_many :comments
+  has_many :notifications
   
   belongs_to :account
   

@@ -1,4 +1,4 @@
-<div id="list_item_actionable-<%= @li.id %>" data-list-container="<%= @li.id.to_s %>">
+<div id="list_item_actionable-<%= @li.id %>" class="list_item_individual_todo_content" data-list-container="<%= @li.id.to_s %>">
 	<%= form_for @li, url: account_project_list_item_path(@project.account, @project, @list, @li), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
 	
 	<%= hidden_field_tag :action_to_take, "individual_update" %>

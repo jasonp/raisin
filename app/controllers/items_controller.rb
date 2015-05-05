@@ -96,6 +96,10 @@ class ItemsController < ApplicationController
     @project = @list.project
     @li = @item
     @assignees = return_potential_users_to_assign(@project)    
+    
+    @comment = @item.comments.build
+    
+    @existing_comments = @item.comments
   end
 
   def destroy

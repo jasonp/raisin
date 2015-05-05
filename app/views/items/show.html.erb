@@ -13,3 +13,27 @@
 	
 </div>
 
+
+<section class="comments_section row">
+<div class="col-md-7">	
+	
+	<h5 class="comments_section_header">
+		Have a conversation about this to-do:
+	</h5>
+	<div id="comments_list">
+		<% @existing_comments.each do |ec| %>
+			<% if ec.user %>
+				<div id="account_comment-<%= ec.id %>">
+					<%= render partial: '/comments/comment_content', locals: {ec: ec} %>
+				</div>
+			<% end %>	
+		<% end %>
+	</div>	
+	
+	<div id="new_comment_form">
+		<%= render partial: '/comments/new_comment_form' %>
+	</div>
+	
+</div>	
+</section>	
+

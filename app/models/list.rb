@@ -17,6 +17,7 @@ class List < ActiveRecord::Base
   has_many :items, dependent: :destroy
   
   has_many :notifications
+  has_many :comments
   
   validates :title, presence: true
   

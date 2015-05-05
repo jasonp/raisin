@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       end
     end
     resources :members
+    resources :comments, only: [:create, :update, :destroy, :show, :new]
   end
+        
   
   get '/welcome', to: 'accounts#new', as: 'welcome'
 
