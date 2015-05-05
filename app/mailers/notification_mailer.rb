@@ -21,7 +21,24 @@ class NotificationMailer < ApplicationMailer
         subject: subject_line)
   end
   
-  def new_comment_added_to_object(comment, object, notified_user, commenting_user)
+  def new_comment_added_to_item(comment, item, notified_user, commenting_user)
+    @item = item
+    @to_user_name = notified_user.name
+    @from_user_name = commenting_user.name
+    @comment = comment
+    
+    @url_to_item = account_project_list_item_url(item.list.project.account, item.list.project, item.list, item)
+    
+    to_email_with_name = %("#{@to_user_name}" <#{notified_user.email}>)
+    from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
+    subject_line = %(#{@from_user_name} added a comment to a to-do in Raisin)
+    reply_to_email = %("Raisin" <item-#{item.id}-comment-#{comment.id}@raisinhq.com>)
+    
+
+    mail(to: to_email_with_name, 
+        from: from_email_with_name, 
+        reply_to: reply_to_email,
+        subject: subject_line)
   end
   
   def assigned_user_completed_todo(todo, completing_user, assigning_user)

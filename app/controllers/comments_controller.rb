@@ -2,12 +2,21 @@ include ApplicationHelper
 class CommentsController < ApplicationController
  
   def create
-    @comment = Comment.new(comment_params)
-    @project = @comment.item.list.project
-    @li = @comment.item.list
+    @new_comment = Comment.new(comment_params)
+    @project = @new_comment.item.list.project
+    @li = @new_comment.item
+    @notifiable_users = @project.users 
+    @default_notify_users = return_default_users_to_notify(@li)
+    @comment = @li.comments.build
     
     respond_to do |format|
-      if @comment.save
+      if @new_comment.save
+        
+        # issue notifications as needed
+        if params[:notifiable_users]
+          check_for_and_issue_notifications_for(@new_comment, params[:notifiable_users], "comment_added_to_item")
+        end
+        
         format.js
       end
     end

@@ -95,11 +95,14 @@ class ItemsController < ApplicationController
     @list = @item.list
     @project = @list.project
     @li = @item
-    @assignees = return_potential_users_to_assign(@project)    
+    @assignees = return_potential_users_to_assign(@project)   
     
+    # build for comment notification & display
+    @notifiable_users = @project.users 
+    @default_notify_users = return_default_users_to_notify(@item)
     @comment = @item.comments.build
-    
     @existing_comments = @item.comments
+    
   end
 
   def destroy

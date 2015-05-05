@@ -5,7 +5,21 @@
 		<div class="form-group">
 		  <%= f.text_area :content, class: "form-control", rows: 5, id: "comment_area", placeholder: "Add a comment..." %>
 		</div>	
-
+		
+		<div class="form-group">
+			<p class="text-muted">Send this comment as an e-mail to:</p>
+			<% @notifiable_users.each do |nu| -%>
+				<% if nu != current_user -%>
+				
+					<% box_value = true if @default_notify_users.include?(nu) %>
+					<span class="notifiable_user_checkbox">
+						<%= check_box_tag "notifiable_users[]", nu.id, box_value %> <%= nu.name %>
+					</span>
+					
+				<% end %>
+			<% end -%>
+		</div>
+		
 		<div class="form-group">
 			<%= f.submit "Post comment", class: "btn btn-default" %>
 		</div>

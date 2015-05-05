@@ -16,10 +16,20 @@ module ApplicationHelper
     elsif object.instance_of? Project
       notification_string = "There is a new comment on the project: #{object.title}"
       existing_notifications = Notification.where(project_id: object.id)
+    elsif object.instance_of? Comment
+      if object.item
+        notification_string = "There is a new comment on the to-do: #{object.item.title}"
+        # no existing notifications, because item comment notifications are sent to
+        # an explicit list
+        existing_notifications = []
+      elsif object.list
+        notification_string = "There is a new comment on the to-do list: #{object.list.title}"
+        existing_notifications = Notification.where(item_id: object.list.id)
+      end
     end
   
-    # Look up explicitly passed array of users
-    
+    # Look up explicitly passed array of ***** user IDs ******
+     
     users_to_notify = []
     users.each do |user|
       users_to_notify << User.find(user)
@@ -66,6 +76,17 @@ module ApplicationHelper
           if NotificationMailer.assigned_user_completed_todo(object, completing_user, assigning_user).deliver_later
             nn.email_status = "sent"
           end
+        elsif action == "comment_added_to_item"
+          logger.info("looking up details for the call")
+          item = object.item
+          logger.info(object.content)
+          commenting_user = object.user
+          logger.info(commenting_user.name)
+          notified_user = nn.user
+          logger.info("attempting to send comment mail")
+          if NotificationMailer.new_comment_added_to_item(object, item, notified_user, commenting_user).deliver_later
+            nn.email_status = "sent"
+          end
         end
       
       end # status send      
@@ -94,6 +115,9 @@ module ApplicationHelper
       created_by = object.created_by
     elsif object.instance_of? Project
       project_id = object.id
+    elsif object.instance_of? Comment
+      item_id = object.item.id
+      created_by = object.user.id
     end
     
     # file_id = object.id if object.instance_of? File
@@ -117,5 +141,33 @@ module ApplicationHelper
     
     return notification
   end  
+  
+  def return_default_users_to_notify(item)
+    # the user that made the to-do
+    default_users_to_notify = []
+    default_users_to_notify << User.find_by_id(item.created_by)
+    
+    # the user that it's assigned to (if exists)
+    default_users_to_notify << item.user
+    
+    # anyone who has already commented
+    item.comments.each do |c|
+      default_users_to_notify << c.user
+    end
+    
+    # remove anyone who's muted
+    muted_this_item = []
+    Notification.where(item_id: item.id).each do |n|
+      muted_this_item << n.user if n.mute
+    end
+    
+    unique_default_users_to_notify = default_users_to_notify.uniq
+    
+    unique_default_users_to_notify.delete_if { |u| muted_this_item.include?(u) }
+    return unique_default_users_to_notify
+    
+  end
+  
+  
   
 end
