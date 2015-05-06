@@ -1,16 +1,16 @@
-<p>--- REPLY ABOVE THIS LINE TO RESPOND IN RAISIN ---</p>
+<p style="color: #666666; font-size: 85%;">--- REPLY ABOVE THIS LINE TO RESPOND IN RAISIN ---</p>
 
 <p>Hey <%= @to_user_name %>,</p>
 
-<p><%= @from_user_name %> added a comment to a to-do in Raisin. You can reply to this email to add a comment in Raisin, and it will also be emailed as a response.</p>
+<p><%= @from_user_name %> added a comment to a to-do in Raisin:</p>
 
-<blockquote><%= @comment.content %></blockquote>
+<blockquote style="font-size: 110%;"><%= @comment.content %></blockquote>
 
 <p>On the to-do:</p>
 
 <blockquote><%= @item.title %> <% if @item.due %>( Due on <%= @item.due.to_date.to_formatted_s(:long) %> )<% end %></blockquote>
 
-<p>You can also <%= link_to "visit the to-do on Raisin", @url_to_item %> to comment or check it off.</p>
+<p>You can reply to this email to add a comment in Raisin, and it will also be emailed as a response. You can also <%= link_to "visit the to-do on Raisin", @url_to_item %> to comment or check it off.</p>
 
 <p>Cheers, <br />
 	Raisin Dispatch</p>

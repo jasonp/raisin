@@ -3,7 +3,7 @@ class NotificationMailer < ApplicationMailer
   
   def new_todo_assigned_to_user(todo, assigned_user, assigning_user)
     @todo = todo
-    @to_user_name = assigned_user.name
+    @to_user_name = assigned_user.name.split(" ")[0]
     @from_user_name = assigning_user.name
     
     
@@ -23,7 +23,7 @@ class NotificationMailer < ApplicationMailer
   
   def new_comment_added_to_item(comment, item, notified_user, commenting_user)
     @item = item
-    @to_user_name = notified_user.name
+    @to_user_name = notified_user.name.split(" ")[0]
     @from_user_name = commenting_user.name
     @comment = comment
     
@@ -43,7 +43,7 @@ class NotificationMailer < ApplicationMailer
   
   def assigned_user_completed_todo(todo, completing_user, assigning_user)
     @todo = todo
-    @to_user_name = assigning_user.name
+    @to_user_name = assigning_user.name.split(" ")[0]
     @from_user_name = completing_user.name
     
     
