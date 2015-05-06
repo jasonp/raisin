@@ -1,4 +1,5 @@
 class EmailProcessor
+  include ActionView::Helpers::ApplicationHelper
   
   def initialize(email)
     @email = email
@@ -17,7 +18,6 @@ class EmailProcessor
     
     author = User.find_by_email(@email.from[:email])
     
-    #author = User.where( email: @email.from ).first
     if author
       id_string = @email.to.first[:token]
       string = id_string.split("-")
@@ -34,7 +34,22 @@ class EmailProcessor
         item_id = item.id
       end  
       
-      comment = Comment.create!(content: @email.body, user_id: author.id, item_id: item_id)
+      if comment = Comment.create!(content: @email.body, user_id: author.id, item_id: item_id)
+        
+        existing_notifications = Notification.where(item_id: item_id)
+        user_ids = []
+        
+        existing_notifications.each do |en|
+          if en.user != author
+            user_ids << en.user.id unless en.mute
+          end
+        end
+        
+        if item.user.id != author.id
+          user_ids << item.user.id 
+        end
+        check_for_and_issue_notifications_for(comment, user_ids, "comment_added_to_item")
+      end
     end
     
   end

@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   # action is used to determine the type of notification email sent. Valid options:
-  # [ "new_todo_assigned", "todo_completed" ]
+  # [ "new_todo_assigned", "todo_completed", "comment_added_to_item" ]
   
   def check_for_and_issue_notifications_for(object, users, action)
 
@@ -77,13 +77,13 @@ module ApplicationHelper
             nn.email_status = "sent"
           end
         elsif action == "comment_added_to_item"
-          logger.info("looking up details for the call")
+          #logger.info("looking up details for the call")
           item = object.item
-          logger.info(object.content)
+          #logger.info(object.content)
           commenting_user = object.user
-          logger.info(commenting_user.name)
+          #logger.info(commenting_user.name)
           notified_user = nn.user
-          logger.info("attempting to send comment mail")
+          #logger.info("attempting to send comment mail")
           if NotificationMailer.new_comment_added_to_item(object, item, notified_user, commenting_user).deliver_later
             nn.email_status = "sent"
           end
