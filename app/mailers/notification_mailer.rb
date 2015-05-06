@@ -12,7 +12,7 @@ class NotificationMailer < ApplicationMailer
     to_email_with_name = %("#{@to_user_name}" <#{assigned_user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
     subject_line = %(#{@from_user_name} has assigned you a to-do on Raisin)
-    reply_to_email = %("Raisin" <item-#{todo.id}@raisinhq.com>)
+    reply_to_email = %("Raisin" <item-#{todo.id}-flep-#{todo.flep}@raisinhq.com>)
     
 
     mail(to: to_email_with_name, 
@@ -32,7 +32,7 @@ class NotificationMailer < ApplicationMailer
     to_email_with_name = %("#{@to_user_name}" <#{notified_user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
     subject_line = %(#{@from_user_name} added a comment to a to-do in Raisin)
-    reply_to_email = %("Raisin" <item-#{item.id}-comment-#{comment.id}@raisinhq.com>)
+    reply_to_email = %("Raisin" <item-#{item.id}-flep-#{item.flep}@raisinhq.com>)
     
 
     mail(to: to_email_with_name, 
@@ -52,7 +52,7 @@ class NotificationMailer < ApplicationMailer
     to_email_with_name = %("#{@to_user_name}" <#{assigning_user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
     subject_line = %(#{@from_user_name} completed a to-do you assigned them on Raisin)
-    reply_to_email = %("Raisin" <item-#{todo.id}@raisinhq.com>)
+    reply_to_email = %("Raisin" <item-#{todo.id}-flep-#{todo.flep}@raisinhq.com>)
     
 
     mail(to: to_email_with_name, 

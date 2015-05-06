@@ -127,7 +127,7 @@ class ItemsController < ApplicationController
   private
   
     def item_params
-      params.require(:item).permit(:title, :status, :due, :user_id, :created_by, :completed_by)
+      params.require(:item).permit(:title, :status, :due, :user_id, :created_by, :completed_by, :flep)
     end
   
 end

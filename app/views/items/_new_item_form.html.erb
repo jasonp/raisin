@@ -2,6 +2,7 @@
 	<%= form_for @item, url: account_project_list_items_path(@project.account, @project, @list), method: :post, remote: true, html: {class: "form-inline"} do |f| %>
 		<%= f.hidden_field :status, value: "active" %>
 		<%= f.hidden_field :created_by, value: current_user.id %>
+		<%= f.hidden_field :flep, value: rand(1000001..9999999) %>
 
 			<div class="form-group">
 			  <%= f.text_field :title, class: "form-control input-sm", id: "todo_item_input", autofocus: true, placeholder: "Add a to-do item" %>
