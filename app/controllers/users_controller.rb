@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  before_filter :authenticate_user!
+  
   def show
     @user = User.find_by_id(params[:id])
     @account = Account.find_by_id(session["preferred_account_id"]) if session["preferred_account_id"]
@@ -8,17 +10,19 @@ class UsersController < ApplicationController
     @date_options = ["Everything", "This week", "Today", "Tomorrow", "Overdue", "In the future"]
     @items = Item.where(user_id: @user.id, status: "active").order(:list_id)
     
+    nowtime = get_nowtime
+    
     if params[:date_range]
       if params[:date_range] == "Today"
-        @items = Item.where(user_id: @user.id, status: "active", due: Time.now.utc.midnight..(Time.now.utc.midnight + 1.day - 1.minute) ).order(:list_id)
+        @items = Item.where(user_id: @user.id, status: "active", due: nowtime.midnight ).order(:list_id)
       elsif params[:date_range] == "Overdue"
-        @items = Item.where(user_id: @user.id, status: "active", due: (Time.now.utc.midnight - 1.month )..(Time.now.utc.midnight - 1.minute) ).order(:list_id)
+        @items = Item.where(user_id: @user.id, status: "active", due: (nowtime.midnight - 1.month )..(nowtime.midnight - 1.minute) ).order(:list_id)
       elsif params[:date_range] == "Tomorrow"
-        @items = Item.where(user_id: @user.id, status: "active", due: Time.now.utc.midnight.tomorrow).order(:list_id)   
+        @items = Item.where(user_id: @user.id, status: "active", due: nowtime.midnight.tomorrow).order(:list_id)   
       elsif params[:date_range] == "This week"
-        @items = Item.where(user_id: @user.id, status: "active", due: (Time.now.utc.midnight.beginning_of_week(:sunday))..(Time.now.utc.midnight.end_of_week(:sunday)) ).order(:list_id)   
+        @items = Item.where(user_id: @user.id, status: "active", due: (nowtime.beginning_of_week(:sunday))..(nowtime.midnight.end_of_week(:sunday)) ).order(:list_id)   
       elsif params[:date_range] == "In the future"
-        @items = Item.where(user_id: @user.id, status: "active", due: (Time.now.utc.midnight.tomorrow)..(Time.now.utc.midnight + 1.month) ).order(:list_id)                  
+        @items = Item.where(user_id: @user.id, status: "active", due: (nowtime.midnight.tomorrow)..(nowtime.midnight + 1.month) ).order(:list_id)                  
       elsif params[:date_range] == "Everything"
         @items = Item.where(user_id: @user.id, status: "active").order(:list_id)    
       end           
@@ -52,7 +56,22 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :photo, :email_preference)
+      params.require(:user).permit(:name, :email, :photo, :email_preference, :time_zone)
+    end
+    
+    def get_nowtime
+      t = current_user.time_zone
+      today = Date.today.in_time_zone(t)
+      utc_today = Date.today
+      if today.day == utc_today.day
+        nowtime = Time.now.utc
+      elsif today.day == utc_today.yesterday.day
+        nowtime = Time.now.utc - 1.day
+      else 
+        nowtime = Time.now.utc + 1.day
+      end
+      
+      return nowtime
     end
   
 end

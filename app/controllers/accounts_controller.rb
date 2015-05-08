@@ -33,6 +33,9 @@ class AccountsController < ApplicationController
           sign_in @account.users.last
         end
         
+        current_user.time_zone = "Pacific Time (US & Canada)"
+        current_user.save 
+        
         check_for_and_associate_members_and_accounts(current_user)
         
         @proj = @account.projects.create(title: current_user.name, removable: "no")

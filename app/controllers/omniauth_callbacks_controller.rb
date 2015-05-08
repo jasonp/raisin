@@ -35,6 +35,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
 
         sign_in(@user) 
+        @user.remember_me!  
 
 
         redirect_to root_path

@@ -1,32 +1,57 @@
-<h2>My personal information </h2>
+<h3 class="member_headline col-md-offset-2">Your personal information </h3>
 
-<%= form_for(@user, html: { method: :put, class: "form" }) do |f| %>
+<div class="row">
+<div class="new_member_page_box col-md-8 col-md-offset-2">
+	
+	<%= form_for(@user, html: { method: :put, class: "form form-horizontal" }) do |f| %>
 
-  <div class="form-group">
-    <div class="control-label"><%= f.label :name, "My full name" %></div>
-    <div class="controls"><%= f.text_field :name %></div>
-  </div>
+	
+	  <div class="form-group">
+	    <%= f.label :name, "Your full name", class: "col-sm-2 control-label" %>
+	    <div class="col-sm-6">
+				<%= f.text_field :name, class: "form-control" %>
+			</div>
+	  </div>
 
-  <div class="form-group">
-    <div class="control-label"><%= f.label :email, "My email address" %></div>
-    <div class="controls"><%= f.email_field :email %></div>
-  </div>
+	  <div class="form-group">
+	    <%= f.label :email, "Your email address", class: "col-sm-2 control-label" %>
+	    <div class="col-sm-6">
+				<%= f.email_field :email, class: "form-control" %>
+			</div>
+	  </div>
+	
+		<div class="form-group">
+			<%= f.label :time_zone, "Your time zone", class: "col-sm-2 control-label" %>
+	    <div class="col-sm-6">
+				<%= f.time_zone_select( :time_zone, nil, {default: "Pacific Time (US & Canada)"}, {class: "form-control"}) %>
+			</div>
+		</div>
 
-	<div class="form-group">
-    <div class="control-label"><%= link_to "I want to update my password.", edit_user_registration_path %></div>
-  </div>
+		<div class="form-group">
+			<label class="control-label col-sm-2"></label>
+	    <div class="col-sm-6">
+				<%= link_to "I want to update my password.", edit_user_registration_path %>
+			</div>
+	  </div>
 
-	<div class="form-group">
-		<%= link_to "Link to my Facebook account", user_omniauth_authorize_path(:facebook) %>
-	</div>	
+		<div class="form-group">
+			<label class="control-label col-sm-2"></label>
+			<div class="col-sm-6">
+				<%= link_to "Connect Raisin to my Facebook account", user_omniauth_authorize_path(:facebook) %>
+			</div>	
+		</div>	
 
-  <div class="form-group">
-    <%= f.submit "Update", class: "btn" %>
-  </div>
-<% end %>
+	  <div class="form-group">
+			<label class="control-label col-sm-2"></label>
+	    <%= f.submit "Update my info", class: "btn btn-default" %>
+	  </div>
+	<% end %>
 
-<h3>Cancel my account</h3>
+	<h4>Cancel your account</h4>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(@user), class: "btn", data: { confirm: "Are you sure?" }, method: :delete %></p>
+	<p>If you're totally unhappy, you can cancel your account. This is irreversible. <%= button_to "Cancel my account", registration_path(@user), class: "btn btn-default", data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+	<%= link_to "Back", :back %>
+
+</div>
+</div>

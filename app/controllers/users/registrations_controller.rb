@@ -19,6 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
        parameters = params
        
        resource = User.new(user_params)
+       resource.time_zone = "Pacific Time (US & Canada)"
        respond_to do |format| 
          if resource.save     
            sign_in(resource)                      
@@ -27,7 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
            
            format.html {redirect_to root_path, notice: "Invitation accepted!"}
          else
-           format.html {redirect_to new_user_registration_path(email: params[:user][:email], name: params[:user][:name]), flash: { warning: "Oops, it looks like your password is invalid -- you need 8 characters, minimum."} }
+           format.html {redirect_to new_user_registration_path(email: params[:user][:email], name: params[:user][:name]), flash: { warning: "Oops, it looks like your password is invalid (or didn't match) -- you need 8 characters, minimum."} }
          end # if/save
        end   # format
        

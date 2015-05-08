@@ -23,10 +23,11 @@ class ItemsController < ApplicationController
     @list.save
     
     if @li.due
-      notify_users = []
-      notify_users << @li.user unless @li.user == current_user
-      check_for_and_issue_notifications_for(@li, notify_users, "new_todo_assigned")
-      # check_for_and_issue_assigned_todo_notifications(@li)
+      if @li.user
+        notify_users = []
+        notify_users << @li.user unless @li.user == current_user
+        check_for_and_issue_notifications_for(@li, notify_users, "new_todo_assigned")
+      end
     end
     
     respond_to do |format|
