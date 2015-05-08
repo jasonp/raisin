@@ -10,13 +10,16 @@
 
 		<div class="form-group">
 			<% link_self_url = '#comment-' + ec.id.to_s %>
-			<%= f.submit "Update comment", class: "btn btn-default" %> 
+			<%= f.submit "Update comment", class: "btn btn-default update_comment_button" %> 
+			
+			<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form edit_comment_cancel_form"} do |c| %>
+				<%= hidden_field_tag "edit_mode", "cancel" %>
+				<%= c.submit "Cancel", class: "btn btn-link", id: "cancel_update_comment_link_button" %> 
+			<% end %>
+			
 		</div>
 <% end %>
 
-<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form"} do |f| %>
-	<%= hidden_field_tag "edit_mode", "cancel" %>
-	Or <%= f.submit "Cancel", class: "btn btn-link" %> 
-<% end %>
 
+	
 </div>

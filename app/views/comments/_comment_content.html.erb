@@ -12,12 +12,15 @@
 	<% if ec.user == current_user %>
 		<div class="comment_footer small">
 			<% link_self_url = '#comment-' + ec.id.to_s %>
-			You can <%= link_to "edit", link_self_url, id: "show_edit_comment_form_link",  data: { comment_id: ec.id.to_s } %> this comment, or <%= link_to 'delete', account_comment_path(@project.account, ec), method: :delete, remote: true %> it.
+			You can 
+			
+			<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form", id: "inline_edit_link"} do |f| %>
+				<%= f.submit "edit", class: "btn btn-link", id: "show_edit_comment_form_link" %> 
+			<% end %>
+			
+			this comment, or <%= link_to 'delete', account_comment_path(@project.account, ec), method: :delete, remote: true %> it.
 		</div>	
 		
-		<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form"} do |f| %>
-			<%= f.submit "Edit comment", class: "btn btn-link" %> 
-		<% end %>
 	<% end %>
 	
 </div>

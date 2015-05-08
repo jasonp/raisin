@@ -28,7 +28,7 @@ $todo-list-blue: #1d428b;
 	border-bottom: 1px solid $light-gray;
 }
 
-.editor-container .line {
+#full-editor .editor-container p {
 	margin-bottom: 1em;
 }
 
@@ -52,6 +52,7 @@ $todo-list-blue: #1d428b;
 	margin-top: .5em;
 }
 
+
 .comment_footer {
 	color: $mid-gray;
 	margin-top: .5em;
@@ -61,6 +62,33 @@ $todo-list-blue: #1d428b;
 	text-decoration: underline;
 }
 
+#inline_edit_link {
+	display: inline;
+}
+
+#show_edit_comment_form_link {
+	color: $comment-link-gray;
+	text-decoration: underline;
+	padding: 0;
+	font-size: 100%;
+}
+
 .notifiable_user_checkbox {
 	margin-right: .5em;
+}
+
+/*#cancel_update_comment_link_button {
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: -12px;
+} */
+
+.edit_comment_cancel_form {
+	width: 100px;
+	display: inline-block;
+}
+
+.update_comment_button {
+	width: 137px;
+	display: inline-block;
 }

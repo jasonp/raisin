@@ -19,6 +19,8 @@ class ItemsController < ApplicationController
     @assignees = return_potential_users_to_assign(@project)
     
     @li = @list.items.create(item_params)
+    @list.status = "active"
+    @list.save
     
     if @li.due
       notify_users = []

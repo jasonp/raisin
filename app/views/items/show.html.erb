@@ -23,8 +23,8 @@
 	<div id="comments_list">
 		<% @existing_comments.each do |ec| %>
 			<% if ec.user %>
-				<div id="account_comment-<%= ec.id %>">
-					<%= render partial: '/comments/comment_content', locals: {ec: ec} %>
+				<div id="account_comment_container-<%= ec.id %>">
+					<%= render partial: '/comments/comment_content_container', locals: {ec: ec} %>
 				</div>
 			<% end %>	
 		<% end %>

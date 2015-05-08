@@ -31,8 +31,10 @@ class EmailProcessor
       end
       
       if item
+        
+        paragraph_body = @email.body.gsub(/(?<!^)\n\n(?!$)/,'<br /><br />')
       
-        if comment = Comment.create!(content: @email.body, user_id: author.id, item_id: item.id)
+        if comment = Comment.create!(content: paragraph_body, user_id: author.id, item_id: item.id)
         
           existing_notifications = Notification.where(item_id: item.id)
           user_ids = []
