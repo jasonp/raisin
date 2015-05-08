@@ -1,2 +1,3 @@
 $("#account_comment-<%= escape_javascript(@comment.id.to_s) %>").empty();
 $("#account_comment-<%= escape_javascript(@comment.id.to_s) %>").append("<%= escape_javascript(render partial: '/comments/comment_content', locals: {ec: @comment}) %>");
+$("#new_comment_form").toggle();

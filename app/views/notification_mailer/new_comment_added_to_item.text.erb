@@ -4,7 +4,7 @@ Hey <%= @to_user_name %>,
 
 <%= @from_user_name %> added a comment to a to-do in Raisin. 
 
-<%= @comment.content %>
+<%= raw(@comment.content) %>
 
 On the to-do:
 

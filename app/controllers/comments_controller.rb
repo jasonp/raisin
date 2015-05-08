@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @project = @comment.item.list.project
+    @notifiable_users = @project.users 
     @li = @comment.item.list
 
     respond_to do |format|
@@ -36,6 +37,23 @@ class CommentsController < ApplicationController
       end
     end  
     
+  end
+  
+  def edit
+    @comment = Comment.find(params[:id])
+    @project = @comment.item.list.project
+    @li = @comment.item
+    @notifiable_users = @project.users 
+    @default_notify_users = return_default_users_to_notify(@li)
+    
+    respond_to do |format|
+      if params[:edit_mode] == "cancel"
+        format.js { render 'cancel' }
+      else
+        format.js { render 'edit' }
+      end
+      
+    end
   end
 
   def show

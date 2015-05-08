@@ -19,6 +19,19 @@ $todo-list-blue: #1d428b;
  color: $mid-gray;
 }
 
+.quill-wrapper {
+	border: 1px solid $light-gray;
+	border-radius: 5px;
+}
+
+.ql-toolbar-container {
+	border-bottom: 1px solid $light-gray;
+}
+
+.editor-container .line {
+	margin-bottom: 1em;
+}
+
 #new_comment_form {
 	margin-top: 1em;
 }

@@ -4,7 +4,7 @@
 
 <p><%= @from_user_name %> added a comment to a to-do in Raisin:</p>
 
-<blockquote style="font-size: 110%;"><%= @comment.content %></blockquote>
+<blockquote style="font-size: 110%;"><%= raw(@comment.content) %></blockquote>
 
 <p>On the to-do:</p>
 

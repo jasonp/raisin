@@ -1,0 +1,22 @@
+<div id="removable_comment_form">
+
+<%= form_for ec, url: account_comment_path(@project.account, ec), method: :put, remote: true, html: {class: "form"} do |f| %>
+
+		<div class="form-group">
+		  <div id="edit_comment_form_quill">
+				<%= quill_editor nil, { name: 'comment[content]', id: 'edit_comment_area', value: ec.content } %>
+			</div>
+		</div>	
+
+		<div class="form-group">
+			<% link_self_url = '#comment-' + ec.id.to_s %>
+			<%= f.submit "Update comment", class: "btn btn-default" %> 
+		</div>
+<% end %>
+
+<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form"} do |f| %>
+	<%= hidden_field_tag "edit_mode", "cancel" %>
+	Or <%= f.submit "Cancel", class: "btn btn-link" %> 
+<% end %>
+
+</div>
