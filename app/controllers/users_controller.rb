@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     @items = Item.where(user_id: @user.id, status: "active").order(:list_id)
     
     nowtime = get_nowtime
+    logger.info("Showing what NOWTIME is ----------->")
+    logger.info(nowtime)
     
     if params[:date_range]
       if params[:date_range] == "Today"
@@ -61,8 +63,12 @@ class UsersController < ApplicationController
     
     def get_nowtime
       t = current_user.time_zone
-      today = Date.today.in_time_zone(t)
+      today = Time.now.in_time_zone(t).midnight
+      logger.info("Showing what current_user.time_zone TODAY is ----------->")
+      logger.info(today)
       utc_today = Date.today
+      logger.info("Showing what UTC today is ----------->")
+      logger.info(utc_today)
       if today.day == utc_today.day
         nowtime = Time.now.utc
       elsif today.day == utc_today.yesterday.day
