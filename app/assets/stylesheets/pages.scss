@@ -6,6 +6,8 @@ $mid-gray: lighten(#000, 46.7%);
 $light-gray: lighten(#000, 89.7%);
 $practically-white: lighten(#000, 95.0%);
 
+$headline-purple: #7c463a;
+
 
 /*******
 *********
@@ -138,13 +140,28 @@ header {
 
 .project_box {
 	padding: .5em;
-	border: 1px dashed $light-gray;
-	background: $practically-white;
-	width: 150px;
-	height: 150px;
-	margin-right: 10px;
+	width: 175px;
+	height: 172px;	
+	margin-left: 15px;
+	margin-bottom: 15px;
+	overflow: hidden;
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: top;	
+	border: 1px solid $headline-purple;
+  border-radius: 4px;
+  -webkit-box-shadow: outset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: outset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+.project_box_title {
+	color: $headline-purple;
+}
+.project_box_desc {
+	color: #333;
 }
 
 .family_member_projects_container a:hover, .account_projects_container a:hover {
