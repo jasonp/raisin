@@ -1,7 +1,17 @@
-<h4>Whoa, it looks like you're part of more than one family! Don't worry, that's just fine ... which one are you looking to work with right now?</h4>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
 
-<ul>
-	<% @accounts.each do |a| %>
-		<li><%= link_to a.name, a %></li>
-	<% end %>
-</ul>
+		<p class="lead">It looks like you're part of more than one family! Don't worry, that's just fine ... which one are you looking to work with right now?</p>
+
+		
+		<% @accounts.each do |a| %>
+			<a class="" href="<%= account_path(a) %>">
+				<div class="project_box">
+					<div class="project_box_title"><%= a.name %></div>
+				</div>
+			</a>
+		<% end %>
+		
+
+	</div>
+</div>

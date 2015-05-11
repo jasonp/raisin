@@ -100,6 +100,8 @@ class ItemsController < ApplicationController
     @li = @item
     @assignees = return_potential_users_to_assign(@project)   
     
+    @page_title = "- #{@item.title}"
+    
     # build for comment notification & display
     @notifiable_users = @project.users 
     @default_notify_users = return_default_users_to_notify(@item)

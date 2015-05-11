@@ -7,6 +7,7 @@ $light-gray: lighten(#000, 89.7%);
 $practically-white: lighten(#000, 95.0%);
 
 $headline-purple: #7c463a;
+$green: #3a7c6a;
 
 
 /*******
@@ -14,6 +15,10 @@ $headline-purple: #7c463a;
 ***    Structural Elements
 ***
 */
+
+.greenline {
+	border-bottom: 1px solid $green;
+}
 
 .navbar-brand {
 	margin-left: -20px;
@@ -40,8 +45,53 @@ header {
 .bump20 {margin-top: 20px;}
 .bump30 {margin-top: 30px;}
 
+.centered {
+	text-align: center;
+}
+
+/*******
+*********
+***    Home page
+***
+*/
+
+.home_page_content {
+
+}
+
+.rightquote {
+	font-size: 140%;
+	font-weight: 200;
+	float: right;
+	width: 200px;
+	margin-right: 15px;
+}
+.quote_attribution {
+	font-size: 69%;
+	display: block;
+	margin-top: 5px;
+}
+
+.signup_row {
+	margin-top: 2em;
+	margin-bottom: 1em;
+}
+.price_display {
+	margin-left: .5em;
+}
+
+.signup_button_box {
+	padding-left: 1em;
+}
 
 
+.letter_from_jason {
+	margin-top: 2em;
+	padding: 1.5em;
+	border: 1px solid $light-gray;
+  -webkit-box-shadow: 4px 4px 2px $light-gray;
+  box-shadow: 4px 4px 2px $light-gray;
+}
 
 /*******
 *********
@@ -147,13 +197,13 @@ header {
 	overflow: hidden;
 	display: inline-block;
 	vertical-align: top;	
-	border: 1px solid $headline-purple;
-  border-radius: 4px;
-  -webkit-box-shadow: outset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: outset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border: 3px solid $light-gray;
+/*   border-radius: 4px;
+ -webkit-box-shadow: 0 1px 1px $headline-purple;
+  box-shadow: 0 1px 1px $headline-purple;
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; */
 }
 
 
@@ -180,3 +230,14 @@ header {
 .project_box_title {
 	font-weight: bold;
 }
+
+/*******
+*********
+***    Beta code form page
+***
+*/
+
+.have_code_form {
+	margin-top: 1em;
+}
+#go_button { margin-left: 1em;}

@@ -11,10 +11,22 @@ class AccountsController < ApplicationController
   end
   
   def new
+    code = params[:code]
+    
     @account = Account.new
     if !current_user
       1.times { @account.users.build }
     end
+    
+    respond_to do |format|
+      if code == "MBYLJH"
+        format.html { 'new' }
+      else
+        flash[:error] = "Oops, it looks like you have an invalid beta code!"
+        format.html { redirect_to root_path }
+      end
+    end  
+    
   end
   
   def create

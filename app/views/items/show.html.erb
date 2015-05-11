@@ -1,11 +1,13 @@
 <h3><%= @project.title %></h3>
 <span class="invite_new_collaborator_link">
-	<%= link_to "Go to the project page", account_project_path(@project.account, @project) %><br />
-	<%= link_to "Go to the list page", account_project_list_path(@project.account, @project, @list) %>
+	<%= link_to "Go to the project page", account_project_path(@project.account, @project) %>
 </span>
 <div class="completed_page_top">
 </div>
 
+<div class="list_item_parent">
+	From the list: <%= link_to @list.title, account_project_list_path(@project.account, @project, @list) %> &rarr;
+</div>
 
 <div class="item_page_show_todo" id="list_item_actionable_box-<%= @li.id %>">
 	
@@ -36,4 +38,3 @@
 	
 </div>	
 </section>	
-

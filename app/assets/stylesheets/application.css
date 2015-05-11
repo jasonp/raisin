@@ -14,3 +14,12 @@
  *= require_self
  *= require quill.snow
  */
+
+
+a.no_unerline_link:hover {
+	text-decoration: none;
+}
+
+#green_pay_link {
+	color: #3a7c6a;
+}

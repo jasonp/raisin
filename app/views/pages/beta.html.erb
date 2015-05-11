@@ -1,0 +1,29 @@
+<div class="row">
+
+	<section class="col-md-10 col-md-offset-1 home_page_content">
+
+		<h3>Beta tester signup</h3>
+		
+		<p>Welcome!</p>
+		
+		<p>Firstly, thank you <strong>so much</strong> for being willing to help me beta test Raisin. This is a huge work in progress, and you <em>will find bugs</em>. I'm not the world's best developer. Or typist.</p>
+		
+		<p>I really think that Raisin has the potential to make it easier for you to coordinate things with your family. This is not just about me. As you're testing Raisin, please try and pay attention to the times you think to yourself "oh I wish I could do <em>this</em>," or "I think I can make it work by doing <em>x</em>." Then send it to me in an email! It'll be super useful feedback.</p>
+		
+		<p>Enough of this. <strong>Put your beta code in the form below to create an account.</strong></p>
+		
+		<p>Thanks,<br />
+		&nbsp;&nbsp;- Jason	
+		</p>
+		
+		<div class="have_code_form">
+	    <%= form_tag('/welcome?code=', method: :get, class: "form form-inline") %>
+	    <%= text_field_tag 'code', nil, id: "enter_code_form", class: "form-control col-md-4", placeholder: 'Enter your code' %>
+	    <%= submit_tag "Go", :id => "go_button", class: "btn btn-success" %>
+	    </form>
+	  </div>
+		
+
+	</section>
+
+</div>

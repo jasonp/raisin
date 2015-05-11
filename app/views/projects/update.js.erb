@@ -1,0 +1,4 @@
+$('#project_headline').empty();
+$('#project_headline').toggle();
+$('#edit_project_headline_form').toggle();
+$('#project_headline').append("<%= escape_javascript(render '/projects/existing_project_headline', :locals => {project: @project}) %>");

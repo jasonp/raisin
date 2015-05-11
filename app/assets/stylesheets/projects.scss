@@ -209,3 +209,26 @@ a.completed_todo {
 	padding: 1em;
 }
 
+/*
+****
+*** Editing project headlines
+**
+*/
+
+.edit_project_headline_link a {
+	color: $light-gray;
+	font-size: 50%;
+}
+
+#inline_edit_project_title {
+	width: 200px;
+}
+#inline_edit_project_description {
+	width: 400px;
+}
+
+.edit_project_title_row {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 2px;
+}

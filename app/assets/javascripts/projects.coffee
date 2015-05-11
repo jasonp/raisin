@@ -59,4 +59,14 @@ $ ->
     $(editDiv).toggle()
     $(titleDiv).toggle()
 
-    
+$ -> 
+  $("body").on 'click', '#edit_project_headline_link', (evt) ->
+    $("#project_headline").toggle()
+    $("#edit_project_headline_form").toggle()
+    $("#page_top_collab_invite").toggle()
+
+$ ->
+  $("body").on 'click', '#cancel_edit_project_headline_link', (evt) ->
+    $('#project_headline').toggle()
+    $('#edit_project_headline_form').toggle()
+    $('#page_top_collab_invite').toggle()

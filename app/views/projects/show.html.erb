@@ -7,23 +7,23 @@
 	<% end %>
 
 	<div class="project_page_top">
-		<% if @project.users.first == current_user %>
-			<% if @project.removable != "no" %>
-				<% if !@garage %>
-					<span class="invite_new_collaborator_link">
-					<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
-					</span>
+		
+		<div id="page_top_collab_invite">
+			<% if @project.users.first == current_user %>
+				<% if @project.removable != "no" %>
+					<% if !@garage %>
+						<span class="invite_new_collaborator_link">
+						<%= link_to "Invite a new collaborator", new_account_member_path(@account, project: @project.id) %>
+						</span>
+					<% end %>
 				<% end %>
 			<% end %>
-		<% end %>
-	
-		<h2><%= @project.title %></h2>
-		
-		<div class="">
-			<h5 class="project_description"><%= @project.description %></h5>
 		</div>
+	
+		<%= render 'projects/project_headline' %>
 		
 	</div>	
+
 	
 
 	<h4 class="todo_header">To-do lists</h4>

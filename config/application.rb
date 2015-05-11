@@ -25,5 +25,6 @@ module Raisin
     
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths += %W(#{config.root}/lib/email_processor.rb)
+    config.autoload_paths += %W(#{config.root}/lib/raisin_routines.rb)
   end
 end

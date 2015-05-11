@@ -1,0 +1,39 @@
+<div class="project_headline_box">
+	<div id="project_headline">
+		<%= render '/projects/existing_project_headline' %>
+	</div>
+	
+	<div id="edit_project_headline_form" class="starts_hidden">
+		<div class="row edit_project_title_row">
+			<%= form_for @project, url: account_project_path(@project.account, @project), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
+
+					
+					<div class="form-group">
+						<div class="">
+					  	<%= f.text_field :title, class: "form-control", id: "inline_edit_project_title" %>
+						</div>
+					</div>	
+					
+					<div class="form-group">
+						<div class="">
+					  	<%= f.text_field :description, class: "form-control right1em", id: "inline_edit_project_description" %>
+						</div>
+					</div>
+					
+					<div class="form-group">
+							<%= f.submit "Update", class: "btn btn-default right1em" %>
+					</div>		
+							
+
+					<div class="form-group" id="link_options">	
+						Or: <%= link_to "Cancel my edits", '#', id: "cancel_edit_project_headline_link", remote: true, data: { list_id: @list.id.to_s } %>
+					</div>
+
+	
+			<% end %>
+						
+		</div>
+		
+	</div>
+	
+</div>	

@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     resources :comments
   end
         
-  
+        
+  get '/beta', to: 'pages#beta', as: 'beta'
   get '/welcome', to: 'accounts#new', as: 'welcome'
 
   

@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   
   def home
     @page_title = "- Project Management for Families"
+    @home_page = true
     
     @redirect_route = ""
     if current_user

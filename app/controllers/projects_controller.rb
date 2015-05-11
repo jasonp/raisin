@@ -29,6 +29,8 @@ class ProjectsController < ApplicationController
     @lists = List.where(project_id: @project.id, status: "active").order(id: :desc)
     @assignees = return_potential_users_to_assign(@project)
     
+    @page_title = "- #{@project.title}"
+    
     if @project.status == "garage"
       @garage = true
     end
@@ -104,6 +106,7 @@ class ProjectsController < ApplicationController
           format.html { redirect_to root_path, notice: 'OK: We stashed that project in the garage.'}
         else
           format.html { redirect_to account_project_path(@account, @project), notice: 'Project updated!' }
+          format.js { render 'update' }
         end  
       else
         format.html { render action: "edit" }
