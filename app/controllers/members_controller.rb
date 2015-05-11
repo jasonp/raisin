@@ -120,6 +120,17 @@ class MembersController < ApplicationController
       end
   end
   
+  def destroy
+    @member = Member.find(params[:id])
+
+    
+    respond_to do |format|
+      if @member.delete
+        format.js
+      end
+    end
+  end
+  
   private
   
     def member_params

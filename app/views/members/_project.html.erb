@@ -58,7 +58,7 @@
 <div class="new_member_page_sidebar col-md-4 ">
 	<h5 class="sidebar_topper">Here's who's already included in this project:</h5>
 	<% @project.members.each do |m| %>
-		<div class="sidebar_member_list_item">
+		<div class="sidebar_member_list_item" id="sidebar_member-<%= m.id %>">
 			<div class="sidebar_member_list_item-image">
 				<% if m.user %>
 					<% if m.user.photo %>
@@ -95,7 +95,7 @@
 			
 			<div class="sidebar_member_list_item-action">
 				<% if m.user || m.name %>
-					<%= link_to "Remove this person", root_path %>
+					<%= link_to 'Remove this person', account_member_path(@project.account, m.id), method: :delete, remote: true %>
 				<% end %>
 			</div>
 		</div>

@@ -1,3 +1,4 @@
+include AccountsHelper
 class AccountsController < ApplicationController
   before_filter :authenticate_user!, only: [:index, :show]
   
@@ -49,9 +50,13 @@ class AccountsController < ApplicationController
         current_user.save 
         
         check_for_and_associate_members_and_accounts(current_user)
+
         
         @proj = @account.projects.create(title: current_user.name, removable: "no")
         @proj.members.create(user_id: current_user.id, account_id: @account.id)
+        
+        create_sample_todo_list_on_permanent_project(@proj)
+        create_sample_project_for_new_account(@account)        
         
         format.html { redirect_to root_path, notice: 'All set! Welcome to Raisin.' }
         format.json { render json: root_path, status: :created, location: @account }
