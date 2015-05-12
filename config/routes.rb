@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         
         
   get '/beta', to: 'pages#beta', as: 'beta'
+  get '/help', to: 'pages#help', as: 'help'
   get '/welcome', to: 'accounts#new', as: 'welcome'
 
   

@@ -64,5 +64,23 @@ class NotificationMailer < ApplicationMailer
   def todo_due_tomorrow(todo, assigned_user)
   end
   
+  def new_account_created(account)
+    @account = account
+    
+    @account_name = account.name
+    @user_count = User.all.count
+    @account_count= Account.all.count
+    
+    to_email_with_name = %("Jason Preston" <jason@prestons.me>)
+    from_email_with_name = %("Raisin" <dispatch@raisinhq.com>)
+    subject_line = %(New on Raisin: #{@account_name})
+    
+    mail(to: to_email_with_name,
+         from: from_email_with_name,
+         subject: subject_line
+    )
+    
+  end
+  
  
 end

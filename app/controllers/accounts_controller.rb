@@ -51,6 +51,7 @@ class AccountsController < ApplicationController
         
         check_for_and_associate_members_and_accounts(current_user)
 
+        NotificationMailer.new_account_created(@account).deliver_later
         
         @proj = @account.projects.create(title: current_user.name, removable: "no")
         @proj.members.create(user_id: current_user.id, account_id: @account.id)

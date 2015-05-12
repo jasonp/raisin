@@ -10,7 +10,7 @@
 	      </button>
 	
 	      <% unless @home_page -%>
-					<a class="navbar-brand" href="<%= root_path %>"><%= image_tag 'raisin.jpg' %></a>
+					<a class="navbar-brand" href="<%= root_path %>"><%= image_tag 'raisin.png' %></a>
 				<% end -%>	
 	    </div>
 	
@@ -41,6 +41,8 @@
 								<%= RaisinRoutines.time_until_account_expiration(unpaid_account) %>
 								)</a></li>	
 						<% end %>
+						
+						<li><%= link_to "Help", help_path %></li>
 						
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.name || "Profile" %> <span class="caret"></span></a>
