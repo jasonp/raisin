@@ -15,13 +15,4 @@ else
 end
 
 
-if Rails.env == 'production'
-  Sidekiq.configure_server do |config|
-    config.redis = { url: 'redis://rediscloud:jdMbOCF90FOTAnml@pub-redis-15632.us-east-1-3.3.ec2.garantiadata.com:15632' }
-  end
-
-  Sidekiq.configure_client do |config|
-    config.redis = { url: 'redis://rediscloud:jdMbOCF90FOTAnml@pub-redis-15632.us-east-1-3.3.ec2.garantiadata.com:156322' }
-  end
-end
 
