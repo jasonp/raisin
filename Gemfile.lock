@@ -60,6 +60,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.1.0)
@@ -71,6 +73,7 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     commonjs (0.2.7)
+    connection_pool (2.2.0)
     cucumber (1.3.19)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.3)
@@ -86,11 +89,6 @@ GEM
     daemons (1.2.2)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
-    delayed_job (4.0.6)
-      activesupport (>= 3.0, < 5.0)
-    delayed_job_active_record (4.0.3)
-      activerecord (>= 3.0, < 5.0)
-      delayed_job (>= 3.0, < 4.1)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -121,6 +119,7 @@ GEM
     griddler-sendgrid (0.0.1)
       griddler
     hashie (3.4.1)
+    hitimes (1.2.2)
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -182,6 +181,8 @@ GEM
     quill-rails (0.1.4)
       railties (>= 3.1.0, < 5.0)
     rack (1.6.0)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -211,6 +212,9 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.1)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
@@ -251,6 +255,16 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    sidekiq (3.3.4)
+      celluloid (>= 0.16.0)
+      connection_pool (>= 2.1.1)
+      json
+      redis (>= 3.0.6)
+      redis-namespace (>= 1.3.1)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     spring (1.3.4)
     sprockets (3.0.1)
       rack (~> 1.0)
@@ -264,6 +278,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    timers (4.0.1)
+      hitimes
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.0)
@@ -300,7 +316,6 @@ DEPENDENCIES
   cucumber-rails
   daemons
   database_cleaner
-  delayed_job_active_record
   devise
   factory_girl_rails
   griddler
@@ -319,6 +334,8 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selenium-webdriver
   shoulda-matchers
+  sidekiq
+  sinatra
   spring
   stripe!
   therubyracer

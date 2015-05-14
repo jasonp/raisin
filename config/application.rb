@@ -12,8 +12,8 @@ module Raisin
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     
-    # Set DelayedJob as ActiveJob adapter
-    config.active_job.queue_adapter = :delayed_job
+    # Set Sidekiq as ActiveJob adapter
+    config.active_job.queue_adapter = :sidekiq
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

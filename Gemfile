@@ -47,8 +47,9 @@ gem 'griddler'
 gem 'griddler-sendgrid'
 
 # do things in the background
-gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'sidekiq'
+gem 'sinatra', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
