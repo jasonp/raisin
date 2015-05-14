@@ -60,6 +60,9 @@ gem 'redis'
 # Use PUMA, per Heroku
 gem 'puma'
 
+# For heroku
+gem 'rails_12factor'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
