@@ -18,3 +18,6 @@
 
 # Ignore ngrok
 ngrok
+
+# Ignore misc / Redis db
+dump.rdb
