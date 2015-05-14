@@ -39,7 +39,7 @@ class RaisinRoutines
      # Let's send email only between 5 & 8am, locally
      if Time.zone.now.hour > 20 && Time.zone.now.hour < 23
        date = Time.zone.now.to_date
-       items = Item.where(user_id: user.id, due: date)
+       items = Item.where(user_id: user.id, due: date).order(:list_id)
        if items.count > 0
          item_ids = []
          items.each do |i|
