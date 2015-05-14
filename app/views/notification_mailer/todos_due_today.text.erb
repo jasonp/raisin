@@ -1,0 +1,22 @@
+Hi <%= @to_user_name %>,
+
+You've got todo items in Raisin that are due today!
+
+-----------
+
+<% @items.each do |item| -%>
+	<% if @previous_list != item.list -%>
+		In the list "<%= item.list.title %>":
+		<% @previous_list = item.list %>
+	<% end -%>	
+	
+	<%= item.title %>
+
+<% end -%>
+
+-----------
+
+You can see all of your today's to-dos <%= link_to "on this page", user_path(@user, date_range: "Today") %> in Raisin.
+
+Cheers, 
+	- Raisin Dispatch
