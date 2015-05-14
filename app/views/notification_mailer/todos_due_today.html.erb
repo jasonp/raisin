@@ -6,12 +6,12 @@
 
 <% @items.each do |item| -%>
 	<% if @previous_list != item.list -%>
-		<div style="text-decoration: underline;">In the list "<%= item.list.title %>":</div>
+		<div style="">In the list "<%= item.list.title %>":</div>
 		<% @previous_list = item.list %>
 	<% end -%>	
 	
 	<div style="margin-left: 1.5em; margin-bottom: 1em; margin-top: .2em;">
-		<div style=""><li><span style="color:#3a7c6a;"><%= link_to item.title, account_project_list_item_path(item.list.project.account, item.list.project, item.list, item), class: "todo_item-link" %></span></li></div>
+		<div style=""><li><span style="color:#3a7c6a;"><%= link_to item.title, account_project_list_item_url(item.list.project.account, item.list.project, item.list, item), class: "todo_item-link" %></span></li></div>
 	</div>
 
 <% end -%>

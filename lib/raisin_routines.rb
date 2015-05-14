@@ -36,8 +36,8 @@ class RaisinRoutines
     users = User.all
     users.each do |user|
      Time.zone = user.time_zone
-     # Let's send email only between 5 & 8am, locally
-     if Time.zone.now.hour > 20 && Time.zone.now.hour < 23
+     # Let's send email only between 6 & 9am, locally
+     if Time.zone.now.hour > 5 && Time.zone.now.hour < 9
        date = Time.zone.now.to_date
        items = Item.where(user_id: user.id, due: date).order(:list_id)
        if items.count > 0
@@ -49,7 +49,7 @@ class RaisinRoutines
          date_string = date.to_formatted_s(:long)
          NotificationMailer.todos_due_today(item_ids, user, date_string).deliver_later
        end  
-     end # btwn 5-8am        
+     end # btwn 6-9am        
     end # users.all do 
     
   end
