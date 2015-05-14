@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   # mount griddler using default path: /email_processor
   mount_griddler
 
-  mount Sidekiq::Web, at: '/sidekiq'
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
