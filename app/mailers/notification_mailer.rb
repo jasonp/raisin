@@ -61,7 +61,24 @@ class NotificationMailer < ApplicationMailer
         subject: subject_line)
   end
   
-  def todo_due_tomorrow(todo, assigned_user)
+  def todos_due_today(items, assigned_user, date_string)
+    @to_user_name = assigned_user.name.split(" ")[0]
+    @user = assigned_user
+    @items = []
+    items.each do |i|
+      itm = Item.find(i)
+      @items << itm
+    end
+    
+    to_email_with_name = %("#{@to_user_name}" <#{assigned_user.email}>)
+    from_email_with_name = %("Raisin" <dispatch@raisinhq.com>)
+    subject_line = %(You have to-do's due today! -- #{date_string} )
+    
+    mail(to: to_email_with_name,
+         from: from_email_with_name,
+         subject: subject_line
+    )
+    
   end
   
   def new_account_created(account)

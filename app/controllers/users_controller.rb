@@ -64,11 +64,15 @@ class UsersController < ApplicationController
     def get_nowtime
       t = current_user.time_zone
       today = Time.now.in_time_zone(t).midnight
-      logger.info("Showing what current_user.time_zone TODAY is ----------->")
+      logger.info("Showing what current_user.time_zone.midnight TODAY is ----------->")
       logger.info(today)
-      utc_today = Date.today
+      utc_today = Time.now.utc.midnight
       logger.info("Showing what UTC today is ----------->")
       logger.info(utc_today)
+      logger.info("Showing what UTC today.day is ----------->")
+      logger.info(utc_today.day)    
+      logger.info("Showing what current_user.time_zone.midnight.day is ----------->")
+      logger.info(today.day)        
       if today.day == utc_today.day
         nowtime = Time.now.utc
       elsif today.day == utc_today.yesterday.day

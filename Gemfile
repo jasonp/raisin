@@ -46,6 +46,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'griddler'
 gem 'griddler-sendgrid'
 
+# do things in the background
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

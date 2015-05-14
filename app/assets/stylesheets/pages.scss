@@ -9,6 +9,7 @@ $practically-white: lighten(#000, 95.0%);
 $headline-purple: #7c463a;
 $green: #3a7c6a;
 $light-green: lighten(#3a7c6a, 20%);
+$purple: #523a7c;
 
 
 /*******
@@ -116,13 +117,19 @@ header {
 ***
 */
 
+
 .or_facebook {
 	margin-top: 7em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;	
 }
 
 .sign_up_facebook {
-	margin-top: 1em;
-	margin-left: 3em;
+	margin-top: 2em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 202px;
 }
 
 /*******
