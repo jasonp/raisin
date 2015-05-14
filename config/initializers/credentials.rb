@@ -16,5 +16,5 @@ end
 
 
 if Rails.env == 'production'
-  REDIS_PROVIDER=ENV[REDISCLOUD_URL]
+  REDIS_PROVIDER=ENV['REDISCLOUD_URL']
 end
