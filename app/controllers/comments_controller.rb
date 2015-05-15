@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
     @project = @comment.item.list.project
     @notifiable_users = @project.users 
     @li = @comment.item
+    @default_notify_users = return_default_users_to_notify(@li)
 
     respond_to do |format|
       if @comment.update(comment_params)

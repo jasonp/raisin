@@ -1,4 +1,5 @@
-$("#new_comment_form").toggle();
 $("#comment_content-<%= escape_javascript(@comment.id.to_s) %>").toggle();
 $("#removable_comment_form").remove();
 $("#edit_comment_content-<%= escape_javascript(@comment.id.to_s) %>").toggle();
+$("#new_comment_form").append("<%= escape_javascript(render partial: '/comments/new_comment_form') %>");
+$("body").trigger('reloadQuill');

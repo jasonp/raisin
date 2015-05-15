@@ -14,23 +14,27 @@
 	<div id="new_comment_editor">
 		<%= raw(ec.content) %>
 	</div>
+	
+	<div class="row bump10">
 
-<%= form_for ec, url: account_comment_path(@project.account, ec), method: :put, remote: true, html: {class: "form"} do |f| %>
+<%= form_for ec, url: account_comment_path(@project.account, ec), method: :put, remote: true, html: {class: "form-inline col-md-3"} do |f| %>
 		<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
-
 
 		<div class="form-group">
 			<% link_self_url = '#comment-' + ec.id.to_s %>
 			<%= f.submit "Update comment", class: "btn btn-default update_comment_button" %> 
+		</div>	
 			
 <% end %>			
 			
-<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form edit_comment_cancel_form"} do |f| %>
+<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form-inline edit_comment_cancel_form col-md-2"} do |c| %>
 	<%= hidden_field_tag "edit_mode", "cancel" %>
-	<%= f.submit "Cancel", class: "btn btn-link", id: "cancel_update_comment_link_button" %> 
+	<%= c.submit "Cancel", class: "btn btn-link", id: "cancel_update_comment_link_button" %> 
 <% end %>
+
+	</div>
 			
-		</div>
+		
 
 
 
