@@ -30,8 +30,6 @@ gem 'jquery-turbolinks'
 # annotate!
 gem 'annotate', '~> 2.6.6'
 
-# Let's have a RTE
-gem 'quill-rails', '~> 0.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

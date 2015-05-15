@@ -19,6 +19,7 @@ $todo-list-blue: #1d428b;
  color: $mid-gray;
 }
 
+/* 
 .quill-wrapper {
 	border: 1px solid $light-gray;
 	border-radius: 5px;
@@ -30,7 +31,7 @@ $todo-list-blue: #1d428b;
 
 #full-editor .editor-container p {
 	margin-bottom: 1em;
-}
+} */
 
 #new_comment_form {
 	margin-top: 1em;
@@ -91,4 +92,27 @@ $todo-list-blue: #1d428b;
 .update_comment_button {
 	width: 137px;
 	display: inline-block;
+}
+
+/******
+****
+*********** QUILL
+**
+***/
+
+#new_comment_form_quill {
+}
+#toolbar {
+	border: 1px solid #ccc;
+}
+
+#new_comment_editor {
+	border: 1px solid #ccc;
+	border-top: 0px;
+	padding: 1em;
+}
+
+
+.editor_button {
+	border: none;
 }
