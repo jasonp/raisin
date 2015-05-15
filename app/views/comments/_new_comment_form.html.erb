@@ -24,6 +24,7 @@
 	<%= f.hidden_field :item_id, value: @li.id %>
 	<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
 		
+	<% if @notifiable_users_count > 0 %>	
 		<div class="form-group">
 			<p class="text-muted">Send this comment as an e-mail to:</p>
 			<% @notifiable_users.each do |nu| -%>
@@ -37,6 +38,7 @@
 				<% end %>
 			<% end -%>
 		</div>
+	<% end -%>	
 		
 		<div class="form-group">
 			<%= f.submit "Post comment", class: "btn btn-default" %>

@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$green: #3a7c6a;
+
 .item_page_show_todo .list_item_individual_todo_content {
 	font-size: 120%;
 }
@@ -10,3 +12,11 @@
 	margin-bottom: 1em;
 }
 
+.todo_comment_count_link a {
+	color: $green;
+	font-size: 90%;
+}
+
+.todo_comment_count_link a:hover {
+	text-decoration: underline;
+}

@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @li = @new_comment.item
     @notifiable_users = @project.users 
     @default_notify_users = return_default_users_to_notify(@li)
+    @notifiable_users_count = count_notifiable_users(@notifiable_users)
     @comment = @li.comments.build
     
     respond_to do |format|
@@ -31,6 +32,7 @@ class CommentsController < ApplicationController
     @notifiable_users = @project.users 
     @li = @comment.item
     @default_notify_users = return_default_users_to_notify(@li)
+    @notifiable_users_count = count_notifiable_users(@notifiable_users)
 
     respond_to do |format|
       if @comment.update(comment_params)
@@ -46,6 +48,7 @@ class CommentsController < ApplicationController
     @li = @comment.item
     @notifiable_users = @project.users 
     @default_notify_users = return_default_users_to_notify(@li)
+    @notifiable_users_count = count_notifiable_users(@notifiable_users)
     
     respond_to do |format|
       if params[:edit_mode] == "cancel"

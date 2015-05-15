@@ -169,5 +169,13 @@ module ApplicationHelper
   end
   
   
+  def count_notifiable_users(notifiable_users)
+    count = 0
+    notifiable_users.each do |u|
+      count = count + 1 unless u == current_user
+    end
+    return count
+  end
+  
   
 end

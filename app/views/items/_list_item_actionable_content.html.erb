@@ -25,6 +25,14 @@
 				</span>	
 			<% end %>
 			
+			<% if @li.comments.count > 0 %>
+				<span class="todo_comment_count_link">	
+					<a href="<%= account_project_list_item_path(@project.account, @project, @list, @li) %>">
+						(<%= @li.comments.count %> <%= 'comment'.pluralize(@li.comments.count) %>)
+					</a>
+				</span>	
+			<% end %>
+			
 			<%= link_to "Edit", '#', id: "show_edit_item_form_link",  data: { item_id: @li.id.to_s } %>
 
 		</label>

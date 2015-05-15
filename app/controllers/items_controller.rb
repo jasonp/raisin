@@ -104,6 +104,7 @@ class ItemsController < ApplicationController
     
     # build for comment notification & display
     @notifiable_users = @project.users 
+    @notifiable_users_count = count_notifiable_users(@notifiable_users)
     @default_notify_users = return_default_users_to_notify(@item)
     @comment = @item.comments.build
     @existing_comments = @item.comments.order(:id)
