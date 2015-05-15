@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @project = @comment.item.list.project
     @notifiable_users = @project.users 
-    @li = @comment.item.list
+    @li = @comment.item
 
     respond_to do |format|
       if @comment.update(comment_params)

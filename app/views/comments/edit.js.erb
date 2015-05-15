@@ -1,4 +1,5 @@
-$("#new_comment_form").toggle();
+$("#new_comment_form").empty();
 $("#comment_content-<%= escape_javascript(@comment.id.to_s) %>").toggle();
 $("#edit_comment_content-<%= escape_javascript(@comment.id.to_s) %>").toggle();
 $("#edit_comment_content-<%= escape_javascript(@comment.id.to_s) %>").append("<%= escape_javascript(render partial: '/comments/edit_comment_form', locals: {ec: @comment}) %>");
+$("body").trigger('reloadQuill');

@@ -2,29 +2,29 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ -> 
-  quill = new Quill('#new_comment_editor', {
-    modules: {
-      'toolbar': { container: '#toolbar' },
+makeQuill = (element) ->
+  quill = new Quill '#new_comment_editor', modules:
+      'toolbar': container: '#toolbar'
       'link-tooltip': true
-    }
-  });
 
-  $("body").on 'myCustomEvent', (evt) ->
-    quill = new Quill('#new_comment_editor', {
-      modules: {
-        'toolbar': { container: '#toolbar' },
-        'link-tooltip': true
-      }
-    });
+  $("body").on 'reloadQuill', (evt) ->
+    quill = new Quill '#new_comment_editor', modules:
+      'toolbar': container: '#toolbar'
+      'link-tooltip': true
 
   quill.on 'text-change', (delta, source) ->
     if source is 'user'
       html = quill.getHTML()
       $("#comment_area").val(html)
 
-  $("body").on 'myCustomEvent', (evt) ->
+  $("body").on 'reloadQuill', (evt) ->
     quill.on 'text-change', (delta, source) ->
       if source is 'user'
-          html = quill.getHTML()
-          $("#comment_area").val(html)
+        html = quill.getHTML()
+        $("#comment_area").val(html)
+
+
+$ ->  
+  element = $('#new_comment_editor')
+  makeQuill(element) if element.val()?
+

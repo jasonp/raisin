@@ -1,4 +1,4 @@
 $("#comments_list").append("<%= escape_javascript(render partial: '/comments/comment_content_container', locals: {ec: @new_comment}) %>");
 $("#new_comment_form").html("");
 $("#new_comment_form").append("<%= escape_javascript(render partial: '/comments/new_comment_form') %>");
-$("body").trigger("myCustomEvent");
+$("body").trigger("reloadQuill");

@@ -1,24 +1,37 @@
 <div id="removable_comment_form">
 
-<%= form_for ec, url: account_comment_path(@project.account, ec), method: :put, remote: true, html: {class: "form"} do |f| %>
+	<!-- Create the toolbar container -->
+	<div id="toolbar">
+	  <button class="ql-bold btn btn-default editor_button"><i class="fa fa-bold"></i></button>
+		<button class="ql-italic btn btn-default editor_button"><i class="fa fa-italic"></i></button>
+		<button class="ql-underline btn btn-default editor_button"><i class="fa fa-underline"></i></button>
+		<button class="ql-bullet btn btn-default editor_button"><i class="fa fa-list-ul"></i></button>
+		<button class="ql-list btn btn-default editor_button"><i class="fa fa-list-ol"></i></button>			
+		<button class="ql-link btn btn-default editor_button"><i class="fa fa-link"></i></button>
+	</div>
 
-		<div class="form-group">
-		  <div id="edit_comment_form_quill">
-				
-			</div>
-		</div>	
+	<!-- Create the editor container -->
+	<div id="new_comment_editor">
+		<%= raw(ec.content) %>
+	</div>
+
+<%= form_for ec, url: account_comment_path(@project.account, ec), method: :put, remote: true, html: {class: "form"} do |f| %>
+		<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
+
 
 		<div class="form-group">
 			<% link_self_url = '#comment-' + ec.id.to_s %>
 			<%= f.submit "Update comment", class: "btn btn-default update_comment_button" %> 
 			
-			<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form edit_comment_cancel_form"} do |c| %>
-				<%= hidden_field_tag "edit_mode", "cancel" %>
-				<%= c.submit "Cancel", class: "btn btn-link", id: "cancel_update_comment_link_button" %> 
-			<% end %>
+<% end %>			
+			
+<%= form_for ec, url: edit_account_comment_path(@project.account, ec), method: :get, remote: true, html: {class: "form edit_comment_cancel_form"} do |f| %>
+	<%= hidden_field_tag "edit_mode", "cancel" %>
+	<%= f.submit "Cancel", class: "btn btn-link", id: "cancel_update_comment_link_button" %> 
+<% end %>
 			
 		</div>
-<% end %>
+
 
 
 	
