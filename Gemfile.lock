@@ -275,6 +275,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    stripe-rails (0.3.1)
+      rails (>= 3)
+      stripe
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -342,6 +345,7 @@ DEPENDENCIES
   sinatra
   spring
   stripe!
+  stripe-rails
   therubyracer
   turbolinks
   twitter-bootstrap-rails

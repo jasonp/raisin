@@ -30,6 +30,8 @@ gem 'jquery-turbolinks'
 # annotate!
 gem 'annotate', '~> 2.6.6'
 
+# stripe for payments
+gem 'stripe-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -26,6 +26,9 @@ Rails.application.configure do
       password: 'weqp44ii7952'
   }
 
+  # Use strip debug JS
+  config.stripe.debug_js = true  # use stripe-debug.js
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
