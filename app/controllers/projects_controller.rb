@@ -3,6 +3,8 @@ class ProjectsController < ApplicationController
   # we get to use current_user without checking because we require log-in in this controller
   before_filter :authenticate_user!
   before_filter :check_editable, only: [:edit]
+  before_filter :authenticate_project
+  before_filter :verify_active
   
   def index
   end
@@ -34,10 +36,6 @@ class ProjectsController < ApplicationController
     if @project.status == "garage"
       @garage = true
     end
-    
-    # Prevent unauthorized users from seeing a project
-    # Not working yet
-    @project_check = check_for_project_membership(@project, current_user)
     
     respond_to do |format|
       if @project.nil?
@@ -172,5 +170,26 @@ class ProjectsController < ApplicationController
         end
       end
     end
+    
+    def authenticate_project
+      project = Project.find(params[:id])
+      if !check_for_project_membership(project, current_user)
+        redirect_to root_path
+      end
+    end
+    
+    def verify_active
+      account = Account.find(params[:account_id])
+      if account.active_until < Time.now.utc
+        if account.stripe_customer_id
+          flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to update your payment information -- it looks like there was a problem charging your card on file."
+          redirect_to edit_subscription_path
+        else
+          flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to enter your payment information and become a paying subscriber."
+          redirect_to new_subscription_path
+        end            
+      end
+    end
+    
   
 end

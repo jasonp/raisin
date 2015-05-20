@@ -9,7 +9,7 @@ class PaymentsMailer < ApplicationMailer
     
     # update the active_until 
     new_active_until = Time.now.utc + 1.month
-    account.active_until = new_active_until + 2.days
+    account.active_until = new_active_until + 7.days
     account.save
     
     new_invoice(user).deliver_later

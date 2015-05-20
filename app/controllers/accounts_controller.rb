@@ -1,6 +1,9 @@
 include AccountsHelper
 class AccountsController < ApplicationController
-  before_filter :authenticate_user!, only: [:index, :show]
+  before_filter :authenticate_user!, only: [:index, :show, :edit, :update, :archive]
+  before_filter :authenticate_account, only: [:show, :edit, :update]
+  
+  before_filter :verify_active, only: [:show, :edit, :update]
   
   def index
     #if admin, 
@@ -132,8 +135,27 @@ class AccountsController < ApplicationController
        # and of course add the user_id to the membership record
        m.user_id = resource.id
        m.save!
-    end
+     end
     end
     
+    def authenticate_account
+      account = Account.find(params[:id])
+      if !account.users.include?(current_user)
+        redirect_to root_path
+      end
+    end
+    
+    def verify_active
+      account = Account.find(params[:id])
+      if account.active_until < Time.now.utc
+        if account.stripe_customer_id
+          flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to update your payment information -- it looks like there was a problem charging your card on file."
+          redirect_to edit_subscription_path
+        else
+          flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to enter your payment information and become a paying subscriber."
+          redirect_to new_subscription_path
+        end
+      end
+    end
     
 end

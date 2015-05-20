@@ -33,7 +33,9 @@
 				</span>	
 			<% end %>
 			
-			<%= link_to "Edit", '#', id: "show_edit_item_form_link",  data: { item_id: @li.id.to_s } %>
+			<% linkstring = '#list_item_actionable-' + @li.id.to_s -%>
+			
+			<%= link_to "Edit", "#{linkstring}", id: "show_edit_item_form_link",  data: { item_id: @li.id.to_s } %>
 
 		</label>
 	</div>
@@ -63,7 +65,8 @@
 	<% end %>
 	
 	<div class="new_list_item_cancel_link">
-		<%= link_to "Cancel my edits", '#', id: "cancel_edit_item_link", data: { item_id: @li.id.to_s } %> or
+		<% linkstring = '#list_item_actionable-' + @li.id.to_s -%>
+		<%= link_to "Cancel my edits", "#{linkstring}", id: "cancel_edit_item_link", data: { item_id: @li.id.to_s } %> or
 		<%= link_to 'Delete this item', account_project_list_item_path(@project.account, @project, @list, @li), method: :delete, remote: true %>.</p>
 	</div>	
 	

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get '/help', to: 'pages#help', as: 'help'
   get '/welcome', to: 'accounts#new', as: 'welcome'
   
-  resources :subscriptions, only: [:new, :create]
+  resources :subscriptions, only: [:new, :create, :edit, :update]
 
   
   get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'

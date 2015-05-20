@@ -1,6 +1,8 @@
 include ProjectsHelper
 class ListsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :authenticate_list
+  before_filter :verify_active
 
   def new
     @project = Project.find(params[:project_id])
@@ -72,5 +74,46 @@ class ListsController < ApplicationController
     def list_params
       params.require(:list).permit(:title, :status, :description)
     end
+    
+    def check_for_project_membership(project, user)
+      if project.removable == "no"
+        # family project -- check to see if the user is a family member
+        if Member.where(user_id: user.id, account_id: project.account.id).count > 0
+          return true
+        else
+          return false
+        end
+      else
+        # regular project, check for project membership
+        if Member.where(user_id: user.id, project_id: project.id).count > 0
+          return true
+        else
+          return false
+        end
+      end
+    end
+    
+    def authenticate_list
+      list = List.find(params[:id])
+      project = list.project
+      
+      if !check_for_project_membership(project, current_user)
+        redirect_to root_path
+      end
+      
+    end
+    
+    def verify_active
+      account = Account.find(params[:account_id])
+      if account.active_until < Time.now.utc
+        if account.stripe_customer_id
+          flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to update your payment information -- it looks like there was a problem charging your card on file."
+          redirect_to edit_subscription_path
+        else
+          flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to enter your payment information and become a paying subscriber."
+          redirect_to new_subscription_path
+        end
+      end
+    end    
     
 end

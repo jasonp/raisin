@@ -1,8 +1,28 @@
 class SubscriptionsController < ApplicationController
   before_filter :authenticate_user!
-  # before_filter :check_for_selected_account
+  before_filter :check_for_selected_account
   
   def new
+  end
+  
+  def edit
+
+    
+    
+  end
+  
+  def update
+    account = Account.find(session["preferred_account_id"])
+    cu = Stripe::Customer.retrieve(account.stripe_customer_id)
+    cu.source = params[:stripe_card_token]
+    cu.save
+    
+    respond_to do |format|
+      format.html { 
+        flash[:notice] = "Payment information updated, thank you!"
+        redirect_to root_path
+        }
+    end
   end
 
   def create
@@ -55,6 +75,11 @@ class SubscriptionsController < ApplicationController
   
   private
 
+  def check_for_selected_account
+    if !session["preferred_account_id"]
+      redirect_to accounts_path
+    end
+  end
 
   
 end
