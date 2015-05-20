@@ -12,6 +12,16 @@ Stripe.plan :basic do |plan|
   plan.trial_period_days = 0
 end
 
+
+Stripe.plan :oneday do |plan|
+  plan.name = "Raisin HQ"
+  plan.amount = 500
+  plan.currency = 'usd'
+  plan.interval = 'week'
+  plan.interval_count = 1
+  plan.trial_period_days = 0
+end
+
 # Stripe.plan :primo do |plan|
 #
 #   # plan name as it will appear on credit card statements

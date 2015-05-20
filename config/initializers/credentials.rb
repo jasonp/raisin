@@ -7,11 +7,9 @@ SENDGRID_PASSWORD = "zxbgfdfz"
 
 
 if Rails.env == 'production'
-  Stripe.api_key = ""
-  STRIPE_PUBLIC_KEY = ""
+  STRIPE_PUBLIC_KEY = "pk_or8LqI1qmdDoigvCHvFIRT4Jeurpn"
 else
-  Stripe.api_key = ""
-  STRIPE_PUBLIC_KEY = ""
+  STRIPE_PUBLIC_KEY = "pk_wCSzBjODUCaz5T7sgpOTvxwdMWidy"
 end
 
 

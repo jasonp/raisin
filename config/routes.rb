@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get '/beta', to: 'pages#beta', as: 'beta'
   get '/help', to: 'pages#help', as: 'help'
   get '/welcome', to: 'accounts#new', as: 'welcome'
+  
+  resources :subscriptions, only: [:new, :create]
 
   
   get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'

@@ -1,0 +1,55 @@
+<div class="row">
+<div class="subscription_page col-md-5 col-md-offset-3">
+	
+    <h4>Become a Raisin subscriber, <%= current_user.name.split(" ")[0] %></h4>
+
+		<p>Raisin is just $5 / month.</p>
+		
+		<p>You'll be charged once per month until you cancel your subscription. If you are enjoying your free two-month trial, you will not be charged until the end of your two months.</p>
+
+	  <p class="text-muted">We accept AmEx, Visa, Discover, and MasterCard</p>
+
+	<%= form_tag subscriptions_path, method: :post, class: "form", id: "new_subscription" %>
+	
+		<%= hidden_field_tag :user_name, current_user.name, id: "card_user_name" %>
+			
+	  <div class="form-group">
+			<label class="sr-only" for="card_number">Credit Card Number</label>
+	    <div class="input-group col-md-10">
+				<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
+				<%= text_field_tag :card_number, nil, name: nil, class: "form-control", placeholder: "Credit Card Number" %>
+			</div>
+	  </div>
+	
+		<div class="form-inline row">
+		  <div class="form-group col-md-4">
+		    <div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+					<%= text_field_tag :card_code, nil, name: nil, class: "form-control", placeholder: "CVC" %>
+				</div>
+		  </div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+		     <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", class: "form-control"} %>
+			</div>
+		</div>	
+
+			<%= hidden_field_tag :stripe_card_token %>
+
+	  <div id="stripe_error">
+	    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+	    </noscript>
+	  </div>
+	
+		<div class="actions">
+			<%= submit_tag "Subscribe", class: "btn btn-success" %>
+		</div>
+	
+	</form>
+</div>	
+</div>

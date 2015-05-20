@@ -28,6 +28,11 @@ Rails.application.configure do
 
   # Use strip debug JS
   config.stripe.debug_js = true  # use stripe-debug.js
+  
+  config.stripe.secret_key = "Gl0hxFkMM7GNoUarnVooxU2udIDLVDZZ"
+  
+  # allow call-backs to work better
+  config.eager_load = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

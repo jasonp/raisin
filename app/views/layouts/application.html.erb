@@ -10,7 +10,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 	<%= stripe_javascript_tag %>
-	
+	<%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
