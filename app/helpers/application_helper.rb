@@ -107,12 +107,25 @@ module ApplicationHelper
   
   def create_notification_object_with_optional_string(object, string, user)
     
+    # set the notification email_status based on user pref [ "immediate", "off", "digest" ]
+     if user.email_preference == "immediate"
+       email_status = "send"
+     elsif user.email_preference == "digest"
+       email_status = "queued"
+     else # off
+       email_status = "sent"
+     end    
+    
     # set the right notification type
     if object.instance_of? List
       list_id = object.id 
     elsif object.instance_of? Item
       item_id = object.id 
       created_by = object.created_by
+      # catch notifcations for self-completed to-dos 
+      if created_by = user.id
+        email_status = "sent"
+      end
     elsif object.instance_of? Project
       project_id = object.id
     elsif object.instance_of? Comment
@@ -121,18 +134,9 @@ module ApplicationHelper
     end
     
     # file_id = object.id if object.instance_of? File
-    # conversation_id = object.id if object.instance_of Conversation
+    # conversation_id = object.id if object.instance_of Conversation   
+  
     
-    
-    # set the notification email_status based on user pref [ "immediate", "off", "digest" ]
-    if user.email_preference == "immediate"
-      email_status = "send"
-    elsif user.email_preference == "digest"
-      email_status = "queued"
-    else # off
-      email_status = "sent"
-    end
-        
     
     notification_string = string || "Notification: Something has been updated."
     
