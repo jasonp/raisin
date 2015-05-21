@@ -51,5 +51,18 @@
 		</div>
 	
 	</form>
+	
+	<div class="cancel_section">
+	<h5>Or, you can cancel your subscription</h5>
+	
+	<p>Nobody enjoys a big drawn-out process. Hit the red button and you won't be charged again. You'll have access to Raisin and all your data until the end of your current subscription month.</p>
+	
+	<%= form_tag subscription_path, method: :put, class: "form", id: "new_subscription" %>
+		<%= hidden_field_tag :cancel_subscription, value: "cancel_me" %>
+	
+		<%= submit_tag "Cancel Subscription", class: "btn btn-danger" %>
+	</form>
+	
+	</div>
 </div>	
 </div>

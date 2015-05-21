@@ -47,9 +47,16 @@
 	  </div>
 	<% end %>
 
-	<h4>Cancel your account</h4>
+	<h4>Cancel your user profile</h4>
 
-	<p>If you're totally unhappy, you can cancel your account. This is irreversible. <%= button_to "Cancel my account", registration_path(@user), class: "btn btn-default", data: { confirm: "Are you sure?" }, method: :delete %></p>
+	<p>If you're totally unhappy, you can cancel your account. This is irreversible.</p>
+	
+	<p class="">
+		<li>If you are the <u>only</u> user in a Family account, this will also cancel the account subscription.</li> 
+		<li class="text-warning">If you are <u>not</u> the only user, this <em>will not cancel your family account or credit card payment</em>.</li> 
+		<li>If you want to stop paying for Raisin, you can cancel your subscription <%= link_to "here", edit_subscription_path() %>.</li></p> 
+	
+	<%= button_to "Cancel my account", registration_path(@user), class: "btn btn-default", data: { confirm: "Are you sure?" }, method: :delete %>
 
 	<%= link_to "Back", :back %>
 

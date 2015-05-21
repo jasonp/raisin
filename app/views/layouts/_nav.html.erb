@@ -37,7 +37,7 @@
 					
 						
 						<% if unpaid_account = RaisinRoutines.show_payment_link_if_needed(session["preferred_account_id"], current_user) -%>
-							<li><a href="#" id="green_pay_link">Pay for Raisin (
+							<li><a href="<%= new_subscription_path %>" id="green_pay_link">Activate your account (
 								<%= RaisinRoutines.time_until_account_expiration(unpaid_account) %>
 								)</a></li>	
 						<% end %>

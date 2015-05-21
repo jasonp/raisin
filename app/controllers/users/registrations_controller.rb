@@ -70,7 +70,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      end
      
      def user_params
-       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+       params.require(:user).permit(:name, :email, :password, :email_preference, :password_confirmation)
      end
   
      # You can put the params you want to permit in the empty array.

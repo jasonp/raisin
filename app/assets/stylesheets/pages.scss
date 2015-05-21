@@ -9,6 +9,7 @@ $practically-white: lighten(#000, 95.0%);
 $headline-purple: #7c463a;
 $green: #3a7c6a;
 $light-green: lighten(#3a7c6a, 20%);
+$dark-green: darken(#3a7c6a, 5%);
 $purple: #523a7c;
 
 
@@ -23,6 +24,15 @@ $purple: #523a7c;
 	background: $light-green;
 	padding: 1em;
 	border-radius: 3px;
+	color: white;
+}
+
+.btn-raisin-green {
+	background: $green;
+	color: white;
+}
+.btn-raisin-green:hover {
+	background: $dark-green;
 	color: white;
 }
 

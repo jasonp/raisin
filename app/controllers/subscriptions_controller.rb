@@ -14,14 +14,30 @@ class SubscriptionsController < ApplicationController
   def update
     account = Account.find(session["preferred_account_id"])
     cu = Stripe::Customer.retrieve(account.stripe_customer_id)
-    cu.source = params[:stripe_card_token]
-    cu.save
+    action = ""
+    
+    
+    if params[:commit] = "Cancel Subscription"
+      # cu.subscriptions.retrieve("sub_6GLoJrs3Q0nkDo").delete
+      action = "canceled"
+    else
+      cu.source = params[:stripe_card_token]
+      cu.save
+      action = "updated"
+    end  
     
     respond_to do |format|
-      format.html { 
-        flash[:notice] = "Payment information updated, thank you!"
-        redirect_to root_path
-        }
+      if action == "updated"
+        format.html { 
+          flash[:notice] = "Payment information updated, thank you!"
+          redirect_to root_path
+          }
+      else
+        format.html { 
+          flash[:notice] = "Sorry to see you go -- subscription canceled!"
+          redirect_to root_path
+          }
+      end    
     end
   end
 
