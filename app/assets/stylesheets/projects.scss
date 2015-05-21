@@ -148,8 +148,8 @@ a.todo_item-link {
 }
 
 #todo_item_input{
-	width: 475px;
-}
+	width: 100%;
+} 
 .new_list_item_cancel_link {
 	margin-left: 1em;
 	margin-top: .5em;
@@ -183,9 +183,9 @@ a.todo_item-link {
 }
 
 
-#todo_due_date_input {
+/* #todo_due_date_input {
 	width: 125px;
-}
+} */
 
 #hidden_settings_form {
 	display: none;
