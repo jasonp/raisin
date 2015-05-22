@@ -70,3 +70,21 @@ $ ->
     $('#project_headline').toggle()
     $('#edit_project_headline_form').toggle()
     $('#page_top_collab_invite').toggle()
+
+$ ->
+	$("body").on 'loadDatePicker', (evt) ->
+    $(".date_picker_field").datetimepicker({
+		                icons: {
+		                    time: "fa fa-clock-o",
+		                    date: "fa fa-calendar",
+		                    previous: "fa fa-arrow-left",
+		                    next: "fa fa-arrow-right",
+		                    today: "fa fa-calendar-o",
+		                    close: "fa fa-close",
+		                    clear: "fa fa-circle-thin"
+		                }
+		                showTodayButton: true,
+		                showClose: true,
+		                showClear: true,
+		                format: "DD/MM/YYYY"
+		            })

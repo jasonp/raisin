@@ -27,6 +27,10 @@ gem 'omniauth-facebook'
 # Try to fix page-reload javascript problem
 gem 'jquery-turbolinks'
 
+# Get a date picker for non-supported browsers
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+
 # annotate!
 gem 'annotate', '~> 2.6.6'
 
