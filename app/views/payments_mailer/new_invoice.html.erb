@@ -1,8 +1,47 @@
-<p>Hi <%= @to_user_name %>,</p>
+<div style="">
+	<p>Hi <%= @to_user_name %>,</p>
 
-<p>This is your receipt for Raisin.</p>
+	<p>This is your monthly receipt for Raisin. Thank you!</p>
 
-<p>Your card was charged $5, and your subscription to Raisin is active until <%= @active_until %></p>
+	<p>Cheers,<br />
+		&nbsp;&nbsp;- Jason </p>
+</div>
 
-<p>Cheers,<br />
-	Dispatch </p>
+<div style="letter-spacing: 2px; margin-top: 1em; border-bottom: 1px solid #3a7c6a; width: 100%;">
+	Payment Receipt
+</div>
+
+<table style="width: 100%; margin-top: 1em;">
+	<tr>
+		<td>
+			<strong>Paid for period</strong><br />
+			<%= Date.today.to_formatted_s(:long) %> - <%= @active_until.to_formatted_s(:long) %>
+		</td>
+		<td></td>
+		<td>
+			<strong>Amount</strong><br />
+			$<%= @amount.to_s %>.00<br />
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>Description</strong><br/>
+			Raisin monthly subscription.
+		</td>
+		<td>
+		</td>
+		<td>
+			<strong>Receipt ID</strong><br />
+			<%= @invoice_id %>
+		</td>		
+	</tr>
+</table>
+	
+<div style="margin-top: 1em;">
+	<p>You can change your credit card, or cancel you subscription <%= link_to 'at this link', edit_subscription_url(1) %>.</p>
+</div>	
+	

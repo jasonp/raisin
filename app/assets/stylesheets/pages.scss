@@ -9,6 +9,7 @@ $practically-white: lighten(#000, 95.0%);
 $headline-purple: #7c463a;
 $green: #3a7c6a;
 $light-green: lighten(#3a7c6a, 20%);
+$back-green: lighten(#3a7c6a, 50%);
 $dark-green: darken(#3a7c6a, 5%);
 $purple: #523a7c;
 
@@ -18,6 +19,14 @@ $purple: #523a7c;
 ***    Structural Elements
 ***
 */
+
+body {
+	
+}
+
+main {
+	background: white;
+}
 
 .bg-raisingreen {
 	border: 1px solid $green;
@@ -57,7 +66,8 @@ $purple: #523a7c;
 }
 
 footer {
-	margin-top: 25px;
+	margin-top: 25px; 
+	background: white;
 	border-top: 1px solid $light-gray;
 	padding-top: 15px;
 	margin-bottom: 1em;

@@ -1,8 +1,25 @@
 Hi <%= @to_user_name %>,
 
-This is your receipt for Raisin.
-
-Your card was charged $5, and your subscription to Raisin is active until <%= @active_until %>
+This is your monthly receipt for Raisin. Thank you!
 
 Cheers,
-	Dispatch 
+	- Jason 
+
+Payment Receipt
+-----------------
+
+Paid for period:
+<%= Date.today.to_formatted_s(:long) %> - <%= @active_until.to_formatted_s(:long) %>
+
+Amount:
+$<%= @amount.to_s %>.00
+
+Description:
+Raisin monthly subscription.
+
+Receipt ID:
+<%= @invoice_id %>
+				
+
+You can change your credit card, or cancel you subscription <%= link_to 'at this link', edit_subscription_url(1) %>.
+	

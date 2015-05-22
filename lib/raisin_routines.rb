@@ -19,7 +19,10 @@ class RaisinRoutines
   def self.time_until_account_expiration(unpaid_account)
     valid_until = "Expired!"
     if unpaid_account.active_until > Time.now.utc
-      valid_until = "Soon!"
+      expire = unpaid_account.active_until.to_date
+      now = Time.now.utc.to_date
+      
+      valid_until = (expire - now).to_i.to_s + " days left"
     end
     
     return valid_until

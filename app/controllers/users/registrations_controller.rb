@@ -49,9 +49,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
    #end
   
    # DELETE /resource
-   #def destroy
-   #  super
-   #end
+   def destroy
+       
+     resource.accounts.each do |acc|
+       if acc.users.first == resource
+         logger.info("----> User is the account owner")
+         # This user is the owner of an account
+         # check to see if they're the ONLY user
+         if acc.users.count == 1
+           stripe_id = acc.stripe_customer_id
+           cu = Stripe::Customer.retrieve(stripe_id)
+           if cu.subscriptions.total_count > 0
+             sub_id = cu.subscriptions.first.id
+             cu.subscriptions.retrieve(sub_id).delete
+             cu.save
+           end
+           acc.delete
+         end # only user 
+       end # if acct owner
+     end # for each acct
+     
+     resource.destroy
+     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+     set_flash_message :notice, :destroyed if is_flashing_format?
+     respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+   end
   
    # GET /resource/cancel
    #Forces the session data which is usually expired after sign

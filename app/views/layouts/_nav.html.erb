@@ -50,6 +50,7 @@
 		            <li><%= link_to "Edit my personal info", edit_user_path(current_user) %></a></li>
 								<% if session["preferred_account_id"] != nil -%>
 		            	<li><%= link_to "Edit my account info", edit_account_path(session["preferred_account_id"]) %></li>
+									<li><%= link_to "Edit payment info", edit_subscription_path(1) %></li>
 								<% end -%>
 		            <li><%= link_to "Switch accounts", accounts_path %></li>
 		            <li class="divider"></li>

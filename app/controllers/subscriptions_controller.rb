@@ -1,14 +1,13 @@
 class SubscriptionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_for_selected_account
+  before_filter :check_for_stripe_id, only: [:edit]
   
   def new
   end
   
   def edit
-
-    
-    
+    @account = Account.find(session["preferred_account_id"])
   end
   
   def update
@@ -17,12 +16,24 @@ class SubscriptionsController < ApplicationController
     action = ""
     
     
-    if params[:commit] = "Cancel Subscription"
-      # cu.subscriptions.retrieve("sub_6GLoJrs3Q0nkDo").delete
+    if params[:commit] == "Cancel Subscription"
+      if cu.subscriptions.total_count > 0
+        sub_id = cu.subscriptions.first.id
+        cu.subscriptions.retrieve(sub_id).delete
+      end
+      account.plan = "canceled"
+      account.save
       action = "canceled"
     else
       cu.source = params[:stripe_card_token]
+      
+      # if they've canceled previously, add them to the plan
+      if cu.subscriptions.total_count == 0
+        cu.plan = "basic"
+      end
       cu.save
+      account.plan = "basic"
+      account.save
       action = "updated"
     end  
     
@@ -97,5 +108,12 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def check_for_stripe_id
+    account = Account.find(session["preferred_account_id"])
+    if !account.stripe_customer_id
+      redirect_to new_subscription_path
+    end
+  end
+  
   
 end

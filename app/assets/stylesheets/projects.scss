@@ -9,6 +9,8 @@ $practically-white: lighten(#000, 95.0%);
 $dark-gray: lighten(#000, 20%);   
 
 $todo-list-blue: #1d428b;
+$green: #3a7c6a;
+$dark-green: darken(#3a7c6a, 5%);
 
 /*******
 *********
@@ -140,7 +142,8 @@ h5.todo_list_title .edit_list_title_link_span a:hover {
 }
 
 a.todo_item-link {
-	color: $dark-gray;
+	color: $dark-green;
+/*	color: $dark-gray; */
 }
 
 #inline_edit_list_title {

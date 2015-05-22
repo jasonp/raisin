@@ -7,15 +7,16 @@
 		
 		<p>You'll be charged once per month until you cancel your subscription. If you are enjoying your free two-month trial, you will not be charged until the end of your two months.</p>
 
-	  <p class="text-muted">We accept AmEx, Visa, Discover, and MasterCard</p>
+	  
 
 	<%= form_tag subscriptions_path, method: :post, class: "form", id: "new_subscription" %>
+	<p class="text-muted">We accept AmEx, Visa, Discover, and MasterCard</p>
 	
 		<%= hidden_field_tag :user_name, current_user.name, id: "card_user_name" %>
 			
 	  <div class="form-group">
 			<label class="sr-only" for="card_number">Credit Card Number</label>
-	    <div class="input-group col-md-10">
+	    <div class="input-group col-md-11">
 				<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
 				<%= text_field_tag :card_number, nil, name: nil, class: "form-control", placeholder: "Credit Card Number" %>
 			</div>
@@ -51,5 +52,7 @@
 		</div>
 	
 	</form>
+	
+	
 </div>	
 </div>

@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$green: #3a7c6a;
+$light-green: lighten(#3a7c6a, 20%);
 
 #stripe_error {
 	color: red;
@@ -20,4 +22,11 @@
 
 .cancel_section {
 	margin-top: 2em;
+}
+
+#new_subscription {
+	border: 1px solid $green;
+	border-radius: 5px;
+	padding: 1.5em;
+	padding-top: .8em;
 }
