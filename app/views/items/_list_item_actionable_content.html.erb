@@ -56,7 +56,13 @@
 			</div>		
 			
 			<div class="form-group">
-				<%= f.date_field :due, class: "form-control input-sm date_picker_field", id: "todo_due_date_input" %>
+				<div class="input-group date_picker_field" id="new_item_date_field" >
+					<% due_string = @li.due.strftime("%d/%m/%Y") if @li.due %>
+					<%= f.text_field :due, value: due_string, class: "form-control input-sm", id: "todo_due_date_input" %>
+					<span class="input-group-addon">
+						<span class="fa fa-calendar"></i>
+					</span>
+				</div>
 			</div>
 	
 			<div class="form-group">
