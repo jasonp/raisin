@@ -56,10 +56,11 @@ class AccountsController < ApplicationController
 
         NotificationMailer.new_account_created(@account).deliver_later
         
-        @proj = @account.projects.create(title: current_user.name, removable: "no")
-        @proj.members.create(user_id: current_user.id, account_id: @account.id)
+        #@proj = @account.projects.create(title: current_user.name, removable: "no")
+        #@proj.members.create(user_id: current_user.id, account_id: @account.id)
+        Member.create(user_id: current_user.id, account_id: @account.id, name: current_user.name)
         
-        create_sample_todo_list_on_permanent_project(@proj)
+        #create_sample_todo_list_on_permanent_project(@proj)
         create_sample_project_for_new_account(@account)        
         
         format.html { redirect_to root_path, notice: 'All set! Welcome to Raisin.' }
@@ -78,7 +79,8 @@ class AccountsController < ApplicationController
     # Only display family members to other family members
     @fam_member = Member.where(account_id: @account.id, user_id: current_user.id)
     if @fam_member.count > 0
-      @family_members = Project.where(account_id: @account.id, removable: "no")
+      @family_members = Member.where(account_id: @account.id).order(:created_at)
+      #@family_members = Project.where(account_id: @account.id, removable: "no")
     end  
     
     @projs = Project.where(account_id: @account.id, removable: nil)

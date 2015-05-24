@@ -6,11 +6,11 @@
 	<div class="family_member_projects_container">
 	<% @family_members.each do |fm| %>
 	
-		<a class="" href="<%= account_project_path(@account, fm) %>">
+		<a class="" href="<%= account_member_path(@account, fm) %>">
 			<span class="family_member_box">
-				<% if fm.members.first.user %>
-					<% if fm.members.first.user.photo != nil %>
-						<% photo_url = fm.members.first.user.photo %>
+				<% if fm.user %>
+					<% if fm.user.photo != nil %>
+						<% photo_url = fm.user.photo %>
 					<% else %>
 						<% photo_url = 'nophoto.png' %>
 					<% end %>	
@@ -18,8 +18,7 @@
 					<% photo_url = 'nophoto.png' %>
 				<% end %>
 				<div class="project_box_photo"><%= image_tag photo_url %></div>
-				<div class="project_box_title"><%= fm.title %></div>
-				<div class="project_box_desc"><%= fm.description %></div>
+				<div class="project_box_title"><%= fm.name %></div>
 			</span>
 		</a>		
 	<% end %>

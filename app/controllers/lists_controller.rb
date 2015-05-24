@@ -1,7 +1,7 @@
 include ProjectsHelper
 class ListsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authenticate_list
+  before_filter :authenticate_list, only: [:show]
   before_filter :verify_active
 
   def new

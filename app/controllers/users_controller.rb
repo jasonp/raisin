@@ -46,6 +46,11 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.update(user_params)
+        members = Member.where(user_id: @user.id)
+        members.each do |m|
+          m.name = @user.name
+          m.save
+        end
         format.html { redirect_to @user, notice: 'Great success! New information saved.' }
         format.json { render json: @user, status: :created, location: @user }
       else

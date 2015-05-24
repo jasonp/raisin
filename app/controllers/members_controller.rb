@@ -69,10 +69,10 @@ class MembersController < ApplicationController
     
       # We need to create a permanent project for them
       # 
-      @proj = Project.new(title: @member.name, removable: "no", account_id: @account.id)
-      @proj.save!      
+      #@proj = Project.new(title: @member.name, removable: "no", account_id: @account.id)
+      #@proj.save!      
     
-      @member.project_id = @proj.id
+      #@member.project_id = @proj.id
 
 
     
@@ -120,6 +120,19 @@ class MembersController < ApplicationController
       end
   end
   
+  def show
+    @account = Account.find(params[:account_id])
+    @member = Member.find(params[:id])
+    
+    name = @member.name.split(" ")[0]
+    @items = get_filtered_current_account_items(@account, name)
+    
+    #
+    #wildcard_search = "%#{name}%"
+
+    #@items = Item.where("title ILIKE :search", search: wildcard_search).order(:list_id)
+  end
+  
   def destroy
     @member = Member.find(params[:id])
 
@@ -127,6 +140,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.delete
         format.js
+        format.html { redirect_to root_path }
       end
     end
   end
@@ -140,5 +154,23 @@ class MembersController < ApplicationController
     def member_params_only_project
       params.require(:member).permit(:name, :birthday, :gender, :email, :project_id, :user_id, :status)
     end
+    
+    def get_filtered_current_account_items(account, name)
+      items_to_return = []
+      projects = account.projects
+      projects.each do |p|
+        lists = p.lists
+        lists.each do |l|
+          l.items.each do |item|
+            if item.title =~ /(\s|^)#{name}(\s|$)/i
+              items_to_return << item
+            end
+          end #items
+        end #lists
+      end #project loop
+      
+      return items_to_return
+    end
+    
 
 end
