@@ -120,6 +120,17 @@ class MembersController < ApplicationController
       end
   end
   
+  def update
+    @member = Member.find(params[:id])
+    @account = @member.account
+    
+    respond_to do |format|
+      if @member.update(member_params)
+        format.js
+      end
+    end
+  end
+  
   def show
     @account = Account.find(params[:account_id])
     @member = Member.find(params[:id])

@@ -20,6 +20,7 @@ class Member < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :project
+  belongs_to :account
   
 
   def self.add_user_to_project(user, project)

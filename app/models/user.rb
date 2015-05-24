@@ -23,6 +23,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  email_preference       :string
+#  time_zone              :string
 #
 
 class User < ActiveRecord::Base

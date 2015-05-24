@@ -1,0 +1,41 @@
+<div id="show_memeber_info">
+	<div class="member_edit_link">
+		[ <%= link_to "Edit", "#", id: "show_edit_member_ifo", data: { member_id: @member.id.to_s } %> ]
+	</div>
+	
+	<h2 class="member_name">
+		<%= @member.name %>
+	</h2>
+
+	<div class="member_birthdate text-muted">
+		Born <%= @member.birthday.to_date.to_formatted_s(:long) if @member.birthday %>
+	</div>
+
+
+</div>
+
+<div id="edit_member_info" class="starts_hidden">		
+	<%= form_for @member, url: account_member_path(@member.account, @member), method: :put, remote: true, html: {class: "form"} do |f| %>
+
+		<div class="row">
+			<div class="form-group col-sm-6">
+			  	<%= f.text_field :name, class: "form-control", id: "member_name" %>
+			</div>	
+
+			<div class="form-group col-sm-3">
+				<div class="input-group date_picker_field" id="new_item_date_field" >
+					<% date_string = @member.birthday.strftime("%d/%m/%Y") if @member.birthday %>
+					<%= f.text_field :birthday, value: date_string, class: "form-control", id: "member_birthday" %>
+					<span class="input-group-addon">
+						<span class="fa fa-calendar"></i>
+					</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.submit "Update", class: "btn btn-default right1em" %>
+				Or <%= link_to "Cancel", "#", id: "cancel_edit_member_ifo", data: { member_id: @member.id.to_s } %>.
+			</div>
+		</div>	
+	<% end %>
+</div>

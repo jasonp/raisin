@@ -2,6 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$headline-purple: #7c463a;
+$green: #3a7c6a;
+$light-green: lighten(#3a7c6a, 20%);
+$back-green: lighten(#3a7c6a, 50%);
+$dark-green: darken(#3a7c6a, 5%);
+$purple: #523a7c;
+$practically-white: lighten(#000, 95.0%);
+
 .family_mini_footer {
 	margin-top: 2em;
+}
+
+.member_page_top {
+	border: 1px solid $green;
+	padding: 1em;
+	margin-bottom: 1.5em;
+}
+
+h2.member_name {
+	margin-top: .2em;
+}
+
+.member_edit_link {
+	float: right;
+	color: $practically-white;
+}
+.member_edit_link a {
+	color: $practically-white;
+}
+
+#edit_member_info {
+	margin-top: .8em;
 }
