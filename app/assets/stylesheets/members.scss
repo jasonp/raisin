@@ -32,6 +32,10 @@ h2.member_name {
 	color: $practically-white;
 }
 
+.member_edit_link a:hover {
+	color: #666;
+}
+
 #edit_member_info {
 	margin-top: .8em;
 }
