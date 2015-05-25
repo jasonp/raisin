@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   # we get to use current_user without checking because we require log-in in this controller
   before_filter :authenticate_user!
   before_filter :check_editable, only: [:edit]
-  before_filter :authenticate_project, only [:show, :edit]
+  before_filter :authenticate_project, only: [:show, :edit]
   before_filter :verify_active
   
   def index
