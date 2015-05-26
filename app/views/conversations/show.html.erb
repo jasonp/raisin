@@ -1,5 +1,27 @@
-<h3><%= @conversation.title %></h3>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		
+		<div class="navigation_pillbox">
+			&larr; <a href="<%= account_project_path(@project.account, @project)%>">
+				Return to <%= @project.title %>
+			</a>
+		</div>	
+		
+		<h3><%= @conversation.title %></h3>
 
-<div class="conversation_content">
-	<%= raw(@conversation.content) %>
-</div>	
+		<div class="conversation_content">
+			<%= raw(@conversation.content) %>
+		</div>	
+		
+		<div class="conversation_meta text-muted">
+			Posted on <%= @conversation.created_at.to_date.to_formatted_s(:long) %> by <%= @conversation.user.name %>.
+			<% if current_user == @conversation.user %>
+				You can <%= link_to "edit", edit_account_project_conversation_path(@project.account, @project, @conversation), class: "conversation_meta_link" %> 
+				this conversation, or 
+				<%= link_to "delete", account_project_conversation_path(@project.account, @project, @conversation), method: :delete, remote: true, class: "conversation_meta_link" %> it.
+			<% end %>
+		</div>
+		
+			
+	</div>
+</div>

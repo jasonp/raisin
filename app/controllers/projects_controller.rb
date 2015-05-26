@@ -31,6 +31,9 @@ class ProjectsController < ApplicationController
     @lists = List.where(project_id: @project.id, status: "active").order(id: :desc)
     @assignees = return_potential_users_to_assign(@project)
     
+    # for conversations
+    @conversations = @project.conversations.limit(5)
+    
     @page_title = "- #{@project.title}"
     
     if @project.status == "garage"

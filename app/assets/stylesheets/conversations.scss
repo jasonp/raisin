@@ -1,3 +1,35 @@
 // Place all the styles related to the Conversations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$green: #3a7c6a;
+
+/* Show page */
+
+.conversation_meta_link {
+	color: #666;
+	text-decoration: underline;
+}
+
+.conversation_meta {
+	margin-top: 1em;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	
+}
+
+/* Edit page */
+
+
+/* Project page */
+
+.convo_comment_count {
+	color: $green;
+}
+
+.conversations_table {
+	margin-top: 1em;
+}
+

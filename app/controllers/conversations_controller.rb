@@ -27,13 +27,29 @@ class ConversationsController < ApplicationController
   end
 
   def edit
+    @conversation = Conversation.find(params[:id])
+    @account = Account.find(params[:account_id])
+    @project = Project.find(params[:project_id])
   end
 
   def update
+    @conversation = Conversation.find(params[:id])
+    @account = Account.find(params[:account_id])
+    @project = Project.find(params[:project_id])
+    
+    respond_to do |format|
+      if @conversation.update(conversation_params)
+        format.html { redirect_to account_project_conversation_path(@account, @project, @conversation) }
+      else
+        flash.now[:warning] = "Uh oh, your changes couldn't be saved"
+        render 'edit'
+      end
+    end
   end
 
   def show
     @conversation = Conversation.find(params[:id])
+    @project = @conversation.project
   end
 
   def destroy

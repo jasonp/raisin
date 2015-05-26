@@ -24,6 +24,36 @@
 		
 	</div>	
 
+	<h4 class="todo_header">Conversations</h4>
+	
+	<div class="new_conversation_button">
+		<a href="<%= new_account_project_conversation_path(@account, @project) %>">
+			<button type="button" class="btn btn-default">Start a new conversation</button>
+		</a>
+	</div>	
+	
+	<div id="conversations_box">	
+		<table class="table conversations_table table-condensed table-striped">
+			<tbody>
+			<% @conversations.each do |c| %>
+				<tr>
+					<td>
+						<strong>
+							<%= link_to c.title, account_project_conversation_path(@account, @project, c), class: "conversation_link" %>
+						</strong>
+						<%= truncate(strip_tags(c.content)) %>
+					</td>
+					<td>
+						<span class="text-muted">Posted by <%= c.user.name %></span>
+					</td>
+					<td>
+						<span class="convo_comment_count"><%= c.comments.count %> <%= 'comment'.pluralize(c.comments.count) %></span>
+					</td>	
+				</tr>
+			<% end -%>
+			</tbody>
+		</table>
+	</div>	
 	
 
 	<h4 class="todo_header">To-do lists</h4>

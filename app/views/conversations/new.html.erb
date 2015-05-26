@@ -1,40 +1,43 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
 
+		<%= form_for @conversation, url: account_project_conversations_path(@account, @project), method: :post, html: {class: "form"} do |f| %>
 
-<%= form_for @conversation, url: account_project_conversations_path(@account, @project), method: :post, html: {class: "form"} do |f| %>
-
-<div class="form-group">
-	<%= f.text_field :title, class: "form-control input-lg", placeholder: "Title your conversation" %>
-</div>
-
-	<%= f.hidden_field :user_id, value: current_user.id %>
-	<%= f.hidden_field :project_id, value: @project.id if @project %>
-	<%= f.hidden_field :member_id, value: @member.id if @member %>
-	<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
-
-
-<div class="form-group">
-	<div id="new_comment_form_quill">
-		<!-- Create the toolbar container -->
-		<div id="toolbar">
-		  <button type="button" class="ql-bold btn btn-default editor_button"><i class="fa fa-bold"></i></button>
-			<button type="button" class="ql-italic btn btn-default editor_button"><i class="fa fa-italic"></i></button>
-			<button type="button" class="ql-underline btn btn-default editor_button"><i class="fa fa-underline"></i></button>
-			<button type="button" class="ql-bullet btn btn-default editor_button"><i class="fa fa-list-ul"></i></button>
-			<button type="button" class="ql-list btn btn-default editor_button"><i class="fa fa-list-ol"></i></button>			
-			<button type="button" class="ql-link btn btn-default editor_button"><i class="fa fa-link"></i></button>
+		<div class="form-group">
+			<%= f.text_field :title, class: "form-control input-lg", placeholder: "Title your conversation" %>
 		</div>
 
-		<!-- Create the editor container -->
-		<div id="new_comment_editor">
-			<%= raw(@preserved_comment) if @preserved_comment %>
-		  <div></div>
-		  <div></div>
-		  <div><br></div>
-		</div>
-	</div>
-</div>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :project_id, value: @project.id %>
+			<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
 
-	<div class="form-group">
-		<%= f.submit "Post this Conversation", class: "btn btn-raisin-green" %>
-	</div>
-<% end -%>
+
+		<div class="form-group">
+			<div id="new_comment_form_quill">
+				<!-- Create the toolbar container -->
+				<div id="toolbar">
+				  <button type="button" class="ql-bold btn btn-default editor_button"><i class="fa fa-bold"></i></button>
+					<button type="button" class="ql-italic btn btn-default editor_button"><i class="fa fa-italic"></i></button>
+					<button type="button" class="ql-underline btn btn-default editor_button"><i class="fa fa-underline"></i></button>
+					<button type="button" class="ql-bullet btn btn-default editor_button"><i class="fa fa-list-ul"></i></button>
+					<button type="button" class="ql-list btn btn-default editor_button"><i class="fa fa-list-ol"></i></button>			
+					<button type="button" class="ql-link btn btn-default editor_button"><i class="fa fa-link"></i></button>
+				</div>
+
+				<!-- Create the editor container -->
+				<div id="new_comment_editor">
+					<%= raw(@preserved_comment) if @preserved_comment %>
+				  <div></div>
+				  <div></div>
+				  <div><br></div>
+				</div>
+			</div>
+		</div>
+
+			<div class="form-group">
+				<%= f.submit "Post this Conversation", class: "btn btn-raisin-green" %>
+			</div>
+		<% end -%>
+		
+	</div>	
+</div>		
