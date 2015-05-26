@@ -6,7 +6,7 @@
 
 	
 
-	<h4 class="todo_header">To-do's that mention "<%= @member.name.split[0] %>"</h4>
+	<h4 class="todo_header">To-do's that mention "<%= @member.name.split[0] if @member.name %>"</h4>
 
 
 	<div id="existing_project_todo_section">

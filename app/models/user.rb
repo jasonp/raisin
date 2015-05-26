@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   
   has_many :notifications
   has_many :comments
+  has_many :conversations
   
   validates :name, presence: true
   validates :email, presence: true

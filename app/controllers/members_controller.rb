@@ -135,7 +135,11 @@ class MembersController < ApplicationController
     @account = Account.find(params[:account_id])
     @member = Member.find(params[:id])
     
-    name = @member.name.split(" ")[0]
+    if @member.name != ""
+      name = @member.name.split(" ")[0] 
+    else
+      name = "hello"
+    end
     @items = get_filtered_current_account_items(@account, name)
     
     #
@@ -174,7 +178,7 @@ class MembersController < ApplicationController
         lists.each do |l|
           l.items.each do |item|
             if item.title =~ /(\s|^)#{name}(\s|$)/i
-              items_to_return << item
+              items_to_return << item if item.status == "active"
             end
           end #items
         end #lists

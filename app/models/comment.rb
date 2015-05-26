@@ -20,7 +20,7 @@ class Comment < ActiveRecord::Base
   belongs_to :list
   
   # belongs_to :file
-  # belongs_to :conversation
+  belongs_to :conversation
   
   validates :content, presence: true
   

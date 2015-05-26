@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :accounts, only: [:new, :show, :edit, :create, :update, :index] do
     get 'users', on: :member
     resources :projects do
+      resources :conversations
       resources :lists, only: [:create, :update, :destroy, :show, :new] do
         resources :items, only: [:new, :create, :update, :destroy, :show]
       end

@@ -20,6 +20,7 @@ class Project < ActiveRecord::Base
   has_many :lists, dependent: :destroy
   has_many :comments
   has_many :notifications
+  has_many :conversations
   
   belongs_to :account
   
