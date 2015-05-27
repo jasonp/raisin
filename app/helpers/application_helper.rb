@@ -16,6 +16,9 @@ module ApplicationHelper
     elsif object.instance_of? Project
       notification_string = "There is a new comment on the project: #{object.title}"
       existing_notifications = Notification.where(project_id: object.id)
+    elsif object.instance_of? Conversation
+      notification_string = "There is a new conversation: #{object.title}"
+      existing_notifications = [] # an explicit list
     elsif object.instance_of? Comment
       if object.item
         notification_string = "There is a new comment on the to-do: #{object.item.title}"
@@ -24,7 +27,10 @@ module ApplicationHelper
         existing_notifications = []
       elsif object.list
         notification_string = "There is a new comment on the to-do list: #{object.list.title}"
-        existing_notifications = Notification.where(item_id: object.list.id)
+        existing_notifications = Notification.where(list_id: object.list.id)
+      elsif object.conversation
+        notification_string = "There is a new comment on the conversation: #{object.conversation.title}"
+        existing_notifications = [] # Again, an explicit list
       end
     end
   
@@ -76,15 +82,23 @@ module ApplicationHelper
           if NotificationMailer.assigned_user_completed_todo(object, completing_user, assigning_user).deliver_later
             nn.email_status = "sent"
           end
+        elsif action == "conversation_started"
+          if NotificationMailer.new_conversation_started(object, nn.user).deliver_later
+            nn.email_status = "sent"
+          end
         elsif action == "comment_added_to_item"
-          #logger.info("looking up details for the call")
           item = object.item
-          #logger.info(object.content)
           commenting_user = object.user
-          #logger.info(commenting_user.name)
           notified_user = nn.user
-          #logger.info("attempting to send comment mail")
           if NotificationMailer.new_comment_added_to_item(object, item, notified_user, commenting_user).deliver_later
+            nn.email_status = "sent"
+          end
+        elsif action == "comment_added_to_conversation"
+          conversation = object.conversation
+          commenting_user = object.user
+          notified_user = nn.user
+          sub_line = truncate(strip_tags(object.content))
+          if NotificationMailer.new_comment_added_to_conversation(object, conversation, notified_user, commenting_user, sub_line).deliver_later
             nn.email_status = "sent"
           end
         end
@@ -128,8 +142,15 @@ module ApplicationHelper
       end
     elsif object.instance_of? Project
       project_id = object.id
+    elsif object.instance_of? Conversation
+      conversation_id = object.id
+      created_by = object.user.id
     elsif object.instance_of? Comment
-      item_id = object.item.id
+      if object.item
+        item_id = object.item.id
+      elsif object.conversation
+        conversation_id = object.conversation.id
+      end
       created_by = object.user.id
     end
     
@@ -140,7 +161,7 @@ module ApplicationHelper
     
     notification_string = string || "Notification: Something has been updated."
     
-    notification = Notification.new(user_id: user.id, creator_id: created_by, notification: notification_string, email_status: email_status, status: "new", item_id: item_id, list_id: list_id, project_id: project_id, file_id: nil, conversation_id: nil) 
+    notification = Notification.new(user_id: user.id, creator_id: created_by, notification: notification_string, email_status: email_status, status: "new", item_id: item_id, list_id: list_id, project_id: project_id, file_id: nil, conversation_id: conversation_id) 
     notification.save
     
     return notification

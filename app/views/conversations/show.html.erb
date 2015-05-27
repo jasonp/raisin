@@ -22,6 +22,29 @@
 			<% end %>
 		</div>
 		
+		<section class="comments_section row">
+		<div class="col-md-8">	
+
+			<h5 class="comments_section_header">
+				Continue the conversation:
+			</h5>
+			<div id="comments_list">
+				<% @comments.each do |ec| %>
+					<% if ec.user %>
+						<div id="account_comment_container-<%= ec.id %>">
+							<%= render partial: '/comments/comment_content_container', locals: {ec: ec} %>
+						</div>
+					<% end %>	
+				<% end %>
+			</div>	
+
+			<div id="new_comment_form">
+				<%= render partial: '/comments/new_comment_form' %>
+			</div>
+
+		</div>	
+		</section>
+		
 			
 	</div>
 </div>

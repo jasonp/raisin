@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150525201359) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.string   "status"
+    t.string   "flep"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

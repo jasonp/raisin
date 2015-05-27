@@ -3,19 +3,33 @@ class CommentsController < ApplicationController
  
   def create
     @new_comment = Comment.new(comment_params)
-    @project = @new_comment.item.list.project
-    @li = @new_comment.item
+    
+    if @new_comment.item
+      @project = @new_comment.item.list.project
+      @li = @new_comment.item
+      @default_notify_users = return_default_users_to_notify(@li)
+      @comment = @li.comments.build
+    elsif @new_comment.conversation
+      @conversation = @new_comment.conversation
+      @project = @conversation.project
+      @default_notify_users = []
+      @comment = @conversation.comments.build
+    end
+    
     @notifiable_users = @project.users 
-    @default_notify_users = return_default_users_to_notify(@li)
     @notifiable_users_count = count_notifiable_users(@notifiable_users)
-    @comment = @li.comments.build
     
     respond_to do |format|
       if @new_comment.save
         
         # issue notifications as needed
         if params[:notifiable_users]
-          check_for_and_issue_notifications_for(@new_comment, params[:notifiable_users], "comment_added_to_item")
+          # one more layer
+          if params[:comment][:item_id]
+            check_for_and_issue_notifications_for(@new_comment, params[:notifiable_users], "comment_added_to_item")
+          elsif params[:comment][:conversation_id]
+            check_for_and_issue_notifications_for(@new_comment, params[:notifiable_users], "comment_added_to_conversation") 
+          end  
         end
         
         format.js
@@ -28,10 +42,18 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    @project = @comment.item.list.project
+    
+    if @comment.item
+      @project = @comment.item.list.project
+      @li = @comment.item
+      @default_notify_users = return_default_users_to_notify(@li)      
+    elsif @comment.conversation
+      @conversation = @comment.conversation
+      @project = @conversation.project
+      @default_notify_users = []
+    end
+
     @notifiable_users = @project.users 
-    @li = @comment.item
-    @default_notify_users = return_default_users_to_notify(@li)
     @notifiable_users_count = count_notifiable_users(@notifiable_users)
 
     respond_to do |format|
@@ -44,10 +66,18 @@ class CommentsController < ApplicationController
   
   def edit
     @comment = Comment.find(params[:id])
-    @project = @comment.item.list.project
-    @li = @comment.item
+    
+    if @comment.item
+      @project = @comment.item.list.project
+      @li = @comment.item
+      @default_notify_users = return_default_users_to_notify(@li)
+    elsif @comment.conversation
+      @conversation = @comment.conversation
+      @project = @conversation.project
+      @default_notify_users = []
+    end
+    
     @notifiable_users = @project.users 
-    @default_notify_users = return_default_users_to_notify(@li)
     @notifiable_users_count = count_notifiable_users(@notifiable_users)
     
     respond_to do |format|

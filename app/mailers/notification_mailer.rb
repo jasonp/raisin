@@ -61,6 +61,43 @@ class NotificationMailer < ApplicationMailer
         subject: subject_line)
   end
   
+  def new_conversation_started(object, user)
+    @conversation = object
+    @to_user_name = user.name.split(" ")[0]
+    @from_user_name = object.user.name
+    
+    @url_to_conversation = account_project_conversation_url(object.project.account, object.project, object)
+    
+    to_email_with_name = %("#{user.name}" <#{user.email}>)
+    from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
+    subject_line = %(#{@from_user_name} on Raisin: {#@conversation.title})
+    reply_to_email = %("Raisin" <conversation-#{@conversation.id}-flep-#{@conversation.flep}@raisinhq.com>)
+    
+    mail(to: to_email_with_name, 
+        from: from_email_with_name, 
+        reply_to: reply_to_email,
+        subject: subject_line)
+  end
+  
+  def new_comment_added_to_conversation(object, conversation, notified_user, commenting_user, sub_line)
+    @conversation = conversation
+    @to_user_name = notified_user.name.split(" ")[0]
+    @from_user_name = commenting_user.name
+    
+    @url_to_conversation = account_project_conversation_url(conversation.project.account, conversation.project, conversation)
+    
+    to_email_with_name = %("#{notified_user.name}" <#{notified_user.email}>)
+    from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
+    subject_line = %(#{@from_user_name} on Raisin: {#sub_line})
+    reply_to_email = %("Raisin" <conversation-#{@conversation.id}-flep-#{@conversation.flep}@raisinhq.com>)
+    
+    mail(to: to_email_with_name, 
+        from: from_email_with_name, 
+        reply_to: reply_to_email,
+        subject: subject_line)
+    
+  end
+  
   def todos_due_today(items, assigned_user, date_string)
     @to_user_name = assigned_user.name.split(" ")[0]
     @user = assigned_user

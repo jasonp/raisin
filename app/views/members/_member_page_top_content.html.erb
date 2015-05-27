@@ -1,6 +1,6 @@
 <div id="show_memeber_info">
 	<div class="member_edit_link">
-		<%= link_to "[ Edit ]", "#", id: "show_edit_member_ifo", data: { member_id: @member.id.to_s } %>
+		<%= link_to "Update #{@name}'s name and birthday...", "#", id: "show_edit_member_ifo", data: { member_id: @member.id.to_s } %>
 	</div>
 	
 	<h2 class="member_name">

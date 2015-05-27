@@ -1,5 +1,5 @@
 <div class="row">
 	<%= form_for @list, url: new_account_project_list_path(@project.account, @project), method: :get, remote: true, html: {class: "form col-md-2"} do |f| %>
-	<%= f.submit "Make a new to-do list", class: "btn btn-default" %>
+	<%= f.submit "Make a new to-do list", class: "btn btn-default btn-sm" %>
 	<% end %>
 </div>

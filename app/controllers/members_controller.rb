@@ -136,11 +136,11 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     
     if @member.name != ""
-      name = @member.name.split(" ")[0] 
+      @name = @member.name.split(" ")[0] 
     else
-      name = "hello"
+      @name = nil
     end
-    @items = get_filtered_current_account_items(@account, name)
+    @items = get_filtered_current_account_items(@account, @name)
     
     #
     #wildcard_search = "%#{name}%"

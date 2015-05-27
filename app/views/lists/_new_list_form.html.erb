@@ -7,8 +7,9 @@
 			  	<%= f.text_field :title, class: "form-control", autofocus: true, placeholder: "A brand new to-do list!" %>
 				</div>
 	
-				<div class="col-md-2">
-					<%= f.submit "Add to-do list", class: "btn btn-default right1em" %>
+				<div class="col-md-4">
+					<%= f.submit "Add to-do list", class: "btn btn-default btn-sm right1em" %>
+					<%= link_to "Cancel", account_project_cancel_list_path(@project.account, @project), :remote => true %>
 				</div>
 	
 			</div>
@@ -17,6 +18,6 @@
 	<% end %>
 
 
-	<%= link_to "Cancel", account_project_cancel_list_path(@project.account, @project), :remote => true %>
+	
 	</div>
 </div>

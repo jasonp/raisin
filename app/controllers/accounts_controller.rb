@@ -33,6 +33,75 @@ class AccountsController < ApplicationController
     
   end
   
+  def recently
+    @account = Account.find(params[:account_id])
+    @projs = Project.where(account_id: @account.id, removable: nil).order(:updated_at)
+    
+    # Same process... what do they have permission to see?
+    @projects = []
+    @inactive_count = 0
+    @projs.each do |p|
+      if p.status == "active"
+        if p.users.include?(current_user)
+          @projects << p 
+        end  
+      else
+        @inactive_count = @inactive_count + 1 if p.status == "garage"
+      end  
+    end
+    
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def createdorder
+    @account = Account.find(params[:account_id])
+    @projs = Project.where(account_id: @account.id, removable: nil).order(:created_at)
+    
+    # Same process... what do they have permission to see?
+    @projects = []
+    @inactive_count = 0
+    @projs.each do |p|
+      if p.status == "active"
+        if p.users.include?(current_user)
+          @projects << p 
+        end  
+      else
+        @inactive_count = @inactive_count + 1 if p.status == "garage"
+      end  
+    end
+    
+    
+    respond_to do |format|
+      format.js { render 'recently' }
+    end
+  end
+  
+  def alphabetical
+    @account = Account.find(params[:account_id])
+    @projs = Project.where(account_id: @account.id, removable: nil).order(:title)
+    
+    # Same process... what do they have permission to see?
+    @projects = []
+    @inactive_count = 0
+    @projs.each do |p|
+      if p.status == "active"
+        if p.users.include?(current_user)
+          @projects << p 
+        end  
+      else
+        @inactive_count = @inactive_count + 1 if p.status == "garage"
+      end  
+    end
+    
+    
+    respond_to do |format|
+      format.js { render 'recently' }
+    end
+  end
+  
   def create
 
     @account = Account.new(account_params)

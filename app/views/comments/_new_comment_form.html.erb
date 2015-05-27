@@ -21,7 +21,12 @@
 
 <%= form_for @comment, url: account_comments_path(@project.account), method: :post, remote: true, html: {class: "form"} do |f| %>
 	<%= f.hidden_field :user_id, value: current_user.id %>
-	<%= f.hidden_field :item_id, value: @li.id %>
+	<% if @li %>
+		<%= f.hidden_field :item_id, value: @li.id %>
+	<% end -%>
+	<% if @conversation %>
+		<%= f.hidden_field :conversation_id, value: @conversation.id %>
+	<% end -%>
 	<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
 		
 	<% if @notifiable_users_count > 0 %>	

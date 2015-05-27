@@ -6,6 +6,7 @@ class CreateConversations < ActiveRecord::Migration
       t.integer :user_id
       t.integer :project_id
       t.string :status
+      t.string :flep
 
       t.timestamps null: false
     end

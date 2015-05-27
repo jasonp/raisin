@@ -34,31 +34,21 @@
 
 <% end %>
 
-<h4>Projects</h4>
+<section class="projects_list">
+	<span id="sort_projects">
+		Sort: <%= link_to 'When projects were created', account_createdorder_path(@account), remote: true %> or
+		<%= link_to 'alphabetically', account_alphabetical_path(@account), remote: true %>
+	</span>
 
-<div class="row">
+	<h4>Projects</h4>
 
-	<div class="account_projects_container">
-	<% @projects.each do |p| %>
-		<a class="" href="<%= account_project_path(@account, p) %>">
-			<div class="project_box">
-				<div class="project_box_title"><%= p.title %></div>
-				<div class="project_box_desc"><%= p.description %></div>
-			</div>
-		</a>
-	<% end %>	
+	<div class="row" id="active_projects_loop_div">
+
+		<%= render 'active_projects_loop' %>
+
+	</div>	
 	
-	<% if @family_members %>
-		<a class="" href="<%= new_account_project_path(@account) %>">
-			<div class="project_box add_new_project">
-				<div class="project_box_title">Create a new project </div>
-				<div class="project_box_desc new_member_desc">+</div>
-			</div>
-		</a>
-	<% end %>
-	
-	</div>
-</div>	
+</section>	
 	
 	<% if @inactive_count > 0 %>
 		<div class="inactive_projects">

@@ -1,11 +1,19 @@
+include ApplicationHelper
 class ConversationsController < ApplicationController
   before_filter :authenticate_user!
   
   def new
+    @conversation = Conversation.new
+    
     @account = Account.find(params[:account_id])
     @project = Project.find_by_id(params[:project_id])
     
-    @conversation = Conversation.new
+    # Notification things
+    @notifiable_users = @project.users 
+    @notifiable_users_count = count_notifiable_users(@notifiable_users)
+    @default_notify_users = [] # there are no default notifiables for new conversations
+    
+
   end
 
   def create
@@ -15,6 +23,11 @@ class ConversationsController < ApplicationController
     
     respond_to do |format|
       if @conversation.save
+        # issue notifications as needed
+        if params[:notifiable_users]
+          check_for_and_issue_notifications_for(@conversation, params[:notifiable_users], "conversation_started")
+        end
+        
         format.html { redirect_to account_project_conversation_path(@account, @project, @conversation) }
       else
         format.html { 
@@ -50,6 +63,14 @@ class ConversationsController < ApplicationController
   def show
     @conversation = Conversation.find(params[:id])
     @project = @conversation.project
+    
+    # build for comment notification & display
+    @notifiable_users = @project.users 
+    @notifiable_users_count = count_notifiable_users(@notifiable_users)
+    @default_notify_users = []
+    
+    @comments = @conversation.comments.order(:id)
+    @comment = @conversation.comments.build
   end
 
   def destroy
@@ -58,6 +79,6 @@ class ConversationsController < ApplicationController
   private
   
     def conversation_params
-      params.require(:conversation).permit(:title, :content, :user_id, :member_id, :project_id, :status)
+      params.require(:conversation).permit(:title, :content, :user_id, :member_id, :project_id, :status, :flep)
     end
 end

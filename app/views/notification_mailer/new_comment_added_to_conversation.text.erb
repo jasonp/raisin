@@ -1,0 +1,17 @@
+--- REPLY ABOVE THIS LINE TO RESPOND IN RAISIN ---
+
+Hey <%= @to_user_name %>,
+
+<%= @from_user_name %> added a comment to the <%= @conversation.title %> conversation in Raisin:
+
+
+
+<%= raw(@comment.content) %>
+
+
+
+You can reply to this email to add a comment in Raisin, and it will also be emailed as a response. You can also <%= link_to "visit the conversation on Raisin", @url_to_conversation %>.
+
+Cheers, 
+	Raisin Dispatch
+	

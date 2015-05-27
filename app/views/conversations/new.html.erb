@@ -10,6 +10,7 @@
 			<%= f.hidden_field :user_id, value: current_user.id %>
 			<%= f.hidden_field :project_id, value: @project.id %>
 			<%= f.hidden_field :content, value: nil, id: 'comment_area', data: { field_for: "comment-text" } %>
+			<%= f.hidden_field :flep, value: rand(1000001..9999999) %>
 
 
 		<div class="form-group">
@@ -33,9 +34,26 @@
 				</div>
 			</div>
 		</div>
+		
+		<% if @notifiable_users_count > 0 %>	
+			<div class="form-group">
+				<p class="text-muted">Send this conversation as an e-mail to:</p>
+				<% @notifiable_users.each do |nu| -%>
+					<% if nu != current_user -%>
+
+						<% box_value = true if @default_notify_users.include?(nu) %>
+						<span class="notifiable_user_checkbox">
+							<%= check_box_tag "notifiable_users[]", nu.id, box_value %> <%= nu.name %>
+						</span>
+
+					<% end %>
+				<% end -%>
+			</div>
+		<% end -%>
 
 			<div class="form-group">
-				<%= f.submit "Post this Conversation", class: "btn btn-raisin-green" %>
+				<%= f.submit "Post this Conversation", class: "btn btn-raisin-green right1em" %>
+				Or <%= link_to "Cancel", account_project_path(@account, @project) %>
 			</div>
 		<% end -%>
 		

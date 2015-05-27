@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   get '/welcome', to: 'accounts#new', as: 'welcome'
   
   resources :subscriptions, only: [:new, :create, :edit, :update]
+  
+  get '/accounts/:account_id/recently', to: 'accounts#recently', as: 'account_recently'
+  get '/accounts/:account_id/createdorder', to: 'accounts#createdorder', as: 'account_createdorder'
+  get '/accounts/:account_id/alphabetical', to: 'accounts#alphabetical', as: 'account_alphabetical'
 
   
   get '/accounts/:account_id/archive', to: 'accounts#archive', as: 'account_project_archive'
