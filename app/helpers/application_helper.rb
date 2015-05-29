@@ -51,8 +51,8 @@ module ApplicationHelper
       users_to_notify << en.user
       muted_users << en.user if en.mute == "yes" # track who's muted the thread
     end
-    logger.info("------>> MUTED USERS")
-    logger.info(muted_users)
+    #logger.info("------>> MUTED USERS")
+    #logger.info(muted_users)
     
     # final_notifications_array = []
     final_notifications_array = add_or_remove_users_from_recipients_based_on_preferences(muted_users, users_to_notify)
@@ -131,12 +131,12 @@ module ApplicationHelper
     # set the notification email_status based on user pref [ "immediate", "off", "digest" ]
      if user.email_preference == "immediate"
        email_status = "send"
-       logger.info ("Set to Send")
+       #logger.info ("Set to Send")
      elsif user.email_preference == "digest"
        email_status = "queued"
      else # off
        email_status = "sent"
-       logger.info("Email Status set to OFF")
+       #logger.info("Email Status set to OFF")
      end    
     
     # set the right notification type
@@ -145,9 +145,9 @@ module ApplicationHelper
     elsif object.instance_of? Item
       item_id = object.id 
       created_by = object.created_by
-      logger.info("========== created by ===========")
-      logger.info(created_by)
-      logger.info(object.completed_by)
+      #logger.info("========== created by ===========")
+      #logger.info(created_by)
+      #logger.info(object.completed_by)
       # catch notifcations for self-completed to-dos 
       if created_by == object.completed_by
         email_status = "sent"
