@@ -1,0 +1,8 @@
+<div class="project_page_top">
+
+	<h3>Conversations in <%= link_to @project.title, account_project_path(@account, @project) %></h3>
+
+</div>
+
+
+<%= render '/projects/conversations_loop' %>

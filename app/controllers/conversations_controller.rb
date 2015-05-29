@@ -15,6 +15,13 @@ class ConversationsController < ApplicationController
     
 
   end
+  
+  def index
+    @project = Project.find(params[:project_id])
+    @account = Account.find(params[:account_id])
+    
+    @conversations = @project.conversations.order('created_at DESC')
+  end
 
   def create
     @conversation = Conversation.new(conversation_params)
@@ -74,6 +81,17 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
+    @conversation = Conversation.find(params[:id])
+    @project = @conversation.project
+    
+    respond_to do |format|
+      if @conversation.destroy
+        format.html { 
+          flash[:notice] = "Conversation deleted."
+          redirect_to account_project_path(@project.account, @project)
+          }
+      end
+    end
   end
   
   private

@@ -2,7 +2,7 @@
 
 <p>Hey <%= @to_user_name %>,</p>
 
-<p><%= @from_user_name %> added a comment to the <%= @conversation.title %> conversation in Raisin:</p>
+<p><%= @from_user_name %> added a comment to the <%= link_to @conversation.title, @url_to_conversation %> conversation in Raisin:</p>
 
 <blockquote>
 

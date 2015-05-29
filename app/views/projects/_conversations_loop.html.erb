@@ -1,0 +1,27 @@
+<div id="conversations_box">	
+	<table class="table conversations_table table-condensed table-striped">
+		<tbody>
+		<% @conversations.each do |c| %>
+			<tr>
+				<td>
+					<strong>
+						<%= link_to c.title, account_project_conversation_path(@account, @project, c), class: "conversation_link" %>
+					</strong>
+					<% preview = sanitize raw(c.content), tags: %w(strong em a) %>
+					<%= truncate(preview, length: 45) %>
+				</td>
+				<td>
+					<span class="text-muted">Posted by <%= c.user.name.split(" ")[0] if c.user.name %></span>
+				</td>
+				<td>
+					<span class="convo_comment_count">
+						<a href="<%= account_project_conversation_path(@account, @project, c) %>">
+							<%= c.comments.count %> <%= 'comment'.pluralize(c.comments.count) %>
+						</a>
+					</span>
+				</td>	
+			</tr>
+		<% end -%>
+		</tbody>
+	</table>
+</div>

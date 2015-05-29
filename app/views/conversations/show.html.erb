@@ -18,7 +18,7 @@
 			<% if current_user == @conversation.user %>
 				You can <%= link_to "edit", edit_account_project_conversation_path(@project.account, @project, @conversation), class: "conversation_meta_link" %> 
 				this conversation, or 
-				<%= link_to "delete", account_project_conversation_path(@project.account, @project, @conversation), method: :delete, remote: true, class: "conversation_meta_link" %> it.
+				<%= link_to "delete", account_project_conversation_path(@project.account, @project, @conversation), method: :delete, class: "conversation_meta_link" %> it.
 			<% end %>
 		</div>
 		

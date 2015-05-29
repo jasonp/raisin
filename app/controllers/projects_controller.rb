@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     @assignees = return_potential_users_to_assign(@project)
     
     # for conversations
-    @conversations = @project.conversations.limit(5)
+    @conversations = @project.conversations.limit(5).order('created_at DESC')
     
     @page_title = "- #{@project.title}"
     

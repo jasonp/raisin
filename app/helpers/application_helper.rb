@@ -1,4 +1,7 @@
+include ActionView::Helpers::SanitizeHelper
+include ActionView::Helpers::TextHelper
 module ApplicationHelper
+
   
   # action is used to determine the type of notification email sent. Valid options:
   # [ "new_todo_assigned", "todo_completed", "comment_added_to_item" ]
@@ -48,6 +51,8 @@ module ApplicationHelper
       users_to_notify << en.user
       muted_users << en.user if en.mute == "yes" # track who's muted the thread
     end
+    logger.info("------>> MUTED USERS")
+    logger.info(muted_users)
     
     # final_notifications_array = []
     final_notifications_array = add_or_remove_users_from_recipients_based_on_preferences(muted_users, users_to_notify)
@@ -97,7 +102,9 @@ module ApplicationHelper
           conversation = object.conversation
           commenting_user = object.user
           notified_user = nn.user
-          sub_line = truncate(strip_tags(object.content))
+          preview = strip_tags(object.content)
+          #preview = sanitize object.content, tags: %w(strong em a)
+					sub_line = truncate(preview, length: 45)
           if NotificationMailer.new_comment_added_to_conversation(object, conversation, notified_user, commenting_user, sub_line).deliver_later
             nn.email_status = "sent"
           end
@@ -124,10 +131,12 @@ module ApplicationHelper
     # set the notification email_status based on user pref [ "immediate", "off", "digest" ]
      if user.email_preference == "immediate"
        email_status = "send"
+       logger.info ("Set to Send")
      elsif user.email_preference == "digest"
        email_status = "queued"
      else # off
        email_status = "sent"
+       logger.info("Email Status set to OFF")
      end    
     
     # set the right notification type
@@ -136,8 +145,11 @@ module ApplicationHelper
     elsif object.instance_of? Item
       item_id = object.id 
       created_by = object.created_by
+      logger.info("========== created by ===========")
+      logger.info(created_by)
+      logger.info(object.completed_by)
       # catch notifcations for self-completed to-dos 
-      if created_by = user.id
+      if created_by == object.completed_by
         email_status = "sent"
       end
     elsif object.instance_of? Project

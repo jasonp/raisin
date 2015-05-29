@@ -5,13 +5,14 @@ class NotificationMailer < ApplicationMailer
     @todo = todo
     @to_user_name = assigned_user.name.split(" ")[0]
     @from_user_name = assigning_user.name
+    @from_user_first = assigning_user.name.split(" ")[0]
     
     
     @url_to_item = account_project_list_item_url(todo.list.project.account, todo.list.project, todo.list, todo)
     
     to_email_with_name = %("#{@to_user_name}" <#{assigned_user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(#{@from_user_name} has assigned you a to-do on Raisin)
+    subject_line = %(#{@from_user_name} assigned you a to-do: #{@todo.title})
     reply_to_email = %("Raisin" <item-#{todo.id}-flep-#{todo.flep}@raisinhq.com>)
     
 
@@ -26,12 +27,13 @@ class NotificationMailer < ApplicationMailer
     @to_user_name = notified_user.name.split(" ")[0]
     @from_user_name = commenting_user.name
     @comment = comment
+    @from_user_first = commenting_user.name.split(" ")[0]
     
     @url_to_item = account_project_list_item_url(item.list.project.account, item.list.project, item.list, item)
     
     to_email_with_name = %("#{@to_user_name}" <#{notified_user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(#{@from_user_name} added a comment to a to-do in Raisin)
+    subject_line = %(#{@from_user_first} added a comment on #{@item.title})
     reply_to_email = %("Raisin" <item-#{item.id}-flep-#{item.flep}@raisinhq.com>)
     
 
@@ -70,7 +72,7 @@ class NotificationMailer < ApplicationMailer
     
     to_email_with_name = %("#{user.name}" <#{user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(#{@from_user_name} on Raisin: {#@conversation.title})
+    subject_line = %(#{@from_user_name} on Raisin: #{@conversation.title})
     reply_to_email = %("Raisin" <conversation-#{@conversation.id}-flep-#{@conversation.flep}@raisinhq.com>)
     
     mail(to: to_email_with_name, 
@@ -83,12 +85,13 @@ class NotificationMailer < ApplicationMailer
     @conversation = conversation
     @to_user_name = notified_user.name.split(" ")[0]
     @from_user_name = commenting_user.name
+    @comment = object
     
     @url_to_conversation = account_project_conversation_url(conversation.project.account, conversation.project, conversation)
     
     to_email_with_name = %("#{notified_user.name}" <#{notified_user.email}>)
     from_email_with_name = %("#{@from_user_name} (Raisin)" <dispatch@raisinhq.com>)
-    subject_line = %(#{@from_user_name} on Raisin: {#sub_line})
+    subject_line = %(#{@from_user_name} on Raisin: #{sub_line})
     reply_to_email = %("Raisin" <conversation-#{@conversation.id}-flep-#{@conversation.flep}@raisinhq.com>)
     
     mail(to: to_email_with_name, 

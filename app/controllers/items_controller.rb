@@ -27,7 +27,8 @@ class ItemsController < ApplicationController
     if @li.due
       if @li.user
         notify_users = []
-        notify_users << @li.user unless @li.user == current_user
+        notify_users << @li.user.id unless @li.user == current_user
+        logger.info(notify_users)
         check_for_and_issue_notifications_for(@li, notify_users, "new_todo_assigned")
       end
     end

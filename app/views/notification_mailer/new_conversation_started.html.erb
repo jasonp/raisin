@@ -2,7 +2,7 @@
 
 <p>Hey <%= @to_user_name %>,</p>
 
-<p><%= @from_user_name %> added a conversation on the <%= @conversation.project.title %> project in Raisin:</p>
+<p><%= @from_user_name %> added a conversation on the <%= link_to @conversation.project.title, account_project_url(@conversation.project.account, @conversation.project) %> project in Raisin:</p>
 
 --------------
 
