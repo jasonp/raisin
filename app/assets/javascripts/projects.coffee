@@ -58,6 +58,7 @@ $ ->
     titleDiv = "#list_item_actionable-" + itemId
     $(editDiv).toggle()
     $(titleDiv).toggle()
+    $("body").trigger('loadDatePicker')
 
 $ -> 
   $("body").on 'click', '#edit_project_headline_link', (evt) ->

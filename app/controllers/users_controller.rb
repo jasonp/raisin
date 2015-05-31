@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :authenticate_user!
+  before_filter :only_edit_current_user, only: [:edit]
   
   def show
     @user = User.find_by_id(params[:id])
@@ -87,6 +88,12 @@ class UsersController < ApplicationController
       end
       
       return nowtime
+    end
+  
+    def only_edit_current_user
+      if User.find_by_id(params[:id]) != current_user
+        redirect_to root_path
+      end
     end
   
 end

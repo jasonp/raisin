@@ -1,19 +1,21 @@
 <% @items.each do |item| %>
-	<% if @previous_list != item.list %>
-		<div class="todo_item_project_list_subhead">
-			Tasks in the 
-			<%= link_to item.list.project.title, account_project_path(item.list.project.account, item.list.project) %> 
-			project, from the 
-			<%= link_to item.list.title, account_project_list_path(item.list.project.account, item.list.project, item.list) %> 
-			list:
+	<% if item.list.project.status == "active" %>
+		<% if @previous_list != item.list %>
+			<div class="todo_item_project_list_subhead">
+				Tasks in the 
+				<%= link_to item.list.project.title, account_project_path(item.list.project.account, item.list.project) %> 
+				project, from the 
+				<%= link_to item.list.title, account_project_list_path(item.list.project.account, item.list.project, item.list) %> 
+				list:
+			</div>
+			<% @previous_list = item.list %>
+		<% end %>	
+		<% @assignees = return_custom_potential_users_to_assign(item.list.project) %>
+		<% @list = item.list %>
+		<% @project = item.list.project %>
+		<% @li = item %>
+		<div class="collection_of_todos_indent_class">
+			<%= render 'items/list_item_actionable', locals: {li: @li, project: @project} %>
 		</div>
-		<% @previous_list = item.list %>
-	<% end %>	
-	<% @assignees = return_custom_potential_users_to_assign(item.list.project) %>
-	<% @list = item.list %>
-	<% @project = item.list.project %>
-	<% @li = item %>
-	<div class="collection_of_todos_indent_class">
-		<%= render 'items/list_item_actionable', locals: {li: @li, project: @project} %>
-	</div>
+	<% end -%>	
 <% end %>

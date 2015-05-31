@@ -64,19 +64,19 @@ class EmailProcessor
       
         if comment = Comment.create!(content: paragraph_body, user_id: author.id, conversation_id: conversation.id)
         
-          existing_notifications = Notification.where(conversation_id: conversation.id)
-          user_ids = []
-        
-          existing_notifications.each do |en|
-            if en.user != author
-              user_ids << en.user.id unless en.mute
-            end
-          end
-        
-          if conversation.user.id != author.id
-            user_ids << conversation.user.id 
-          end
-          check_for_and_issue_notifications_for(comment, user_ids, "comment_added_to_conversation")
+#         existing_notifications = Notification.where(conversation_id: conversation.id)
+#         user_ids = []
+#       
+#         existing_notifications.each do |en|
+#           if en.user != author
+#             user_ids << en.user.id unless en.mute
+#           end
+#         end
+#       
+#         if conversation.user.id != author.id
+#           user_ids << conversation.user.id 
+#         end
+#         check_for_and_issue_notifications_for(comment, user_ids, "comment_added_to_conversation")
         end        
         
       end # conversation
