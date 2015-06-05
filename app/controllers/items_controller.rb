@@ -61,9 +61,8 @@ class ItemsController < ApplicationController
     # If the to-do has been checked, issue notification
     if @action == "checked"
        notify_users = []
-       creating_user = User.find(@li.created_by)
        # notify the user who created the to-do, unless it's the same as the user who completed it
-       notify_users << creating_user.id unless creating_user == current_user
+       notify_users << @li.created_by unless @li.created_by == current_user.id
        check_for_and_issue_notifications_for(@li, notify_users, "todo_completed")
      end
     

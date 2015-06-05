@@ -15,7 +15,8 @@ module ApplicationHelper
       existing_notifications = Notification.where(list_id: object.id)
     elsif object.instance_of? Item
       notification_string = "There is an update on the to-do list item: #{object.title}"
-      existing_notifications = Notification.where(item_id: object.id)
+      # this is ONLY for completing/assigning a to-do? An empty array to prevent dupe emails.
+      existing_notifications = []
     elsif object.instance_of? Project
       notification_string = "There is a new comment on the project: #{object.title}"
       existing_notifications = Notification.where(project_id: object.id)
@@ -54,7 +55,7 @@ module ApplicationHelper
     #logger.info("------>> MUTED USERS")
     #logger.info(muted_users)
     
-    # final_notifications_array = []
+    final_notifications_array = []
     final_notifications_array = add_or_remove_users_from_recipients_based_on_preferences(muted_users, users_to_notify)
     
     # create the notifications
