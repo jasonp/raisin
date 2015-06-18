@@ -24,6 +24,8 @@ class ItemsController < ApplicationController
     @list.status = "active"
     @list.save
     
+    @item = @list.items.build
+    
     if @li.due
       if @li.user
         notify_users = []

@@ -47,8 +47,12 @@ class RaisinRoutines
        # check to see if the account is active
        items = []
        proto_items.each do |pi|
+         # is the account active?
          if pi.list.project.account.active_until > Time.now.utc
-           items << pi
+           # is the item checked off?
+           if pi.status == "active"    
+             items << pi
+           end  
          end
        end
        
