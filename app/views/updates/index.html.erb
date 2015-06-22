@@ -1,2 +1,18 @@
-<h1>Updates#index</h1>
-<p>Find me in app/views/updates/index.html.erb</p>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<% @updates.each do |u| -%>
+
+			<div class="update_post_box">
+				<h3><%= link_to u.title, update_path(u) %></h3> 
+				<%= raw(u.content) %>
+				
+				<div class="box_between col-md-6 col-md-offset-2">
+				</div>
+			</div>
+
+
+				
+
+		<% end -%>
+	</div>
+</div>

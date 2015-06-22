@@ -221,9 +221,11 @@ class AccountsController < ApplicationController
       if account.active_until < Time.now.utc
         if account.stripe_customer_id
           flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to update your payment information -- it looks like there was a problem charging your card on file."
+          session["preferred_account_id"] = account.id
           redirect_to edit_subscription_path
         else
           flash[:subscription_expired] = "Your subscription has expired! Don't worry, your data is perfectly fine, but you'll need to enter your payment information and become a paying subscriber."
+          session["preferred_account_id"] = account.id
           redirect_to new_subscription_path
         end
       end

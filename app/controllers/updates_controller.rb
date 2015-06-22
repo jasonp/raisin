@@ -1,19 +1,26 @@
 class UpdatesController < ApplicationController
+  before_filter :reject_unless_admin, only: [:new, :update, :create]
+  
   def index
     @updates = Update.all
   end
 
   def new
     @update = Update.new
+    @possible_statuses = ["Draft", "Live"]
   end
 
   def create
     @update = Update.new(update_params)
     respond_to do |format|
       if @update.save
-        format.html { redirect_to update_path(@update) }
+        format.html { 
+          flash[:success] = "Awesome update."
+          redirect_to update_path(@update) }
       else
-        format.html { render 'new' }
+        format.html { 
+          flash[:warning] = "Nope"
+          render 'new'  }
       end
     end
   end
@@ -21,6 +28,11 @@ class UpdatesController < ApplicationController
   def show
     @update = Update.find(params[:id])
   end
+  
+  def edit
+    @update = Update.find(params[:id])
+  end
+  
 
   def update
     @update = Update.find(params[:id])
@@ -37,5 +49,9 @@ class UpdatesController < ApplicationController
   
     def update_params
       params.require(:update).permit(:title, :content, :user_id, :status)
+    end
+    
+    def reject_unless_admin
+      redirect_to root_path if current_user.role != "admin"
     end
 end

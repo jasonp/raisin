@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
 
-		<%= form_for @update, method: :post, html: {class: "form"} do |f| %>
+		<%= form_for @update, html: {class: "form"} do |f| %>
 
 		<div class="form-group">
 			<%= f.text_field :title, class: "form-control input-lg", placeholder: "Title your update" %>
@@ -24,10 +24,7 @@
 
 				<!-- Create the editor container -->
 				<div id="new_comment_editor">
-					<%= raw(@preserved_comment) if @preserved_comment %>
-				  <div></div>
-				  <div></div>
-				  <div><br></div>
+					<%= raw(@update.content) if @update.content %>
 				</div>
 			</div>
 		</div>
