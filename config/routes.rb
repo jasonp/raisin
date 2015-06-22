@@ -1,6 +1,16 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  get 'updates/index'
+
+  get 'updates/new'
+
+  get 'updates/create'
+
+  get 'updates/show'
+
+  get 'updates/update'
+
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'users/registrations' }
   resources :users, only: [:show, :edit, :update]
   
