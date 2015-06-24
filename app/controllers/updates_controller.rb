@@ -2,7 +2,15 @@ class UpdatesController < ApplicationController
   before_filter :reject_unless_admin, only: [:new, :update, :create]
   
   def index
-    @updates = Update.all
+    if current_user.role == "admin"
+      @updates = Update.all
+    else
+      @updates = Update.where(status: "live")
+    end
+    
+    if current_user.has_not_seen_the_latest_update(Update.last)
+      SeenUpdate.create!(post_id: Update.last.id, user_id: current_user.id)
+    end
   end
 
   def new

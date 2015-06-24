@@ -2,7 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$light-green: lighten(#3a7c6a, 20%);
+
 .box_between {
 	border-bottom: 1px solid #ddd;
 	height: 1.5em;
+	width: 60%;
+}
+
+#new_update_flag {
+	color: $light-green;
 }

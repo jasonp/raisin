@@ -28,6 +28,10 @@ class RaisinRoutines
     return valid_until
   end
   
+  def self.updates_class(current_user)
+    return "new_update_flag" if current_user.has_not_seen_the_latest_update(Update.last)
+  end
+  
   def self.send_daily_todo_summary_email
     # This will be an expensive, long-running background process :)
     

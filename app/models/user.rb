@@ -59,6 +59,15 @@ class User < ActiveRecord::Base
   
  end 
  
+ def has_not_seen_the_latest_update(update)
+   result = SeenUpdate.where(post_id: update.id, user_id: self.id)
+   if result[0]
+     return false
+   else
+     return true
+   end
+ end
+ 
  # This is an existing user so let's not overwrite everything
  def self.link_from_omniauth(auth, user)
      user.photo = auth.info.image # the user model has an image
