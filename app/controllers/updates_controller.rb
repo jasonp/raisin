@@ -5,6 +5,8 @@ class UpdatesController < ApplicationController
     if current_user
       if current_user.role == "admin"
         @updates = Update.all
+      else
+        @updates = Update.where(status: "live")
       end  
     else
       @updates = Update.where(status: "live")
