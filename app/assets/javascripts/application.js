@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require html.sortable.src
 //= require twitter/bootstrap
 //= require moment
 //= require bootstrap-datetimepicker

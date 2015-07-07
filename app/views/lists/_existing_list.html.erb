@@ -1,4 +1,7 @@
 <% @lists.each do |list| %>
+
+	<div class="sortable_list">
+
 	<% @list = list %>
 	<div class="todo_list_box" id="todo_list_box_for-<%= @list.id %>">
 		<div id="todo_list_existing_title-<%= @list.id %>">
@@ -69,4 +72,7 @@
 		</div>	
 	
 	</div>
+	
+	</div>
+	
 <% end %>
