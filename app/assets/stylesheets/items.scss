@@ -20,3 +20,12 @@ $green: #3a7c6a;
 .todo_comment_count_link a:hover {
 	text-decoration: underline;
 }
+
+.list-of-items {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.list-of-items li {
+	margin-left: 0;
+}

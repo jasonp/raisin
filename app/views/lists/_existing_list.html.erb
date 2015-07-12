@@ -46,14 +46,16 @@
 			
 	
 			<div id="todo_list_items-<%= list.id %>">
-				<% list.items.order(created_at: :asc).each do |li| %>
-					<% if li.status == "active" %>
-						<% @li = li %>
+				<ul class="sortable list list-of-items">
+					<% list.items.order(created_at: :asc).each do |li| %>
+						<% if li.status == "active" %>
+							<% @li = li %>
+							
+								<%= render '/items/list_item_actionable', locals: {li: @li} %>
 
-							<%= render '/items/list_item_actionable', locals: {li: @li} %>
-
-					<% end %>	
-				<% end %>
+						<% end %>	
+					<% end %>
+				</ul>
 			</div>
 
 			
