@@ -1,70 +1,74 @@
-<div class="todo_list_box" id="todo_list_box_for-<%= @list.id %>">
-	<div id="todo_list_existing_title-<%= @list.id %>">
-		<%= render '/lists/existing_list_headline' %>
-	</div>
-	<div id="todo_list_edit_title_form-<%= @list.id %>" class="starts_hidden">
-		<div class="row new_list_form_row">
-			<%= form_for @list, url: account_project_list_path(@project.account, @project, @list), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
-				<%= f.hidden_field :status, value: "active" %>
-				<div class="row">
-					
-					<div class="form-group">
-						<div class="">
-					  	<%= f.text_field :title, class: "form-control", id: "inline_edit_list_title", autofocus: true, placeholder: "A brand new to-do list!" %>
-						</div>
-					</div>	
-					
-					<div class="form-group">
+<div class="sortable_list" data-list-id="<%= @list.id %>">
 
-							<%= f.submit "Update", class: "btn btn-default right1em" %>
-					</div>		
+	<div class="todo_list_box" id="todo_list_box_for-<%= @list.id %>">
+		<div id="todo_list_existing_title-<%= @list.id %>">
+			<%= render '/lists/existing_list_headline' %>
+		</div>
+		<div id="todo_list_edit_title_form-<%= @list.id %>" class="starts_hidden">
+			<div class="row new_list_form_row">
+				<%= form_for @list, url: account_project_list_path(@project.account, @project, @list), method: :put, remote: true, html: {class: "form-inline"} do |f| %>
+					<%= f.hidden_field :status, value: "active" %>
+					<div class="row">
+					
+						<div class="form-group">
+							<div class="">
+						  	<%= f.text_field :title, class: "form-control", id: "inline_edit_list_title", autofocus: true, placeholder: "A brand new to-do list!" %>
+							</div>
+						</div>	
+					
+						<div class="form-group">
+
+								<%= f.submit "Update", class: "btn btn-default right1em" %>
+						</div>		
 							
 
-					<div class="form-group" id="link_options">	
-						Or: <%= link_to "Cancel my edits", '#', id: "cancel_edit_title_link", remote: true, data: { list_id: @list.id.to_s } %>
-						 | <%= link_to 'Delete this list', account_project_list_path(@project.account, @project, @list), method: :delete, remote: true, data: {confirm: 'Are you sure? This cannot be undone.'} %>.</p>
+						<div class="form-group" id="link_options">	
+							Or: <%= link_to "Cancel my edits", '#', id: "cancel_edit_title_link", remote: true, data: { list_id: @list.id.to_s } %>
+							 | <%= link_to 'Delete this list', account_project_list_path(@project.account, @project, @list), method: :delete, remote: true, data: {confirm: 'Are you sure? This cannot be undone.'} %>.</p>
 
-					</div>
+						</div>
 
 
-			<% end %>
+				<% end %>
 
 
 			
+				</div>
 			</div>
-		</div>
 		
-	</div>	
-
-	<div class="todo_list_items">
-		
-
-		<div id="todo_list_items-<%= @list.id %>">
-			<% @list.items.each do |li| %>
-				<% if li.status == "active" %>
-					<% @li = li %>
-
-						<%= render '/items/list_item_actionable', locals: {li: @li} %>
-
-				<% end %>	
-			<% end %>
-		</div>
-
-		
-		<div id="add_todo_list_item_form-<%= @list.id %>">
-			
 		</div>	
+
+		<div class="todo_list_items">
 		
-		<div id="add_todo_item_link-<%= @list.id %>" class="add_todo_item_link">
-			<%= render '/items/show_new_item_form_link', locals: {project: @project, list: @list} %>
+
+			<div id="todo_list_items-<%= @list.id %>">
+				<% @list.items.each do |li| %>
+					<% if li.status == "active" %>
+						<% @li = li %>
+
+							<%= render '/items/list_item_actionable', locals: {li: @li} %>
+
+					<% end %>	
+				<% end %>
+			</div>
+
+		
+			<div id="add_todo_list_item_form-<%= @list.id %>">
+			
+			</div>	
+		
+			<div id="add_todo_item_link-<%= @list.id %>" class="add_todo_item_link">
+				<%= render '/items/show_new_item_form_link', locals: {project: @project, list: @list} %>
+			</div>
+		
 		</div>
-		
+	
+		<div id="completed_todo_items_queue-<%= @list.id %>" class="completed_queue starts_hidden">
+			<p class="text-muted recently_completed_header">Recently completed to-dos</p>
+		</div>	
+
 	</div>
 	
-	<div id="completed_todo_items_queue-<%= @list.id %>" class="completed_queue starts_hidden">
-		<p class="text-muted recently_completed_header">Recently completed to-dos</p>
-	</div>	
-
-</div>
+</div>	
 
 

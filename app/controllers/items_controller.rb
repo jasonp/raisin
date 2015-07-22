@@ -94,6 +94,14 @@ class ItemsController < ApplicationController
           
     end
   end
+  
+  def sort
+    logger.info("need valid data")
+    params[:order].each do |key,value|
+      Item.find(value[:id]).update_attribute(:position,value[:position])
+    end
+    render :nothing => true
+  end
 
   def edit
   end

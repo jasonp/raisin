@@ -1,6 +1,6 @@
 <% @lists.each do |list| %>
 
-	<div class="sortable_list">
+	<div class="sortable_list" data-list-id="<%= @list.id %>">
 
 	<% @list = list %>
 	<div class="todo_list_box" id="todo_list_box_for-<%= @list.id %>">

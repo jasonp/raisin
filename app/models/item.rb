@@ -13,6 +13,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  flep         :string
+#  position     :integer
 #
 
 class Item < ActiveRecord::Base
@@ -24,5 +25,7 @@ class Item < ActiveRecord::Base
   has_many :comments
   
   validates :title, presence: true
+  
+  default_scope { order("position ASC") }
 
 end
