@@ -414,5 +414,5 @@ sortable.__testing = {
   _getGhost: _getGhost,
   _makeGhost: _makeGhost
 };
-module.exports = sortable;
+
 /* end-testing */
