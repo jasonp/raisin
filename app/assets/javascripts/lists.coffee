@@ -36,3 +36,7 @@ ready = ->
 
 $ ->
   $(document).ready ready
+
+$ ->
+  $("body").on 'loadSortable', (evt) ->
+    ready();

@@ -3,3 +3,4 @@ $("#show_new_todo_form_link").toggle();
 $("#new_todo_form").empty();
 $("#show_new_todo_form_link_box").append("<%= escape_javascript(render 'new_todo_list_button', :locals => {list: @list, project: @project}) %>");
 $("#existing_project_todo_section").prepend("<%= escape_javascript(render 'new_list', :locals => {list: @list, project: @project}) %>");
+$("body").trigger('loadSortable');

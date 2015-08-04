@@ -12,7 +12,7 @@
 					
 						<div class="form-group">
 							<div class="">
-						  	<%= f.text_field :title, class: "form-control", id: "inline_edit_list_title", autofocus: true, placeholder: "A brand new to-do list!" %>
+						  	<%= f.text_field :title, class: "form-control", id: "inline_edit_list_title", placeholder: "A brand new to-do list!" %>
 							</div>
 						</div>	
 					
@@ -40,17 +40,21 @@
 
 		<div class="todo_list_items">
 		
+			
+			<div>	
+				<ul class="sortable list list-of-items" id="todo_list_items-<%= @list.id %>">
+				
+					<% @list.items.each do |li| %>
+						<% if li.status == "active" %>
+							<% @li = li %>
 
-			<div id="todo_list_items-<%= @list.id %>">
-				<% @list.items.each do |li| %>
-					<% if li.status == "active" %>
-						<% @li = li %>
+								<%= render '/items/list_item_actionable', locals: {li: @li} %>
 
-							<%= render '/items/list_item_actionable', locals: {li: @li} %>
-
-					<% end %>	
-				<% end %>
+						<% end %>	
+					<% end %>
+				</ul>
 			</div>
+				
 
 		
 			<div id="add_todo_list_item_form-<%= @list.id %>">
