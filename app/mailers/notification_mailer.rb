@@ -112,7 +112,7 @@ class NotificationMailer < ApplicationMailer
     
     to_email_with_name = %("#{@to_user_name}" <#{assigned_user.email}>)
     from_email_with_name = %("Raisin" <dispatch@raisinhq.com>)
-    subject_line = %(You have to-do's due today! -- #{date_string} )
+    subject_line = %(You have to-dos due today! -- #{date_string} )
     
     mail(to: to_email_with_name,
          from: from_email_with_name,

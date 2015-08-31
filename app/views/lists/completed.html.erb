@@ -35,7 +35,7 @@
 <% end %>	
 
 <% if completed_count == 0 %>
-	<div class="empty_completed_explainer">It looks like you haven't completed any to-do's for this project yet!</div>
+	<div class="empty_completed_explainer">It looks like you haven't completed any to-dos for this project yet!</div>
 <% else %>
   <div class="completed_todos_counter text-muted">You've completed <%= completed_count %> <%= ' to-do'.pluralize(completed_count) %>. Nice work!</div>
 <% end %>
