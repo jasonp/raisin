@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_editable, only: [:edit]
   before_filter :authenticate_project, only: [:show, :edit]
-  before_filter :verify_active
+  # before_filter :verify_active
   
   def index
   end

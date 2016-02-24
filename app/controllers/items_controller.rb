@@ -4,7 +4,7 @@ include ApplicationHelper
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_item, only: [:update, :edit, :show]
-  before_filter :verify_active, only: [:update, :edit, :show]
+  # before_filter :verify_active, only: [:update, :edit, :show]
   
   def new
     @list = List.find(params[:list_id])

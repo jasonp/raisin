@@ -36,11 +36,6 @@
 				<!-- If logged in -->
 					
 						
-						<% if unpaid_account = RaisinRoutines.show_payment_link_if_needed(session["preferred_account_id"], current_user) -%>
-							<li><a href="<%= new_subscription_path %>" id="green_pay_link">Activate your account (
-								<%= RaisinRoutines.time_until_account_expiration(unpaid_account) %>
-								)</a></li>	
-						<% end %>
 						
 						<li><a id="<%= RaisinRoutines.updates_class(current_user) %>" href="<%= updates_path %>">Updates</a></li>
 						<li><%= link_to "Help", help_path %></li>
@@ -51,7 +46,6 @@
 		            <li><%= link_to "Edit my personal info", edit_user_path(current_user) %></a></li>
 								<% if session["preferred_account_id"] != nil -%>
 		            	<li><%= link_to "Edit my account info", edit_account_path(session["preferred_account_id"]) %></li>
-									<li><%= link_to "Edit payment info", edit_subscription_path(1) %></li>
 								<% end -%>
 		            <li><%= link_to "Switch accounts", accounts_path %></li>
 		            <li class="divider"></li>

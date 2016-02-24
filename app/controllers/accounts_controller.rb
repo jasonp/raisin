@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
   before_filter :authenticate_user!, only: [:index, :show, :edit, :update, :archive]
   before_filter :authenticate_account, only: [:show, :edit, :update]
   
-  before_filter :verify_active, only: [:show, :edit, :update]
+  # before_filter :verify_active, only: [:show, :edit, :update]
   
   def index
     #if admin, 
@@ -212,6 +212,8 @@ class AccountsController < ApplicationController
       end
     end
     
+    # Since nobody is paying for Raisin, and the payment API broke for some unknown reason
+    # Let's just unhook the payment stuff, which lets me go to free Heroku
     def verify_active
       account = Account.find(params[:id])
       if account.active_until < Time.now.utc

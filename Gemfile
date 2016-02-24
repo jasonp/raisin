@@ -52,7 +52,7 @@ gem 'griddler-sendgrid'
 
 # do things in the background
 gem 'daemons'
-gem 'sidekiq'
+gem 'sidekiq', '3.3.4'
 gem 'sinatra', require: false
 gem 'redis'
 

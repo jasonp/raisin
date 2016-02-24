@@ -2,7 +2,7 @@ include ProjectsHelper
 class ListsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_list, only: [:show]
-  before_filter :verify_active
+  # before_filter :verify_active
 
   def new
     @project = Project.find(params[:project_id])
